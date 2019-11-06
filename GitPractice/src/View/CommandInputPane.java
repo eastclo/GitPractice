@@ -28,6 +28,7 @@ public class CommandInputPane extends JPanel{
 		JTextField input = new JTextField();
 		input.setBounds(14, 373, 442, 24);
 		CommandInputPane.add(input);
+		input.addActionListener(new CommandInputListener());	//리스너 적용
 		
 		JButton btnUpload = new JButton("upload");
 		btnUpload.setBounds(460, 371, 65, 26);
