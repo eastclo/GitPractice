@@ -30,6 +30,14 @@ public class CommandInputPane extends JPanel{
 		CommandInputPane.add(input);
 		input.addActionListener(new CommandInputListener());	//리스너 적용
 		
+		JButton btnBack = new JButton("back"); //뒤로가기 버튼 추가
+		btnBack.setBounds(372, 11, 63, 20);
+		CommandInputPane.add(btnBack);
+		
+		JButton btnForward = new JButton("forward"); //앞으로가기 버튼 추가
+		btnForward.setBounds(442, 11, 83, 20); 
+		CommandInputPane.add(btnForward);
+		
 		JButton btnUpload = new JButton("upload");
 		btnUpload.setBounds(460, 371, 65, 26);
 		CommandInputPane.add(btnUpload);
