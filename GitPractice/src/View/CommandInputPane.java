@@ -30,7 +30,7 @@ public class CommandInputPane extends JPanel{
 		CommandInputPane.add(input);
 		input.addActionListener(new CommandInputListener()); //리스너 적용
 		
-		ImageIcon BackIcon = new ImageIcon("C:\\Users\\81961\\Desktop\\back1.png");
+		ImageIcon BackIcon = new ImageIcon("res\\back1.png");
 		JButton btnBack = new JButton(BackIcon);//뒤로가기 버튼 이미지 추가
 		btnBack.setBorderPainted(false);
 		btnBack.setContentAreaFilled(false);
