@@ -1,5 +1,6 @@
 package View;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -26,6 +27,21 @@ public class TemporaryExplorerPane extends JPanel{
 		JList Repository = new JList(); //저장소를 리스트에 지속적으로 추가해서 보여주는 형식
 		Repository.setBounds(14, 42, 237, 550);
 		TemporaryExplorerPane.add(Repository);
+		
+		// Repository를 가져오기 위한 new 버튼을 만들었습니다.
+		// NewRepoClickListener와 연동됩니다.
+		JButton btnNewRepo = new JButton("new");
+		btnNewRepo.setBounds(200, 11, 50, 20);
+		TemporaryExplorerPane.add(btnNewRepo);
+		
+		// LoadClickListener와 연동되는 load 버튼입니다.
+		// 시작하자마자 저장소의 repository 파일을 불러오는 쪽으로 결정될 경우 
+		// 이 버튼은 삭제될 예정입니다.
+		JButton btnLoadRepo = new JButton("load");
+		btnLoadRepo.setBounds(140, 11, 55, 20);
+		TemporaryExplorerPane.add(btnLoadRepo);
+		
+		
 	}
 
 }
