@@ -1,13 +1,22 @@
 package Model;
 
-import java.util.List;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 
-// Model ë‚´ì˜ Remote Repository ë¥¼ ì €ì¥í•˜ê¸° ìœ„í•œ Model ì…ë‹ˆë‹¤.
+// Model ³»ÀÇ Remote Repository ¸¦ ÀúÀåÇÏ°í, ºÒ·¯¿À±â À§ÇÑ Model ÀÔ´Ï´Ù.
 
 public class RemoteRepository {
-		List list;
+		File reposit;
+		private String repositName;
+		
+		public RemoteRepository() {
+			getRemoteRepository();
+		}
 	
-		public List getRemoteRepository() {
-			return list;
+		public void getRemoteRepository() {
+			// Repository ÀÚÃ¼´Â ·ÎÄÃ ÆÄÀÏ·Î ¹Ş¾Æ¿À°í
+			// 4¹ø È­¸é¿¡ ¶ß´Â ¸®½ºÆ®´Â List·Î ±¸ÇöÇÒ °èÈ¹ÀÔ´Ï´Ù.
+			reposit = new File("C:\\");
 		}
 }
