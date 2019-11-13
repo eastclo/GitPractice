@@ -38,7 +38,10 @@ public class CommandInputPane extends JPanel{
 
 		CommandInputPane.add(btnBack);
 		
-		JButton btnForward = new JButton("forward"); //앞으로가기 버튼 추가
+		ImageIcon ForwardIcon = new ImageIcon("res\\forward1.png"); //앞으로가기 버튼 추가
+		JButton btnForward = new JButton(ForwardIcon);//뒤로가기 버튼 이미지 추가
+		btnForward.setBorderPainted(false);
+		btnForward.setContentAreaFilled(false);
 		btnForward.setBounds(442, 11, 83, 20); 
 		CommandInputPane.add(btnForward);
 		
