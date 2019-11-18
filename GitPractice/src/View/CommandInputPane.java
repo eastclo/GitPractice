@@ -1,8 +1,13 @@
 package View;
 
 import java.awt.*;
+import java.io.File;
+
 import javax.swing.*;
+
+
 import Controller.CommandInputListener;
+
 
 public class CommandInputPane extends JPanel{
 	
@@ -30,7 +35,7 @@ public class CommandInputPane extends JPanel{
 		CommandInputPane.add(input);
 		input.addActionListener(new CommandInputListener()); //리스너 적용
 		
-		ImageIcon BackIcon = new ImageIcon("res\\back1.png");
+		ImageIcon BackIcon = new ImageIcon("."+File.separator+"..\\res\\back1.png");
 		JButton btnBack = new JButton(BackIcon);//뒤로가기 버튼 이미지 추가
 		btnBack.setBorderPainted(false);
 		btnBack.setContentAreaFilled(false);
@@ -38,7 +43,7 @@ public class CommandInputPane extends JPanel{
 
 		CommandInputPane.add(btnBack);
 		
-		ImageIcon ForwardIcon = new ImageIcon("res\\forward1.png"); //앞으로가기 버튼 추가
+		ImageIcon ForwardIcon = new ImageIcon("."+File.separator+"..\\res\\forward1.png"); //앞으로가기 버튼 추가
 		JButton btnForward = new JButton(ForwardIcon);//뒤로가기 버튼 이미지 추가
 		btnForward.setBorderPainted(false);
 		btnForward.setContentAreaFilled(false);
