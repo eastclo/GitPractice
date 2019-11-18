@@ -18,7 +18,7 @@ import Model.CommitArray;
 
 public class CommitFunction {
 	
-	String Path = "C:"+File.separator+"test"+File.separator+"CommitArray.ini";
+	String Path = "."+"CommitArray.ini";
 	public List<Object> CMArray;
 	CommitArray JsonArray;
 	
