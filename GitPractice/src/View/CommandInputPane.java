@@ -3,6 +3,7 @@ package View;
 import java.awt.*;
 import javax.swing.*;
 import Controller.CommandInputListener;
+import Controller.GobackButtonListener;
 
 public class CommandInputPane extends JPanel{
 	
@@ -30,19 +31,23 @@ public class CommandInputPane extends JPanel{
 		CommandInputPane.add(input);
 		input.addActionListener(new CommandInputListener()); //리스너 적용
 		
-		ImageIcon BackIcon = new ImageIcon("res\\back1.png");
+		ImageIcon BackIcon = new ImageIcon(".\\..\\res\\back1.png");
 		JButton btnBack = new JButton(BackIcon);//뒤로가기 버튼 이미지 추가
+		btnBack.setName("back");	//리스너 내부에서 뒤로가기 버튼임을 인식하기 위한 name 설정
 		btnBack.setBorderPainted(false);
 		btnBack.setContentAreaFilled(false);
 		btnBack.setBounds(372, 11, 90, 20);
+		btnBack.addActionListener(new GobackButtonListener());	//리스너 적용
 
 		CommandInputPane.add(btnBack);
 		
-		ImageIcon ForwardIcon = new ImageIcon("res\\forward1.png"); //앞으로가기 버튼 추가
+		ImageIcon ForwardIcon = new ImageIcon(".\\..\\res\\forward1.png"); //앞으로가기 버튼 추가
 		JButton btnForward = new JButton(ForwardIcon);//뒤로가기 버튼 이미지 추가
+		btnForward.setName("forward");	//리스너 내부에서 앞으로가기 버튼임을 인식하기 위한 name 설정
 		btnForward.setBorderPainted(false);
 		btnForward.setContentAreaFilled(false);
 		btnForward.setBounds(442, 11, 83, 20); 
+		btnForward.addActionListener(new GobackButtonListener());	//리스너 적용
 		CommandInputPane.add(btnForward);
 		
 		JButton btnUpload = new JButton("upload");

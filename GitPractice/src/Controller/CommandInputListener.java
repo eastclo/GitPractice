@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import javax.swing.JTextField;
+import Model.CommandStack;
 
 
 public class CommandInputListener implements ActionListener {
@@ -26,6 +27,7 @@ public class CommandInputListener implements ActionListener {
 			
 		//배열에 입력된 명령어가 있는지 검색
 		int index = Arrays.binarySearch(cmds, textFieldValue); /*****예외처리 해야함, 찾는 값이 없으면 음수값을 반환.**/
+		Model.CommandStack.push(textFieldValue);	//예외처리 후 명령어가 있으면 명령어 스택에 저장
 		
 		//명령어를 파일 이름으로 저장했으므로 해당 명령어파일 내부에 적힌 클래스 이름을 얻기 위해 파일 객체와  FileReader를 사용함.
 		String cmdlistPath = "." + File.separator + "src" + File.separator + "Model" + File.separator + "cmdlist";
