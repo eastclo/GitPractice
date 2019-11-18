@@ -1,9 +1,14 @@
 package View;
 
 import java.awt.*;
+import java.io.File;
+
 import javax.swing.*;
+
+
 import Controller.CommandInputListener;
 import Controller.GobackButtonListener;
+
 
 public class CommandInputPane extends JPanel{
 	
@@ -14,7 +19,7 @@ public class CommandInputPane extends JPanel{
 		MainFrame.contentPane.add(CommandInputPane);
 		CommandInputPane.setLayout(null);
 		
-		JLabel lblCommandInput = new JLabel("¸í·É¾î ÀÔ·Â");
+		JLabel lblCommandInput = new JLabel("ëª…ë ¹ì–´ ì…ë ¥");
 		lblCommandInput.setBounds(14, 12, 100, 18);
 		CommandInputPane.add(lblCommandInput);
 		
@@ -29,25 +34,25 @@ public class CommandInputPane extends JPanel{
 		JTextField input = new JTextField();
 		input.setBounds(14, 373, 442, 24);
 		CommandInputPane.add(input);
-		input.addActionListener(new CommandInputListener()); //¸®½º³Ê Àû¿ë
+		input.addActionListener(new CommandInputListener()); //ë¦¬ìŠ¤ë„ˆ ì ìš©
 		
-		ImageIcon BackIcon = new ImageIcon(".\\..\\res\\back1.png");
-		JButton btnBack = new JButton(BackIcon);//µÚ·Î°¡±â ¹öÆ° ÀÌ¹ÌÁö Ãß°¡
-		btnBack.setName("back");	//¸®½º³Ê ³»ºÎ¿¡¼­ µÚ·Î°¡±â ¹öÆ°ÀÓÀ» ÀÎ½ÄÇÏ±â À§ÇÑ name ¼³Á¤
+		ImageIcon BackIcon = new ImageIcon("."+File.separator+"..\\res\\back1.png");
+		JButton btnBack = new JButton(BackIcon);//ë’¤ë¡œê°€ê¸° ë²„íŠ¼ ì´ë¯¸ì§€ ì¶”ê°€
+		btnBack.setName("back");	//ë¦¬ìŠ¤ë„ˆ ë‚´ë¶€ì—ì„œ ë’¤ë¡œê°€ê¸° ë²„íŠ¼ì„ì„ ì¸ì‹í•˜ê¸° ìœ„í•œ name ì„¤ì •
 		btnBack.setBorderPainted(false);
 		btnBack.setContentAreaFilled(false);
 		btnBack.setBounds(372, 11, 90, 20);
-		btnBack.addActionListener(new GobackButtonListener());	//¸®½º³Ê Àû¿ë
+		btnBack.addActionListener(new GobackButtonListener());	//ë¦¬ìŠ¤ë„ˆ ì ìš©
 
 		CommandInputPane.add(btnBack);
 		
-		ImageIcon ForwardIcon = new ImageIcon(".\\..\\res\\forward1.png"); //¾ÕÀ¸·Î°¡±â ¹öÆ° Ãß°¡
-		JButton btnForward = new JButton(ForwardIcon);//µÚ·Î°¡±â ¹öÆ° ÀÌ¹ÌÁö Ãß°¡
-		btnForward.setName("forward");	//¸®½º³Ê ³»ºÎ¿¡¼­ ¾ÕÀ¸·Î°¡±â ¹öÆ°ÀÓÀ» ÀÎ½ÄÇÏ±â À§ÇÑ name ¼³Á¤
+		ImageIcon ForwardIcon = new ImageIcon("."+File.separator+"..\\res\\forward1.png"); //ì•ìœ¼ë¡œê°€ê¸° ë²„íŠ¼ ì¶”ê°€
+		JButton btnForward = new JButton(ForwardIcon);//ë’¤ë¡œê°€ê¸° ë²„íŠ¼ ì´ë¯¸ì§€ ì¶”ê°€
+		btnForward.setName("forward");	//ë¦¬ìŠ¤ë„ˆ ë‚´ë¶€ì—ì„œ ì•ìœ¼ë¡œê°€ê¸° ë²„íŠ¼ì„ì„ ì¸ì‹í•˜ê¸° ìœ„í•œ name ì„¤ì •
 		btnForward.setBorderPainted(false);
 		btnForward.setContentAreaFilled(false);
 		btnForward.setBounds(442, 11, 83, 20); 
-		btnForward.addActionListener(new GobackButtonListener());	//¸®½º³Ê Àû¿ë
+		btnForward.addActionListener(new GobackButtonListener());	//ë¦¬ìŠ¤ë„ˆ ì ìš©
 		CommandInputPane.add(btnForward);
 		
 		JButton btnUpload = new JButton("upload");
