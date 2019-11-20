@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import Controller.CommandSearchListener;
+import Controller.CommandMouseEventListener;
 import Controller.UpdateCommandIndexPane;
 
 import java.util.Scanner;
@@ -39,6 +40,7 @@ public class CommandIndexPane  extends JPanel{
 	
 	list = new JList();
 	list.setBounds(14, 78, 208, 514);
+	list.addMouseListener(new CommandMouseEventListener(this)); //명령어 선택 리스너 적용
 	CommandIndexPane.add(list);
 	
 	UpdateCommandIndexPane init = new UpdateCommandIndexPane(this);
