@@ -8,10 +8,17 @@ import javax.swing.*;
 
 import Controller.CommandInputListener;
 import Controller.GobackButtonListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 
 
 public class CommandInputPane extends JPanel{
 	
+	private static final String EXIT_ON_CLOSE = null;
+	private JButton btnBack; 
 	public CommandInputPane(){
 		JPanel CommandInputPane = new JPanel();
 		CommandInputPane.setBounds(236, 0, 539, 409);
@@ -43,8 +50,11 @@ public class CommandInputPane extends JPanel{
 		btnBack.setContentAreaFilled(false);
 		btnBack.setBounds(372, 11, 90, 20);
 		btnBack.addActionListener(new GobackButtonListener());	//리스너 적용
-
+		
 		CommandInputPane.add(btnBack);
+		btnBack.addActionListener(new buttonPress());
+		btnBack.setVisible(true);
+		//btnBack.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		ImageIcon ForwardIcon = new ImageIcon("."+File.separator+"..\\res\\forward1.png"); //앞으로가기 버튼 추가
 		JButton btnForward = new JButton(ForwardIcon);//뒤로가기 버튼 이미지 추가
@@ -58,7 +68,12 @@ public class CommandInputPane extends JPanel{
 		JButton btnUpload = new JButton("upload");
 		btnUpload.setBounds(460, 371, 65, 26);
 		CommandInputPane.add(btnUpload);
-	
-
 	}
-}
+	
+		 class buttonPress implements ActionListener {
+		        @Override
+		        public void actionPerformed(ActionEvent arg0) {
+		            CommandInputPane  pF = new CommandInputPane();
+		          // btnBack.dispose();
+		    }
+		 }	 }
