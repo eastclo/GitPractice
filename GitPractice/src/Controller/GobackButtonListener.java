@@ -66,7 +66,7 @@ public class GobackButtonListener implements ActionListener{
 		        	Class<?> clazz = Class.forName(Clazz);	//Clazz를 통해 클래스 생성
 		        	Object newObj = clazz.getDeclaredConstructor().newInstance();	//클래스로 객체생성
 		        	
-		        	Method m = clazz.getDeclaredMethod("executeCommand", null);	//파라미터로 메소드 이름, 해당 메소000드의 파라미터들의 타입(.class 붙임)
+		        	Method m = clazz.getDeclaredMethod("executeCommand", null);	//파라미터로 메소드 이름, 해당 메소드의 파라미터들의 타입(.class 붙임)
 		        	m.invoke(newObj,null);	//파라미터로 메소드의 클래스, 메소드의 파리미터들     	
 		        } catch (ClassNotFoundException e1) {
 		        	System.out.println("error1");

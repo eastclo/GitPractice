@@ -12,9 +12,6 @@ public class CommandList {
 		String cmdlistPath = "." + File.separator + "src" + File.separator + "Model" + File.separator + "cmdlist";
 		File f = new File(cmdlistPath);
 		this.commands = f.list();
-		
-		/*Model하위 commandlist 파일 안에 명령어 목록 작성*/
-//		FileReader fin = new FileReader(".\\commandlist.txt");
 	}
 	
 	public String[] getCommandList() {
