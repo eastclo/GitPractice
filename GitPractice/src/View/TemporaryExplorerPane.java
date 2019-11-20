@@ -31,14 +31,14 @@ public class TemporaryExplorerPane extends JPanel{
 		// Repository를 가져오기 위한 new 버튼을 만들었습니다.
 		// NewRepoClickListener와 연동됩니다.
 		JButton btnNewRepo = new JButton("new");
-		btnNewRepo.setBounds(200, 11, 50, 20);
+		btnNewRepo.setBounds(190, 11, 60, 20);
 		TemporaryExplorerPane.add(btnNewRepo);
 		
 		// LoadClickListener와 연동되는 load 버튼입니다.
 		// 시작하자마자 저장소의 repository 파일을 불러오는 쪽으로 결정될 경우 
 		// 이 버튼은 삭제될 예정입니다.
 		JButton btnLoadRepo = new JButton("load");
-		btnLoadRepo.setBounds(140, 11, 55, 20);
+		btnLoadRepo.setBounds(122, 11, 60, 20);
 		TemporaryExplorerPane.add(btnLoadRepo);
 		
 		
