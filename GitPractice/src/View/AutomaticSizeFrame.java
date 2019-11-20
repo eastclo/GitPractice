@@ -12,7 +12,7 @@ public class AutomaticSizeFrame extends JFrame { //창의 비율을 자동으로 설정하는
 	StackPane pane = new StackPane();
 	Scene scene = new Scene(pane, 500, 500);
 	
-		/*
+		/* 브랜치 이름 변경
 	* 
 	* View auto = new View();
 	* auto.setPreserveRatio(true);
