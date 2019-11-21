@@ -6,6 +6,9 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 
+import Controller.DocumentUploadListener;
+import Controller.NewRepoClickListener;
+
 public class TemporaryExplorerPane extends JPanel{
 	
 	public TemporaryExplorerPane() {
@@ -33,6 +36,8 @@ public class TemporaryExplorerPane extends JPanel{
 		JButton btnNewRepo = new JButton("new");
 		btnNewRepo.setBounds(200, 11, 50, 20);
 		TemporaryExplorerPane.add(btnNewRepo);
+		// 리스너 연동  
+		btnNewRepo.addMouseListener(new NewRepoClickListener());
 		
 		// LoadClickListener와 연동되는 load 버튼입니다.
 		// 시작하자마자 저장소의 repository 파일을 불러오는 쪽으로 결정될 경우 
@@ -40,6 +45,7 @@ public class TemporaryExplorerPane extends JPanel{
 		JButton btnLoadRepo = new JButton("load");
 		btnLoadRepo.setBounds(140, 11, 55, 20);
 		TemporaryExplorerPane.add(btnLoadRepo);
+		btnLoadRepo.addActionListener(new DocumentUploadListener());
 		
 		
 	}
