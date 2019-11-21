@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import javax.swing.*;
 
 import Model.CommandStack;
 
@@ -43,6 +44,7 @@ public class GobackButtonListener implements ActionListener{
 		        } catch (Exception e1) {
 		        	System.out.println("error2");
 		        }
+				JOptionPane.showMessageDialog(null, "'"+cmd +"'가 취소되었습니다.", "뒤로 가기", JOptionPane.INFORMATION_MESSAGE);	//알림 팝업
 			 }
 		}
 		
@@ -73,6 +75,8 @@ public class GobackButtonListener implements ActionListener{
 		        } catch (Exception e1) {
 		        	System.out.println("error2");
 		        }
+				
+				JOptionPane.showMessageDialog(null, "'"+cmd +"'가 실행되었습니다.", "앞으로 가기", JOptionPane.INFORMATION_MESSAGE);	//알림 팝업
 			 }	
 		 }
 	}
