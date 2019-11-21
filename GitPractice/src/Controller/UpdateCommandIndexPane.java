@@ -16,12 +16,12 @@ public class UpdateCommandIndexPane {
 	}
 	
 	public void setCommandList() {
-		//¸í·É¾î Á¾·ù °¡Á®¿À±â
+		//ëª…ë ¹ì–´ ì¢…ë¥˜ ê°€ì ¸ì˜¤ê¸°
 		Model.CommandExplainList cmdlist = new Model.CommandExplainList();
 		String cmds[] = cmdlist.getCommandList();
 		
-		/*list¿¡ ¸ñ·Ï Ãß°¡ÇÏ±â À§ÇÑ ÀÓ½Ã ¸ğµ¨ »ı¼º
-		* list¿£ addElement °°Àº ¸Ş¼Òµå°¡ ¾ø°í ¿Ï¼ºµÈ ¾ÆÀÌÅÛ ¸®½ºÆ®¸¦ ³Ñ°Ü Áà¾ß ÇÑ´Ù.
+		/*listì— ëª©ë¡ ì¶”ê°€í•˜ê¸° ìœ„í•œ ì„ì‹œ ëª¨ë¸ ìƒì„±
+		* listì—” addElement ê°™ì€ ë©”ì†Œë“œê°€ ì—†ê³  ì™„ì„±ëœ ì•„ì´í…œ ë¦¬ìŠ¤íŠ¸ë¥¼ ë„˜ê²¨ ì¤˜ì•¼ í•œë‹¤.
 		*/
 		DefaultListModel listModel = new DefaultListModel();
 		

@@ -43,7 +43,7 @@ public class DocumentUploadListener implements ActionListener {
 		int ret = fc.showOpenDialog(null);
 		
 		if(ret!=JFileChooser.APPROVE_OPTION) {
-			JOptionPane.showMessageDialog(null, "°æ·Î¸¦ ¼±ÅÃÇÏÁö ¾Ê¾Ò½À´Ï´Ù.","°æ°í",JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "ê²½ë¡œë¥¼ ì„ íƒí•˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.","ê²½ê³ ",JOptionPane.WARNING_MESSAGE);
 			return;
 		}
 		
@@ -84,14 +84,14 @@ public class DocumentUploadListener implements ActionListener {
 	public void workspaceSetting() {
 		if(!wsSetting)
 		{
-			JOptionPane.showMessageDialog(null, "WorkSpace °æ·Î°¡ ¼³Á¤µÇ¾î ÀÖÁö ¾Ê½À´Ï´Ù.");	
+			JOptionPane.showMessageDialog(null, "WorkSpace ê²½ë¡œê°€ ì„¤ì •ë˜ì–´ ìˆì§€ ì•ŠìŠµë‹ˆë‹¤.");	
 			fcd.setCurrentDirectory(new File("C:\\"));
 			fcd.setFileSelectionMode(fcd.DIRECTORIES_ONLY);
 
 			int ret = fcd.showOpenDialog(null);
 			
 			if(ret!=JFileChooser.APPROVE_OPTION) {
-				JOptionPane.showMessageDialog(null, "°æ·Î¸¦ ¼±ÅÃÇÏÁö ¾Ê¾Ò½À´Ï´Ù.","°æ°í",JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "ê²½ë¡œë¥¼ ì„ íƒí•˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.","ê²½ê³ ",JOptionPane.WARNING_MESSAGE);
 				return;
 			}
 			workSpace=fcd.getSelectedFile();

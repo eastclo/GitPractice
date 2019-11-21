@@ -16,12 +16,12 @@ public class GobackButtonListener implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String cmdlistPath = "." + File.separator + "src" + File.separator + "Model" + File.separator + "cmdlist";
 		 
-		if(e.toString().contains("back")) {	//µÚ·Î°¡±â ¹öÆ°ÀÏ °æ¿ì
-			 String cmd = Model.CommandStack.pop();	//¸í·É¾î ½ºÅÃ¿¡¼­ µÚ·Î°¡±â ¸Ş¼Òµå·Î ¸í·É¾î ¹Ş¾Æ¿À±â
-			 if (cmd != null) {	//µÚ·Î°¡±â ÇÒ ¸í·É¾î°¡ ¾øÀ¸¸é null
+		if(e.toString().contains("back")) {	//ë’¤ë¡œê°€ê¸° ë²„íŠ¼ì¼ ê²½ìš°
+			 String cmd = Model.CommandStack.pop();	//ëª…ë ¹ì–´ ìŠ¤íƒì—ì„œ ë’¤ë¡œê°€ê¸° ë©”ì†Œë“œë¡œ ëª…ë ¹ì–´ ë°›ì•„ì˜¤ê¸°
+			 if (cmd != null) {	//ë’¤ë¡œê°€ê¸° í•  ëª…ë ¹ì–´ê°€ ì—†ìœ¼ë©´ null
 				 /*	
-				  * ¹Ş¾Æ¿Â ¸í·É¾î·Î cancelCommand ¸Ş¼Òµå ½ÇÇà
-				  * ¹æ½ÄÀº CommandInputListener¿¡¼­ ½ÇÇàÇÏ´Â ¹æ½Ä°ú µ¿ÀÏ
+				  * ë°›ì•„ì˜¨ ëª…ë ¹ì–´ë¡œ cancelCommand ë©”ì†Œë“œ ì‹¤í–‰
+				  * ë°©ì‹ì€ CommandInputListenerì—ì„œ ì‹¤í–‰í•˜ëŠ” ë°©ì‹ê³¼ ë™ì¼
 				  */
 				 File f = new File(cmdlistPath,cmd);
 				 FileReader fin;
@@ -33,11 +33,11 @@ public class GobackButtonListener implements ActionListener{
 					} catch (FileNotFoundException e1) {} catch (IOException e1) {}
 				String Clazz = String.valueOf(buf).trim();
 				try {
-		        	Class<?> clazz = Class.forName(Clazz);	//Clazz¸¦ ÅëÇØ Å¬·¡½º »ı¼º
-		        	Object newObj = clazz.getDeclaredConstructor().newInstance();	//Å¬·¡½º·Î °´Ã¼»ı¼º
+		        	Class<?> clazz = Class.forName(Clazz);	//Clazzë¥¼ í†µí•´ í´ë˜ìŠ¤ ìƒì„±
+		        	Object newObj = clazz.getDeclaredConstructor().newInstance();	//í´ë˜ìŠ¤ë¡œ ê°ì²´ìƒì„±
 		        	
-		        	Method m = clazz.getDeclaredMethod("cancelCommand", null);	//ÆÄ¶ó¹ÌÅÍ·Î ¸Ş¼Òµå ÀÌ¸§, ÇØ´ç ¸Ş¼Ò000µåÀÇ ÆÄ¶ó¹ÌÅÍµéÀÇ Å¸ÀÔ(.class ºÙÀÓ)
-		        	m.invoke(newObj,null);	//ÆÄ¶ó¹ÌÅÍ·Î ¸Ş¼ÒµåÀÇ Å¬·¡½º, ¸Ş¼ÒµåÀÇ ÆÄ¸®¹ÌÅÍµé     	
+		        	Method m = clazz.getDeclaredMethod("cancelCommand", null);	//íŒŒë¼ë¯¸í„°ë¡œ ë©”ì†Œë“œ ì´ë¦„, í•´ë‹¹ ë©”ì†Œ000ë“œì˜ íŒŒë¼ë¯¸í„°ë“¤ì˜ íƒ€ì…(.class ë¶™ì„)
+		        	m.invoke(newObj,null);	//íŒŒë¼ë¯¸í„°ë¡œ ë©”ì†Œë“œì˜ í´ë˜ìŠ¤, ë©”ì†Œë“œì˜ íŒŒë¦¬ë¯¸í„°ë“¤     	
 		        } catch (ClassNotFoundException e1) {
 		        	System.out.println("error1");
 		        } catch (Exception e1) {
@@ -46,12 +46,12 @@ public class GobackButtonListener implements ActionListener{
 			 }
 		}
 		
-		else {	//¾ÕÀ¸·Î°¡±â ¹öÆ°ÀÏ °æ¿ì
-			 String cmd = Model.CommandStack.go();	//¸í·É¾î ½ºÅÃ¿¡¼­ ¾ÕÀ¸·Î°¡±â ¸Ş¼Òµå·Î ¸í·É¾î ¹Ş¾Æ¿À±â
-			 if (cmd != null) {	//¾ÕÀ¸·Î°¡±â ÇÒ ¸í·É¾î°¡ ¾øÀ¸¸é null
+		else {	//ì•ìœ¼ë¡œê°€ê¸° ë²„íŠ¼ì¼ ê²½ìš°
+			 String cmd = Model.CommandStack.go();	//ëª…ë ¹ì–´ ìŠ¤íƒì—ì„œ ì•ìœ¼ë¡œê°€ê¸° ë©”ì†Œë“œë¡œ ëª…ë ¹ì–´ ë°›ì•„ì˜¤ê¸°
+			 if (cmd != null) {	//ì•ìœ¼ë¡œê°€ê¸° í•  ëª…ë ¹ì–´ê°€ ì—†ìœ¼ë©´ null
 				 /*	
-				  * ¹Ş¾Æ¿Â ¸í·É¾î·Î executeCommand ¸Ş¼Òµå ½ÇÇà
-				  * ¹æ½ÄÀº CommandInputListener¿¡¼­ ½ÇÇàÇÏ´Â ¹æ½Ä°ú µ¿ÀÏ
+				  * ë°›ì•„ì˜¨ ëª…ë ¹ì–´ë¡œ executeCommand ë©”ì†Œë“œ ì‹¤í–‰
+				  * ë°©ì‹ì€ CommandInputListenerì—ì„œ ì‹¤í–‰í•˜ëŠ” ë°©ì‹ê³¼ ë™ì¼
 				  */
 				 File f = new File(cmdlistPath,cmd);
 				 FileReader fin;
@@ -63,11 +63,11 @@ public class GobackButtonListener implements ActionListener{
 					} catch (FileNotFoundException e1) {} catch (IOException e1) {}
 				String Clazz = String.valueOf(buf).trim();
 				try {
-		        	Class<?> clazz = Class.forName(Clazz);	//Clazz¸¦ ÅëÇØ Å¬·¡½º »ı¼º
-		        	Object newObj = clazz.getDeclaredConstructor().newInstance();	//Å¬·¡½º·Î °´Ã¼»ı¼º
+		        	Class<?> clazz = Class.forName(Clazz);	//Clazzë¥¼ í†µí•´ í´ë˜ìŠ¤ ìƒì„±
+		        	Object newObj = clazz.getDeclaredConstructor().newInstance();	//í´ë˜ìŠ¤ë¡œ ê°ì²´ìƒì„±
 		        	
-		        	Method m = clazz.getDeclaredMethod("executeCommand", null);	//ÆÄ¶ó¹ÌÅÍ·Î ¸Ş¼Òµå ÀÌ¸§, ÇØ´ç ¸Ş¼ÒµåÀÇ ÆÄ¶ó¹ÌÅÍµéÀÇ Å¸ÀÔ(.class ºÙÀÓ)
-		        	m.invoke(newObj,null);	//ÆÄ¶ó¹ÌÅÍ·Î ¸Ş¼ÒµåÀÇ Å¬·¡½º, ¸Ş¼ÒµåÀÇ ÆÄ¸®¹ÌÅÍµé     	
+		        	Method m = clazz.getDeclaredMethod("executeCommand", null);	//íŒŒë¼ë¯¸í„°ë¡œ ë©”ì†Œë“œ ì´ë¦„, í•´ë‹¹ ë©”ì†Œë“œì˜ íŒŒë¼ë¯¸í„°ë“¤ì˜ íƒ€ì…(.class ë¶™ì„)
+		        	m.invoke(newObj,null);	//íŒŒë¼ë¯¸í„°ë¡œ ë©”ì†Œë“œì˜ í´ë˜ìŠ¤, ë©”ì†Œë“œì˜ íŒŒë¦¬ë¯¸í„°ë“¤     	
 		        } catch (ClassNotFoundException e1) {
 		        	System.out.println("error1");
 		        } catch (Exception e1) {

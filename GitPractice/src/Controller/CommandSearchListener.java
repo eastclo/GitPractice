@@ -28,20 +28,20 @@ public class CommandSearchListener implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//ÅØ½ºÆ® ÇÊµå·Î ºÎÅÍ ÀÔ·Â °ª ¹Ş¾Æ¿À±â
+		//í…ìŠ¤íŠ¸ í•„ë“œë¡œ ë¶€í„° ì…ë ¥ ê°’ ë°›ì•„ì˜¤ê¸°
 		JTextField txtField = (JTextField) e.getSource();
 		String textFieldValue = txtField.getText();
 		
 		Model.CommandExplainList cmdlist = new Model.CommandExplainList();
 		String cmds[] = cmdlist.getCommandList();
 		
-		/*list¿¡ ¸ñ·Ï Ãß°¡ÇÏ±â À§ÇÑ ÀÓ½Ã ¸ğµ¨ »ı¼º
-		* list¿£ addElement °°Àº ¸Ş¼Òµå°¡ ¾ø°í ¿Ï¼ºµÈ ¾ÆÀÌÅÛ ¸®½ºÆ®¸¦ ³Ñ°Ü Áà¾ß ÇÑ´Ù.
+		/*listì— ëª©ë¡ ì¶”ê°€í•˜ê¸° ìœ„í•œ ì„ì‹œ ëª¨ë¸ ìƒì„±
+		* listì—” addElement ê°™ì€ ë©”ì†Œë“œê°€ ì—†ê³  ì™„ì„±ëœ ì•„ì´í…œ ë¦¬ìŠ¤íŠ¸ë¥¼ ë„˜ê²¨ ì¤˜ì•¼ í•œë‹¤.
 		*/
 		DefaultListModel listModel = new DefaultListModel();
 		
 		for(String cmd : cmds) {
-			//¸í·É¾î ³»ºÎ ¼³¸íÀÌ °Ë»öµÉ °æ¿ì¸¦ À§ÇØ ÆÄÀÏ ³»ºÎ ÀĞ¾î¿À±â
+			//ëª…ë ¹ì–´ ë‚´ë¶€ ì„¤ëª…ì´ ê²€ìƒ‰ë  ê²½ìš°ë¥¼ ìœ„í•´ íŒŒì¼ ë‚´ë¶€ ì½ì–´ì˜¤ê¸°
 			String cmdlistPath = "." + File.separator + "src" + File.separator + "Model" + File.separator + "cmdexplain";
 			File f = new File(cmdlistPath,cmd);
 			char []buf = new char [1024];
@@ -52,9 +52,9 @@ public class CommandSearchListener implements ActionListener {
 			} catch (FileNotFoundException e1) {} catch (IOException e1) {}
 			String explain = String.valueOf(buf).trim();
 			
-			if(cmd.contains(textFieldValue)) {	//¸í·É¾î°¡ °Ë»öµÉ °æ¿ì
+			if(cmd.contains(textFieldValue)) {	//ëª…ë ¹ì–´ê°€ ê²€ìƒ‰ë  ê²½ìš°
 				listModel.addElement(cmd);
-			} else if(explain.contains(textFieldValue)) {	//¸í·É¾î ³»ºÎ ¼³¸í¿¡ °Ë»öÇÑ ³»¿ëÀÌ ÀÖÀ» °æ¿ì
+			} else if(explain.contains(textFieldValue)) {	//ëª…ë ¹ì–´ ë‚´ë¶€ ì„¤ëª…ì— ê²€ìƒ‰í•œ ë‚´ìš©ì´ ìˆì„ ê²½ìš°
 				listModel.addElement(cmd);
 			}
 		}

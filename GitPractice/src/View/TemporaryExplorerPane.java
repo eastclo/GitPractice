@@ -16,7 +16,7 @@ public class TemporaryExplorerPane extends JPanel{
 		MainFrame.contentPane.add(TemporaryExplorerPane);
 		TemporaryExplorerPane.setLayout(null);
 		
-		JLabel lblGitSimul = new JLabel("¸ğÀÇ ±êÇãºê Ã¢");
+		JLabel lblGitSimul = new JLabel("ëª¨ì˜ ê¹ƒí—ˆë¸Œ ì°½");
 		lblGitSimul.setBounds(14, 12, 106, 18);
 		TemporaryExplorerPane.add(lblGitSimul);
 		
@@ -24,19 +24,19 @@ public class TemporaryExplorerPane extends JPanel{
 		scrollGitSimul.setBounds(238, 42, 13, 550);
 		TemporaryExplorerPane.add(scrollGitSimul);
 		
-		JList Repository = new JList(); //ÀúÀå¼Ò¸¦ ¸®½ºÆ®¿¡ Áö¼ÓÀûÀ¸·Î Ãß°¡ÇØ¼­ º¸¿©ÁÖ´Â Çü½Ä
+		JList Repository = new JList(); //ì €ì¥ì†Œë¥¼ ë¦¬ìŠ¤íŠ¸ì— ì§€ì†ì ìœ¼ë¡œ ì¶”ê°€í•´ì„œ ë³´ì—¬ì£¼ëŠ” í˜•ì‹
 		Repository.setBounds(14, 42, 237, 550);
 		TemporaryExplorerPane.add(Repository);
 		
-		// Repository¸¦ °¡Á®¿À±â À§ÇÑ new ¹öÆ°À» ¸¸µé¾ú½À´Ï´Ù.
-		// NewRepoClickListener¿Í ¿¬µ¿µË´Ï´Ù.
+		// Repositoryë¥¼ ê°€ì ¸ì˜¤ê¸° ìœ„í•œ new ë²„íŠ¼ì„ ë§Œë“¤ì—ˆìŠµë‹ˆë‹¤.
+		// NewRepoClickListenerì™€ ì—°ë™ë©ë‹ˆë‹¤.
 		JButton btnNewRepo = new JButton("new");
 		btnNewRepo.setBounds(190, 11, 60, 20);
 		TemporaryExplorerPane.add(btnNewRepo);
 		
-		// LoadClickListener¿Í ¿¬µ¿µÇ´Â load ¹öÆ°ÀÔ´Ï´Ù.
-		// ½ÃÀÛÇÏÀÚ¸¶ÀÚ ÀúÀå¼ÒÀÇ repository ÆÄÀÏÀ» ºÒ·¯¿À´Â ÂÊÀ¸·Î °áÁ¤µÉ °æ¿ì 
-		// ÀÌ ¹öÆ°Àº »èÁ¦µÉ ¿¹Á¤ÀÔ´Ï´Ù.
+		// LoadClickListenerì™€ ì—°ë™ë˜ëŠ” load ë²„íŠ¼ì…ë‹ˆë‹¤.
+		// ì‹œì‘í•˜ìë§ˆì ì €ì¥ì†Œì˜ repository íŒŒì¼ì„ ë¶ˆëŸ¬ì˜¤ëŠ” ìª½ìœ¼ë¡œ ê²°ì •ë  ê²½ìš° 
+		// ì´ ë²„íŠ¼ì€ ì‚­ì œë  ì˜ˆì •ì…ë‹ˆë‹¤.
 		JButton btnLoadRepo = new JButton("load");
 		btnLoadRepo.setBounds(122, 11, 60, 20);
 		TemporaryExplorerPane.add(btnLoadRepo);
