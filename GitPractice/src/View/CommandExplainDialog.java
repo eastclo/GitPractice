@@ -1,17 +1,23 @@
 package View;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
+import javax.swing.*;
 
 public class CommandExplainDialog extends JFrame {
 	private JLabel jlb = new JLabel("");
 	
 	public CommandExplainDialog(String str) {
-		getContentPane().add(jlb);
-		
+		JPanel pane = new JPanel();
+		pane.add(jlb);
+		pane.setBorder(BorderFactory.createEmptyBorder(10 , 10 , 10 , 10));	//내부 패딩 설정
 		jlb.setText(str.toString());
 		
-		this.setSize(200,100);
+		this.add(pane, BorderLayout.WEST);
+		this.setMinimumSize(new Dimension(500,200));	//최소 크기 설정
+		this.pack();
+		this.setLocation(200,200);
 		this.setVisible(true);
 	}
 }

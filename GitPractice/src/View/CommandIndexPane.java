@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class CommandIndexPane  extends JPanel{
 	
-	//¸ğµç element ¸â¹öº¯¼ö·Î ¼±¾ğ
+	//ëª¨ë“  element ë©¤ë²„ë³€ìˆ˜ë¡œ ì„ ì–¸
 	private JPanel CommandIndexPane;
 	private JLabel lblGitCommand;
 	private JScrollBar scrollIndex;
@@ -24,7 +24,7 @@ public class CommandIndexPane  extends JPanel{
 	MainFrame.contentPane.add(CommandIndexPane);
 	CommandIndexPane.setLayout(null);
 	
-	lblGitCommand = new JLabel("git ¸í·É¾î °Ë»ö");
+	lblGitCommand = new JLabel("git ëª…ë ¹ì–´ ê²€ìƒ‰");
 	lblGitCommand.setBounds(14, 12, 132, 18);
 	CommandIndexPane.add(lblGitCommand);
 	
@@ -40,13 +40,13 @@ public class CommandIndexPane  extends JPanel{
 	
 	list = new JList();
 	list.setBounds(14, 78, 208, 514);
-	list.addMouseListener(new CommandMouseEventListener(this)); //¸í·É¾î ¼±ÅÃ ¸®½º³Ê Àû¿ë
+	list.addMouseListener(new CommandMouseEventListener(this)); //ëª…ë ¹ì–´ ì„ íƒ ë¦¬ìŠ¤ë„ˆ ì ìš©
 	CommandIndexPane.add(list);
 	
 	UpdateCommandIndexPane init = new UpdateCommandIndexPane(this);
-	init.setCommandList();	//list¿¡ ¸í·É¾î ¸ñ·Ï ³ª¿­ÇÏ±â À§ÇÑ controller È£Ãâ
+	init.setCommandList();	//listì— ëª…ë ¹ì–´ ëª©ë¡ ë‚˜ì—´í•˜ê¸° ìœ„í•œ controller í˜¸ì¶œ
 	
-	MainFrame.textField.addActionListener(new CommandSearchListener(this));	//¸í·É¾î °Ë»ö ¸®½º³Ê Àû¿ë	
+	MainFrame.textField.addActionListener(new CommandSearchListener(this));	//ëª…ë ¹ì–´ ê²€ìƒ‰ ë¦¬ìŠ¤ë„ˆ ì ìš©	
 	}
 	
 	public JList getJList() {

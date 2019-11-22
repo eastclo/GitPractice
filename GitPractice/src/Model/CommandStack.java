@@ -5,13 +5,13 @@ public class CommandStack {
 	private static int top = -1;
 	private static int max = -1;
 	
-	//¸í·É¾î ÃÖÃÊ ÀÔ·Â½Ã È£Ãâ
+	//ëª…ë ¹ì–´ ìµœì´ˆ ì…ë ¥ì‹œ í˜¸ì¶œ
 	public static void push(String cmd) {
 		commandStack[++top] = cmd;
 		max = top;
 	}
 	
-	//µÚ·Î°¡±â ¹öÆ° Å¬¸¯½Ã È£Ãâ
+	//ë’¤ë¡œê°€ê¸° ë²„íŠ¼ í´ë¦­ì‹œ í˜¸ì¶œ
 	public static String pop() {
 		if(top != -1) 
 			return commandStack[top--];
@@ -20,7 +20,7 @@ public class CommandStack {
 			return null;
 	}
 	
-	//¾ÕÀ¸·Î°¡±â ¹öÆ° Å¬¸¯½Ã È£Ãâ
+	//ì•ìœ¼ë¡œê°€ê¸° ë²„íŠ¼ í´ë¦­ì‹œ í˜¸ì¶œ
 	public static String go() {
 		if(top < max) 
 			return commandStack[++top];

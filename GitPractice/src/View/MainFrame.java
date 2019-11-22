@@ -9,7 +9,7 @@ public class MainFrame extends JFrame {
 	static JPanel contentPane;
 	static JTextField textField;
 
-	//½ÇÇà
+	//ì‹¤í–‰
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -23,7 +23,7 @@ public class MainFrame extends JFrame {
 		});
 	}
 
-	//¸ŞÀÎ ÇÁ·¹ÀÓ »ı¼º
+	//ë©”ì¸ í”„ë ˆì„ ìƒì„±
 	public MainFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1060, 651);

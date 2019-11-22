@@ -10,12 +10,12 @@ public class ExplorerClickListener implements MouseListener {
 	MouseEvent e;
 	
 	public ExplorerClickListener() {
-		// Model¿¡ Á¤ÀÇµÇ¾î ÀÖ´Â Remote Repository ¸®½ºÆ®
+		// Modelì— ì •ì˜ë˜ì–´ ìˆëŠ” Remote Repository ë¦¬ìŠ¤íŠ¸
 		Model.RemoteRepository rmrepo = new Model.RemoteRepository();
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) { // ¸¶¿ì½º°¡ Å¬¸¯ µÇ¾úÀ» ¶§ 
+	public void mouseClicked(MouseEvent e) { // ë§ˆìš°ìŠ¤ê°€ í´ë¦­ ë˜ì—ˆì„ ë•Œ 
 		// TODO Auto-generated method stub
 		mkRepository();
 		
@@ -24,7 +24,7 @@ public class ExplorerClickListener implements MouseListener {
 	
 	private void mkRepository() {
 		JButton linkButton = (JButton) e.getSource();
-		// ¸®½º³Ê °´Ã¼ »ı¼º
+		// ë¦¬ìŠ¤ë„ˆ ê°ì²´ ìƒì„±
 		ExplorerClickListener listener = new ExplorerClickListener();
 		
 	}

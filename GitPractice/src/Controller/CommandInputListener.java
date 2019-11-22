@@ -16,20 +16,20 @@ public class CommandInputListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//textfield·ÎºÎÅÍ ÀÔ·Â °ªÀ» °¡Á®¿Â´Ù.
+		//textfieldë¡œë¶€í„° ì…ë ¥ ê°’ì„ ê°€ì ¸ì˜¨ë‹¤.
 		JTextField txtField = (JTextField) e.getSource();
 		String textFieldValue = txtField.getText();
 		
-		//Model¿¡ Á¤ÀÇ µÇ¾îÀÖ´Â ¸í·É¾î¸®½ºÆ®¸¦ °¡Á®¿È
+		//Modelì— ì •ì˜ ë˜ì–´ìˆëŠ” ëª…ë ¹ì–´ë¦¬ìŠ¤íŠ¸ë¥¼ ê°€ì ¸ì˜´
 		Model.CommandList cmdlist = new Model.CommandList();
 		String cmds[] = cmdlist.getCommandList();
 		Arrays.sort(cmds);
 			
-		//¹è¿­¿¡ ÀÔ·ÂµÈ ¸í·É¾î°¡ ÀÖ´ÂÁö °Ë»ö
-		int index = Arrays.binarySearch(cmds, textFieldValue); /*****¿¹¿ÜÃ³¸® ÇØ¾ßÇÔ, Ã£´Â °ªÀÌ ¾øÀ¸¸é À½¼ö°ªÀ» ¹İÈ¯.**/
-		Model.CommandStack.push(textFieldValue);	//¿¹¿ÜÃ³¸® ÈÄ ¸í·É¾î°¡ ÀÖÀ¸¸é ¸í·É¾î ½ºÅÃ¿¡ ÀúÀå
+		//ë°°ì—´ì— ì…ë ¥ëœ ëª…ë ¹ì–´ê°€ ìˆëŠ”ì§€ ê²€ìƒ‰
+		int index = Arrays.binarySearch(cmds, textFieldValue); /*****ì˜ˆì™¸ì²˜ë¦¬ í•´ì•¼í•¨, ì°¾ëŠ” ê°’ì´ ì—†ìœ¼ë©´ ìŒìˆ˜ê°’ì„ ë°˜í™˜.**/
+		Model.CommandStack.push(textFieldValue);	//ì˜ˆì™¸ì²˜ë¦¬ í›„ ëª…ë ¹ì–´ê°€ ìˆìœ¼ë©´ ëª…ë ¹ì–´ ìŠ¤íƒì— ì €ì¥
 		
-		//¸í·É¾î¸¦ ÆÄÀÏ ÀÌ¸§À¸·Î ÀúÀåÇßÀ¸¹Ç·Î ÇØ´ç ¸í·É¾îÆÄÀÏ ³»ºÎ¿¡ ÀûÈù Å¬·¡½º ÀÌ¸§À» ¾ò±â À§ÇØ ÆÄÀÏ °´Ã¼¿Í  FileReader¸¦ »ç¿ëÇÔ.
+		//ëª…ë ¹ì–´ë¥¼ íŒŒì¼ ì´ë¦„ìœ¼ë¡œ ì €ì¥í–ˆìœ¼ë¯€ë¡œ í•´ë‹¹ ëª…ë ¹ì–´íŒŒì¼ ë‚´ë¶€ì— ì íŒ í´ë˜ìŠ¤ ì´ë¦„ì„ ì–»ê¸° ìœ„í•´ íŒŒì¼ ê°ì²´ì™€  FileReaderë¥¼ ì‚¬ìš©í•¨.
 		String cmdlistPath = "." + File.separator + "src" + File.separator + "Model" + File.separator + "cmdlist";
 		File f = new File(cmdlistPath,cmds[index]);
 		FileReader fin;
@@ -40,16 +40,16 @@ public class CommandInputListener implements ActionListener {
 			fin.close();
 		} catch (FileNotFoundException e1) {} catch (IOException e1) {}
 		
-		//¹öÆÛÀÇ ³²´Â °ø¹éÀ» Á¦°Å
+		//ë²„í¼ì˜ ë‚¨ëŠ” ê³µë°±ì„ ì œê±°
 		String Clazz = String.valueOf(buf).trim();
         
-        //¸í··¾î ½ÇÇà
+        //ëª…ë ì–´ ì‹¤í–‰
         try {
-        	Class<?> clazz = Class.forName(Clazz);	//Clazz¸¦ ÅëÇØ Å¬·¡½º »ı¼º
-        	Object newObj = clazz.getDeclaredConstructor().newInstance();	//Å¬·¡½º·Î °´Ã¼»ı¼º
+        	Class<?> clazz = Class.forName(Clazz);	//Clazzë¥¼ í†µí•´ í´ë˜ìŠ¤ ìƒì„±
+        	Object newObj = clazz.getDeclaredConstructor().newInstance();	//í´ë˜ìŠ¤ë¡œ ê°ì²´ìƒì„±
         	
-        	Method m = clazz.getDeclaredMethod("executeCommand", null);	//ÆÄ¶ó¹ÌÅÍ·Î ¸Ş¼Òµå ÀÌ¸§, ÇØ´ç ¸Ş¼Ò000µåÀÇ ÆÄ¶ó¹ÌÅÍµéÀÇ Å¸ÀÔ(.class ºÙÀÓ)
-        	m.invoke(newObj,null);	//ÆÄ¶ó¹ÌÅÍ·Î ¸Ş¼ÒµåÀÇ Å¬·¡½º, ¸Ş¼ÒµåÀÇ ÆÄ¸®¹ÌÅÍµé     	
+        	Method m = clazz.getDeclaredMethod("executeCommand", null);	//íŒŒë¼ë¯¸í„°ë¡œ ë©”ì†Œë“œ ì´ë¦„, í•´ë‹¹ ë©”ì†Œ000ë“œì˜ íŒŒë¼ë¯¸í„°ë“¤ì˜ íƒ€ì…(.class ë¶™ì„)
+        	m.invoke(newObj,null);	//íŒŒë¼ë¯¸í„°ë¡œ ë©”ì†Œë“œì˜ í´ë˜ìŠ¤, ë©”ì†Œë“œì˜ íŒŒë¦¬ë¯¸í„°ë“¤     	
         } catch (ClassNotFoundException e1) {
         	System.out.println("error1");
         } catch (Exception e1) {

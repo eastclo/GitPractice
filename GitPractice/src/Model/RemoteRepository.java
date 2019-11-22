@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-// Model ³»ÀÇ Remote Repository ¸¦ ÀúÀåÇÏ°í, ºÒ·¯¿À±â À§ÇÑ Model ÀÔ´Ï´Ù.
+// Model ë‚´ì˜ Remote Repository ë¥¼ ì €ì¥í•˜ê³ , ë¶ˆëŸ¬ì˜¤ê¸° ìœ„í•œ Model ì…ë‹ˆë‹¤.
 
 public class RemoteRepository {
 		File reposit;
@@ -15,8 +15,8 @@ public class RemoteRepository {
 		}
 	
 		public void getRemoteRepository() {
-			// Repository ÀÚÃ¼´Â ·ÎÄÃ ÆÄÀÏ·Î ¹Ş¾Æ¿À°í
-			// 4¹ø È­¸é¿¡ ¶ß´Â ¸®½ºÆ®´Â List·Î ±¸ÇöÇÒ °èÈ¹ÀÔ´Ï´Ù.
+			// Repository ìì²´ëŠ” ë¡œì»¬ íŒŒì¼ë¡œ ë°›ì•„ì˜¤ê³ 
+			// 4ë²ˆ í™”ë©´ì— ëœ¨ëŠ” ë¦¬ìŠ¤íŠ¸ëŠ” Listë¡œ êµ¬í˜„í•  ê³„íšì…ë‹ˆë‹¤.
 			reposit = new File("C:\\");
 		}
 }
