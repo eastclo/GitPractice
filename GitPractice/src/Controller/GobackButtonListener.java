@@ -45,6 +45,8 @@ public class GobackButtonListener implements ActionListener{
 		        	System.out.println("error2");
 		        }
 				JOptionPane.showMessageDialog(null, "'"+cmd +"'가 취소되었습니다.", "뒤로 가기", JOptionPane.INFORMATION_MESSAGE);	//알림 팝업
+			 } else {
+				 JOptionPane.showMessageDialog(null, "수행할 명령어가 없습니다.", "오류", JOptionPane.WARNING_MESSAGE);	//알림 팝업
 			 }
 		}
 		
@@ -74,10 +76,11 @@ public class GobackButtonListener implements ActionListener{
 		        	System.out.println("error1");
 		        } catch (Exception e1) {
 		        	System.out.println("error2");
-		        }
-				
+		        }				
 				JOptionPane.showMessageDialog(null, "'"+cmd +"'가 실행되었습니다.", "앞으로 가기", JOptionPane.INFORMATION_MESSAGE);	//알림 팝업
-			 }	
+			 } else {
+				 JOptionPane.showMessageDialog(null, "수행할 명령어가 없습니다.", "오류", JOptionPane.WARNING_MESSAGE);	//알림 팝업
+			 }
 		 }
 	}
 }
