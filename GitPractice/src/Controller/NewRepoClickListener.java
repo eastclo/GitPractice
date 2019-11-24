@@ -48,30 +48,37 @@ public class NewRepoClickListener extends JFrame implements MouseListener {
 	}
 	
 	public void dirCreate() { // 로컬 저장소에 디렉토리를 만들어주는 함수입니다.
-		String repoDir = "C:\\" + input;
-		String repoFile = input;
-		File fdir = new File(repoDir); // 파일 폴더를 다루기 위한 객체
-		File file = new File(repoFile);
+		String repoName = input;
+		
+		File fdir = new File("." + File.separator + "GitHub", repoName);
+		File file = new File("." + File.separator + "GitHub" + File.separator + repoName,repoName);
+
 		
 		if (!fdir.exists()) {
 			if (fdir.mkdirs()) {
-				//폴더 생성  
 				if (!file.exists()) {
 					try {
 						if (file.createNewFile()) {
-							// repository 생성  
+							JOptionPane.showMessageDialog(null, "Repository 생성 완료.	");
 						} else {
-							System.out.println("Repository 생성에 실패했습니다.");
+							JOptionPane.showMessageDialog(null, "Repository 생성에 실패했습니다.");
 						}
 					} catch (IOException e) {
-						//TODO Auto-generated catch block
 						e.printStackTrace();
+						JOptionPane.showMessageDialog(null, "같은 이름의 Repository가 존재합니다!");
 					}
 				} else {
+					JOptionPane.showMessageDialog(null, "같은 이름의 Repository가 이미 존재합니다.");
 					System.out.println("같은 이름의 Repository가 이미 존재합니다.");
 				}
-			} 
+			}
 		}
+		
+		// 절대 경로 출력 (확인을 위해 써놓았습니다. 완성되면 지울게요!)
+		String path = fdir.getAbsolutePath();
+		String pathfile = file.getAbsolutePath();
+		System.out.println("디렉토리 경로 : " + path);
+		System.out.println("파일 경로 : " + pathfile);
 		
 	}
 	
