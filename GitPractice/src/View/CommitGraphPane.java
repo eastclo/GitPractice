@@ -42,8 +42,6 @@ public class CommitGraphPane extends JPanel{
 		CommitFunction commitOpen = new CommitFunction();
 		commitOpen.commitListOpen();
 		List<Object> Array = commitOpen.CMArray;
-		for(int i=0;i<Array.size();i++)
-			System.out.printf("%d\n",Array.get(i));
 	}
 	catch (ParseException e) {
 	      e.printStackTrace();
