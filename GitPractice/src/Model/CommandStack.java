@@ -28,4 +28,7 @@ public class CommandStack {
 			return null;
 	} 
 	
+	public static int printTop() {
+		return top;
+	}
 }
