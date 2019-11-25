@@ -50,6 +50,7 @@ public class CommandInputListener implements ActionListener {
 		        
 		        //명렁어 실행
 				CommandListOperation.execute("executeCommand",Clazz, input);
+				JOptionPane.showMessageDialog(null, textFieldValue.trim().replaceAll(" +", " ") + " 명령어를 수행합니다.", "명령어 입력", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 	}
