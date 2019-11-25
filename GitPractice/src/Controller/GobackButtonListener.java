@@ -24,15 +24,8 @@ public class GobackButtonListener implements ActionListener{
 				  * 받아온 명령어로 cancelCommand 메소드 실행
 				  * 방식은 CommandInputListener에서 실행하는 방식과 동일
 				  */
-				 File f = new File(cmdlistPath,cmd);
-				 FileReader fin;
-				 char []buf = new char [1024];
-					try {
-						fin = new FileReader(cmdlistPath + File.separator + cmd);
-						fin.read(buf);
-						fin.close();
-					} catch (FileNotFoundException e1) {} catch (IOException e1) {}
-				String Clazz = String.valueOf(buf).trim();
+				 String Clazz = getFileReadData(cmdlistPath, cmd);	//명령어 받아오기
+				
 				try {
 		        	Class<?> clazz = Class.forName(Clazz);	//Clazz를 통해 클래스 생성
 		        	Object newObj = clazz.getDeclaredConstructor().newInstance();	//클래스로 객체생성
@@ -57,15 +50,8 @@ public class GobackButtonListener implements ActionListener{
 				  * 받아온 명령어로 executeCommand 메소드 실행
 				  * 방식은 CommandInputListener에서 실행하는 방식과 동일
 				  */
-				 File f = new File(cmdlistPath,cmd);
-				 FileReader fin;
-				 char []buf = new char [1024];
-					try {
-						fin = new FileReader(cmdlistPath + File.separator + cmd);
-						fin.read(buf);
-						fin.close();
-					} catch (FileNotFoundException e1) {} catch (IOException e1) {}
-				String Clazz = String.valueOf(buf).trim();
+				String Clazz = getFileReadData(cmdlistPath, cmd);	//명령어 받아오기
+				
 				try {
 		        	Class<?> clazz = Class.forName(Clazz);	//Clazz를 통해 클래스 생성
 		        	Object newObj = clazz.getDeclaredConstructor().newInstance();	//클래스로 객체생성
@@ -82,6 +68,20 @@ public class GobackButtonListener implements ActionListener{
 				 JOptionPane.showMessageDialog(null, "수행할 명령어가 없습니다.", "오류", JOptionPane.WARNING_MESSAGE);	//알림 팝업
 			 }
 		 }
+	}
+	
+	private String getFileReadData(String cmdlistPath, String cmd) {
+		File f = new File(cmdlistPath,cmd);
+		 FileReader fin;
+		 char []buf = new char [1024];
+			try {
+				fin = new FileReader(cmdlistPath + File.separator + cmd);
+				fin.read(buf);
+				fin.close();
+			} catch (FileNotFoundException e1) {} catch (IOException e1) {}
+		String Clazz = String.valueOf(buf).trim();
+		
+		return String.valueOf(buf).trim();	//버퍼에 공백 제거
 	}
 }
 
