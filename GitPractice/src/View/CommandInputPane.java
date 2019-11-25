@@ -80,7 +80,7 @@ public class CommandInputPane extends JPanel{
 		JLabel lblSelect = new JLabel("브랜치 선택"); //브랜치를 선택하는 라벨 추가
 		lblSelect.setBounds(119, 12, 83, 18); 
 		CommandInputPane.add(lblSelect);
-				
+
 	}
 	
 		 class buttonPress implements ActionListener {

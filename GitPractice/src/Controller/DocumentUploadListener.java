@@ -15,7 +15,7 @@ import javax.swing.JFileChooser.*;
 import javax.swing.event.*;
 
 
-
+//Workspaceë¡œ íŒŒì¼ì„ ì—…ë¡œë“œí•˜ëŠ” Controller
 public class DocumentUploadListener implements ActionListener {
 	JFileChooser fc;
 	JFileChooser fcd;
@@ -32,18 +32,22 @@ public class DocumentUploadListener implements ActionListener {
 	}
 	
 	@Override
+	//ë²„íŠ¼ Clickì‹œ ì‹¤í–‰.
 	public void actionPerformed(ActionEvent e) {
+		//ì €ì¥í•  workspaceì„¤ì •.
 		workspaceSetting();
-		menuOpen();
+		
+		//ì—…ë¡œë“œí•  íŒŒì¼ Open
+		fileOpen();
 		// TODO Auto-generated method stub
 		
 	}
 	
-	public void menuOpen() {
+	public void fileOpen() {
 		int ret = fc.showOpenDialog(null);
 		
 		if(ret!=JFileChooser.APPROVE_OPTION) {
-			JOptionPane.showMessageDialog(null, "°æ·Î¸¦ ¼±ÅÃÇÏÁö ¾Ê¾Ò½À´Ï´Ù.","°æ°í",JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "ê²½ë¡œë¥¼ ì„ íƒí•˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.","ê²½ê³ ",JOptionPane.WARNING_MESSAGE);
 			return;
 		}
 		
@@ -51,7 +55,7 @@ public class DocumentUploadListener implements ActionListener {
 		fileName = file.getName();
 		fileIn =getTextFromFile(file);
 		
-		String wsFile = workSpace + "\\" + fileName;
+		String wsFile = workSpace + File.separator + fileName;
 		JOptionPane.showMessageDialog(null, fileIn);
 		try {
 			FileWriter fileWriter = new FileWriter(wsFile);
@@ -64,6 +68,7 @@ public class DocumentUploadListener implements ActionListener {
 		
 		
 	}
+	//CommandInputPaneì— ì¶œë ¥í•  íŒŒì¼ë‚´ìš©ì„ Stringí˜•íƒœë¡œ  Return
 	public String getTextFromFile(File txtFile){
 	    String text = "";
 	 
@@ -81,17 +86,18 @@ public class DocumentUploadListener implements ActionListener {
 	    }
 		return text;
 	}
+	//Workspaceì˜ ê²½ë¡œë¥¼ ì„¸íŒ…. í´ë”ë§Œ ì„ íƒê°€ëŠ¥
 	public void workspaceSetting() {
 		if(!wsSetting)
 		{
-			JOptionPane.showMessageDialog(null, "WorkSpace °æ·Î°¡ ¼³Á¤µÇ¾î ÀÖÁö ¾Ê½À´Ï´Ù.");	
-			fcd.setCurrentDirectory(new File("C:\\"));
+			JOptionPane.showMessageDialog(null, "WorkSpace ê²½ë¡œê°€ ì„¤ì •ë˜ì–´ ìˆì§€ ì•ŠìŠµë‹ˆë‹¤.");	
+			fcd.setCurrentDirectory(new File("."));
 			fcd.setFileSelectionMode(fcd.DIRECTORIES_ONLY);
 
 			int ret = fcd.showOpenDialog(null);
 			
 			if(ret!=JFileChooser.APPROVE_OPTION) {
-				JOptionPane.showMessageDialog(null, "°æ·Î¸¦ ¼±ÅÃÇÏÁö ¾Ê¾Ò½À´Ï´Ù.","°æ°í",JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "ê²½ë¡œë¥¼ ì„ íƒí•˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.","ê²½ê³ ",JOptionPane.WARNING_MESSAGE);
 				return;
 			}
 			workSpace=fcd.getSelectedFile();

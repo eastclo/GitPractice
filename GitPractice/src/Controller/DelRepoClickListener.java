@@ -7,10 +7,10 @@ import java.awt.event.MouseListener;
 import java.io.File;
 
 /*
- Repository¸¦ »èÁ¦ÇÏ´Â ±â´Éµµ ÇÊ¿äÇÒ °Í °°¾Æ Ãß°¡µÈ ¸®½º³ÊÀÔ´Ï´Ù.
- ±âÁ¸ À©µµ¿ì¿¡ del ¹öÆ°ÀÌ ÀÖ´Â °Ç ¾Æ´Õ´Ï´Ù.
- RepositoryÀÇ ¸µÅ©¸¦ Å¬¸¯ÇÏ°í »õ·Î¿î Ã¢À¸·Î ³Ñ¾î°¬À» ¶§
- Èò»ö È­¸éÀÇ Á¦ÀÏ À§ÂÊ¿¡ ¹öÆ°ÀÌ À§Ä¡ÇÏµµ·Ï ÇÒ ¿¹Á¤ÀÔ´Ï´Ù.
+ Repositoryë¥¼ ì‚­ì œí•˜ëŠ” ê¸°ëŠ¥ë„ í•„ìš”í•  ê²ƒ ê°™ì•„ ì¶”ê°€ëœ ë¦¬ìŠ¤ë„ˆì…ë‹ˆë‹¤.
+ ê¸°ì¡´ ìœˆë„ìš°ì— del ë²„íŠ¼ì´ ìˆëŠ” ê±´ ì•„ë‹™ë‹ˆë‹¤.
+ Repositoryì˜ ë§í¬ë¥¼ í´ë¦­í•˜ê³  ìƒˆë¡œìš´ ì°½ìœ¼ë¡œ ë„˜ì–´ê°”ì„ ë•Œ
+ í°ìƒ‰ í™”ë©´ì˜ ì œì¼ ìœ„ìª½ì— ë²„íŠ¼ì´ ìœ„ì¹˜í•˜ë„ë¡ í•  ì˜ˆì •ì…ë‹ˆë‹¤.
  */
 
 public class DelRepoClickListener implements MouseListener{
@@ -30,14 +30,14 @@ public class DelRepoClickListener implements MouseListener{
 				
 				for (int i = 0; i < files.length; i++) {
 					if (files[i].delete()) {
-						System.out.println(files[i].getName() + "ÆÄÀÏÀ» »èÁ¦Çß½À´Ï´Ù.");
+						System.out.println(files[i].getName() + "íŒŒì¼ì„ ì‚­ì œí–ˆìŠµë‹ˆë‹¤.");
 					} else {
-						System.out.println(files[i].getName() + "ÆÄÀÏÀ» »èÁ¦ÇÏ´Â µ¥ ½ÇÆĞÇß½À´Ï´Ù.");
+						System.out.println(files[i].getName() + "íŒŒì¼ì„ ì‚­ì œí•˜ëŠ” ë° ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 					}
 				}
 			}
 		} else {
-			System.out.println("ÆÄÀÏÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+			System.out.println("íŒŒì¼ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 		}
 	}
 	

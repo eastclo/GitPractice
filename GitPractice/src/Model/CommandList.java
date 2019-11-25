@@ -8,13 +8,10 @@ public class CommandList {
 	private String commands[];
 	
 	public CommandList() {
-		/*cmdlist Æú´õ¿¡ °¢°¢ÀÇ ¸í·É¾î ÀÌ¸§À¸·Î ÆÄÀÏ »ı¼ºÇÏ¿© ÀúÀå*/
+		/*cmdlist í´ë”ì— ê°ê°ì˜ ëª…ë ¹ì–´ ì´ë¦„ìœ¼ë¡œ íŒŒì¼ ìƒì„±í•˜ì—¬ ì €ì¥*/
 		String cmdlistPath = "." + File.separator + "src" + File.separator + "Model" + File.separator + "cmdlist";
 		File f = new File(cmdlistPath);
 		this.commands = f.list();
-		
-		/*ModelÇÏÀ§ commandlist ÆÄÀÏ ¾È¿¡ ¸í·É¾î ¸ñ·Ï ÀÛ¼º*/
-//		FileReader fin = new FileReader(".\\commandlist.txt");
 	}
 	
 	public String[] getCommandList() {

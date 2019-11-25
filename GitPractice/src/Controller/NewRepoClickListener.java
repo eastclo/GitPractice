@@ -13,8 +13,8 @@ import java.io.File;
 import java.io.IOException;
 
 /*
- new ¹öÆ°À» ´©¸£¸é ±êÇé¿¡¼­Ã³·³ Ã¢ÀÌ ¶ß¸é¼­
- »õ·Î¿î Repository¸¦ »ı¼ºÇÒ ¼ö ÀÖ°Ô ÇÏ´Â Å¬·¡½ºÀÔ´Ï´Ù.
+ new ë²„íŠ¼ì„ ëˆ„ë¥´ë©´ ê¹ƒí—™ì—ì„œì²˜ëŸ¼ ì°½ì´ ëœ¨ë©´ì„œ
+ ìƒˆë¡œìš´ Repositoryë¥¼ ìƒì„±í•  ìˆ˜ ìˆê²Œ í•˜ëŠ” í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
  */
 
 public class NewRepoClickListener extends JFrame implements MouseListener {
@@ -32,11 +32,11 @@ public class NewRepoClickListener extends JFrame implements MouseListener {
 	public void getRepoName() {
 		//String[] repoName = new String[100];
 		//String[] buttons = {"create", "close"};
-		// showInputDialog·Î´Â È®ÀÎ/Ãë¼Ò ¹öÆ° ¹®ÀÚ¿­ Á¶Á¤ÀÌ ¾ÈµÇ³×¿ä¤Ğ¤Ğ
-		// ¹æ¹ıÀÌ ÀÖ´ÂÁö ´õ Ã£¾Æº¸°í ¾øÀ¸¸é ÀÌ ÁÖ¼® Áö¿ì°Ú½À´Ï´Ù 
+		// showInputDialogë¡œëŠ” í™•ì¸/ì·¨ì†Œ ë²„íŠ¼ ë¬¸ìì—´ ì¡°ì •ì´ ì•ˆë˜ë„¤ìš”ã… ã… 
+		// ë°©ë²•ì´ ìˆëŠ”ì§€ ë” ì°¾ì•„ë³´ê³  ì—†ìœ¼ë©´ ì´ ì£¼ì„ ì§€ìš°ê² ìŠµë‹ˆë‹¤ 
 		
 		
-		input = JOptionPane.showInputDialog(null, "Repository name", "Repository »ı¼º",
+		input = JOptionPane.showInputDialog(null, "Repository name", "Repository ìƒì„±",
 								JOptionPane.PLAIN_MESSAGE);
 		//System.out.println(input);
 		
@@ -47,35 +47,35 @@ public class NewRepoClickListener extends JFrame implements MouseListener {
 		
 	}
 	
-	public void dirCreate() { // ·ÎÄÃ ÀúÀå¼Ò¿¡ µğ·ºÅä¸®¸¦ ¸¸µé¾îÁÖ´Â ÇÔ¼öÀÔ´Ï´Ù.
+	public void dirCreate() { // ë¡œì»¬ ì €ì¥ì†Œì— ë””ë ‰í† ë¦¬ë¥¼ ë§Œë“¤ì–´ì£¼ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤.
 		String repoDir = "C:\\" + input;
 		String repoFile = input;
-		File fdir = new File(repoDir); // ÆÄÀÏ Æú´õ¸¦ ´Ù·ç±â À§ÇÑ °´Ã¼
+		File fdir = new File(repoDir); // íŒŒì¼ í´ë”ë¥¼ ë‹¤ë£¨ê¸° ìœ„í•œ ê°ì²´
 		File file = new File(repoFile);
 		
 		if (!fdir.exists()) {
 			if (fdir.mkdirs()) {
-				//Æú´õ »ı¼º  
+				//í´ë” ìƒì„±  
 				if (!file.exists()) {
 					try {
 						if (file.createNewFile()) {
-							// repository »ı¼º  
+							// repository ìƒì„±  
 						} else {
-							System.out.println("Repository »ı¼º¿¡ ½ÇÆĞÇß½À´Ï´Ù.");
+							System.out.println("Repository ìƒì„±ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 						}
 					} catch (IOException e) {
 						//TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				} else {
-					System.out.println("°°Àº ÀÌ¸§ÀÇ Repository°¡ ÀÌ¹Ì Á¸ÀçÇÕ´Ï´Ù.");
+					System.out.println("ê°™ì€ ì´ë¦„ì˜ Repositoryê°€ ì´ë¯¸ ì¡´ì¬í•©ë‹ˆë‹¤.");
 				}
 			} 
 		}
 		
 	}
 	
-	public void repoCreate() { // GUI Ã¢¿¡¼­ »õ·Î¿î JTextArea Ã¢À» ¶ç¿öÁÖ´Â ÇÔ¼öÀÔ´Ï´Ù.
+	public void repoCreate() { // GUI ì°½ì—ì„œ ìƒˆë¡œìš´ JTextArea ì°½ì„ ë„ì›Œì£¼ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤.
 		String init = "Quick setup - if you've done this kind of thing before" + 
 				"/n HTTPS : https://github.com/users/" + input  + ".git"
 				+ "\n\n ...or create a new repository on the command line"
@@ -90,7 +90,7 @@ public class NewRepoClickListener extends JFrame implements MouseListener {
 		JTextArea ta = new JTextArea(init);
 		JScrollPane scrollPane = new JScrollPane(ta);
 		
-		// ÀÏ´ÜÀº repository »ı¼º ÈÄ ¶ß´Â Ã¹ È­¸é¸¸ ±¸¼ºÇØºÃ½À´Ï´Ù  
+		// ì¼ë‹¨ì€ repository ìƒì„± í›„ ëœ¨ëŠ” ì²« í™”ë©´ë§Œ êµ¬ì„±í•´ë´¤ìŠµë‹ˆë‹¤  
 		
 		
 	}

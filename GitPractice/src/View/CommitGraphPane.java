@@ -19,7 +19,7 @@ public class CommitGraphPane extends JPanel{
 	MainFrame.contentPane.add(CommitGraphPane);
 	CommitGraphPane.setLayout(null);
 	
-	JLabel lblGraphResult = new JLabel("Ä¿¹Ô ³»¿ª");
+	JLabel lblGraphResult = new JLabel("ì»¤ë°‹ ë‚´ì—­");
 	lblGraphResult.setBounds(14, 12, 78, 18);
 	CommitGraphPane.add(lblGraphResult);
 	
@@ -32,18 +32,16 @@ public class CommitGraphPane extends JPanel{
 	DrawingGraph.setBounds(14, 38, 511, 145);
 	CommitGraphPane.add(DrawingGraph);
 	
-	//Commit ³»¿ëÀ» ÀúÀåÇÏ´Â TESTÀÔ´Ï´Ù.
+	//Commit ë‚´ìš©ì„ ì €ì¥í•˜ëŠ” TESTì…ë‹ˆë‹¤.
 	CommitFunction commit = new CommitFunction();
 	commit.commitAdd(1);
 	commit.commitAdd(2);
 	commit.commitListSave();
-	//Commit ³»¿ëÀ» ºÒ·¯¿À´Â TESTÀÔ´Ï´Ù.
+	//Commit ë‚´ìš©ì„ ë¶ˆëŸ¬ì˜¤ëŠ” TESTì…ë‹ˆë‹¤.
 	try {
 		CommitFunction commitOpen = new CommitFunction();
 		commitOpen.commitListOpen();
 		List<Object> Array = commitOpen.CMArray;
-		for(int i=0;i<Array.size();i++)
-			System.out.printf("%d\n",Array.get(i));
 	}
 	catch (ParseException e) {
 	      e.printStackTrace();
