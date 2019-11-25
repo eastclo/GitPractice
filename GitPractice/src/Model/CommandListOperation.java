@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Method;
 
 import javax.swing.JOptionPane;
 
@@ -46,11 +47,11 @@ public class CommandListOperation {
 		
 		//입력한 명령어와 명령어 리스트의 옵션 개수 체크
 		for(int i = 2; i < 5; i++) 
-			if(input[i]!="")
+			if(input[i]!=null)
 				numberOfOption++;
 		for(int i = 0; i < numberOfCmd; i++) {
 			for(int j = 2; j < 5; j++) 
-				if(cmdsDevide[i][j]!="")
+				if(cmdsDevide[i][j]!=null)
 					numberOfOptionList[i]++;
 		}
 		
@@ -79,179 +80,136 @@ public class CommandListOperation {
 	}
 	
 	//textValue 명령어를  [0]: git, [1]: 명령어  [2],[3],[4]: 명령어 옵션, [5],[6],[7]: 인자 값으로 분할하여 String[] 타입으로 리턴한다.
-	public static String[] devideInputText(String textValue) {
+	public static String[] devideInputText(String cmd) {
 		/*[0]: git, [1]: 명령어  [2],[3],[4]: 명령어 옵션, [5],[6],[7]: 인자 값으로 나눠야 한다.*/
-		String input[] = textValue.split(" ");
-		int length = input.length;
-		if(input.length < 8) {
-			String[] tmp = new String[input.length];
-			for(int i = 0; i < input.length; i++)
+		
+		//공백이 여러번이면 한 번만 들어가게 수정
+		String cmdFix = cmd.trim().replaceAll(" +", " ");
+		
+		String input[] = cmdFix.split(" ");
+		if(input.length < 5) {
+			String[] tmp = new String[5];
+			for(int i = 0; i<input.length; i++)
 				tmp[i] = input[i];
-			String[] tmp2 = new String[8];
-			input = tmp2;
-			for(int i = 0; i < tmp.length; i++)
-				input[i] = tmp[i];
+			input = tmp;
 		}
-				
+		
+		//git 명령어인지 확인
 		if(input[0].equals("git")) {
-			//옵션과 인자값들 나눠야함
-			if(input[2]!=null && input[2].charAt(0) == '-') {
-				if(input[3] != null && input[3].charAt(0) == '-') {
-					if(input[4] != null && input[4].charAt(0) == '-') {
-						if(input.length < 8) {
-							String[] tmp = new String[input.length];
-							for(int i = 0; i < input.length; i++)
-								tmp[i] = input[i];
-							String[] tmp2 = new String[8];
-							input = tmp2;
-							for(int i = 0; i < tmp.length; i++)
-								input[i] = tmp[i];
-						}
-						if(input.length==8) {
-							/*큰 따옴표 사이 공백의 경우 예외처리*/
-							if(input[5]!= null && input[5].charAt(0)=='"'){	
-								if(input[6].charAt(input[6].length()-1) == '"') {
-									input[5] = input[5].concat(input[6]);
-									input[6] = "";
-								} else if (input[7] != null && input[7].charAt(input[7].length()-1) == '"'){
-									input[5] = input[5].concat(input[6]);
-									input[5] = input[5].concat(input[7]);
-									input[6] = ""; input[7] = "";
-								} else {
-									JOptionPane.showMessageDialog(null, "잘못 입력하였습니다.", "명령어 입력 오류", JOptionPane.ERROR_MESSAGE);
-									String[] error = new  String[2];
-									error[0] = "error"; error[1] = "";
-									return error;
-								}
-								
-							} else if(input[6] != null && input[6].charAt(0)=='"'){
-								if (input[7].charAt(input[7].length()-1) == '"'){
-									input[6] = input[6].concat(input[7]);
-									input[7] = "";
-								} else {
-									JOptionPane.showMessageDialog(null, "잘못 입력하였습니다.", "명령어 입력 오류", JOptionPane.ERROR_MESSAGE);
-									String[] error = new  String[2];
-									error[0] = "error"; error[1] = "";
-									return error;
-								}
-							}
-						}
-						else {
-							JOptionPane.showMessageDialog(null, "잘못 입력하였습니다.", "명령어 입력 오류", JOptionPane.ERROR_MESSAGE);
-							String[] error = new  String[2];
-							error[0] = "error"; error[1] = "";
-							return error;
-						}
-							
-					} else {
-						//[4]가 명령어 옵션이 아니므로 [4]를 비우고 [5]부터 시작하게 한다.
-						for(int i = 0; i <= length-5; i++) {
-							input[length-i] = input[length-i-1];
-						}
-						input[4] ="";
-						/*큰 따옴표 사이 공백의 경우 예외처리*/
-						if(input[5]!= null && input[5].charAt(0)=='"'){	
-							if(input[6].charAt(input[6].length()-1) == '"') {
-								input[5] = input[5].concat(input[6]);
-								input[6] = "";
-							} else if (input[7] != null && input[7].charAt(input[7].length()-1) == '"'){
-								input[5] = input[5].concat(input[6]);
-								input[5] = input[5].concat(input[7]);
-								input[6] = ""; input[7] = "";
-							} else {
-								JOptionPane.showMessageDialog(null, "잘못 입력하였습니다.", "명령어 입력 오류", JOptionPane.ERROR_MESSAGE);
-								String[] error = new  String[2];
-								error[0] = "error"; error[1] = "";
-								return error;
-							}
-							
-						} else if(input[6] != null && input[6].charAt(0)=='"'){
-							if (input[7].charAt(input[7].length()-1) == '"'){
-								input[6] = input[6].concat(input[7]);
-								input[7] = "";
-							} else {
-								JOptionPane.showMessageDialog(null, "잘못 입력하였습니다.", "명령어 입력 오류", JOptionPane.ERROR_MESSAGE);
-								String[] error = new  String[2];
-								error[0] = "error"; error[1] = "";
-								return error;
-							}
-						}
-					}
-				} else {	
-					//[3]가 명령어 옵션이 아니므로 [3],[4]를 비우고 [5]부터 시작하게 한다.
-					for(int i = 0; i <= length-4; i++) {
-						input[length-i+1] = input[length-i-1];
-					}
-					input[3] =""; input[4] ="";
-					/*큰 따옴표 사이 공백의 경우 예외처리*/
-					if(input[5]!= null && input[5].charAt(0)=='"'){	
-						if(input[6].charAt(input[6].length()-1) == '"') {
-							input[5] = input[5].concat(input[6]);
-							input[6] = "";
-						} else if (input[7] != null && input[7].charAt(input[7].length()-1) == '"'){
-							input[5] = input[5].concat(input[6]);
-							input[5] = input[5].concat(input[7]);
-							input[6] = ""; input[7] = "";
-						} else {
-							JOptionPane.showMessageDialog(null, "잘못 입력하였습니다.", "명령어 입력 오류", JOptionPane.ERROR_MESSAGE);
-							String[] error = new  String[2];
-							error[0] = "error"; error[1] = "";
-							return error;
-						}
-						
-					} else if(input[6] != null && input[6].charAt(0)=='"'){
-						if (input[7].charAt(input[7].length()-1) == '"'){
-							input[6] = input[6].concat(input[7]);
-							input[7] = "";
-						} else {
-							JOptionPane.showMessageDialog(null, "잘못 입력하였습니다.", "명령어 입력 오류", JOptionPane.ERROR_MESSAGE);
-							String[] error = new  String[2];
-							error[0] = "error"; error[1] = "";
-							return error;
-						}
-					}
-				}
-			} else {		
-				//[2]가 명령어 옵션이 아니므로 [2],[3],[4]를 비우고 [5]부터 시작하게 한다.
-				for(int i = 0; i <= length-3; i++) {
-					input[length-i+2] = input[length-i-1];
-				}
-				input[2] =""; input[3] =""; input[4] ="";
-				/*큰 따옴표 사이 공백의 경우 예외처리*/
-				if(input[5]!= null && input[5].charAt(0)=='"'){	
-					if(input[6].charAt(input[6].length()-1) == '"') {
-						input[5] = input[5].concat(input[6]);
-						input[6] = "";
-					} else if (input[7] != null && input[7].charAt(input[7].length()-1) == '"'){
-						input[5] = input[5].concat(input[6]);
-						input[5] = input[5].concat(input[7]);
-						input[6] = ""; input[7] = "";
-					} else {
-						JOptionPane.showMessageDialog(null, "잘못 입력하였습니다.", "명령어 입력 오류", JOptionPane.ERROR_MESSAGE);
-						String[] error = new  String[2];
-						error[0] = "error"; error[1] = "";
-						return error;
-					}
+			//옵션영역 확보
+			if(input[2] == null) 
+				;
+			else if(input[2].charAt(0) != '-') {	//옵션이 없을 때	
+				String[] tmp = new String[input.length+3];
+				tmp[0] = input[0]; tmp[1] = input[1];
+				
+				for(int i = input.length-1; i>=2; i--)
+					tmp[i+3] = input[i];
+				
+				input = tmp;
+			} else if(input[2].charAt(0) == '-') {
+				if(input[3] == null) 
+					;
+				else if(input[3].charAt(0) != '-') {	//옵션이 하나만 있을 때
+					String[] tmp = new String[input.length+2];
+					tmp[0] = input[0]; tmp[1] = input[1]; tmp[2] = input [2];
 					
-				} else if(input[6] != null && input[6].charAt(0)=='"'){
-					if (input[7].charAt(input[7].length()-1) == '"'){
-						input[6] = input[6].concat(input[7]);
-						input[7] = "";
-					} else {
-						JOptionPane.showMessageDialog(null, "잘못 입력하였습니다.", "명령어 입력 오류", JOptionPane.ERROR_MESSAGE);
-						String[] error = new  String[2];
-						error[0] = "error"; error[1] = "";
-						return error;
+					for(int i = input.length-1; i>=3; i--)
+						tmp[i+2] = input[i];
+					
+					input = tmp;
+				} else if(input[3].charAt(0) == '-') {	//옵션이 두 개 있을 때
+					if(input[4] == null)
+						;
+					else if(input[4].charAt(0) != '-') {
+						String[] tmp = new String[input.length+1];
+						tmp[0] = input[0]; tmp[1] = input[1]; tmp[2] = input [2]; tmp[3] = input[3];
+						
+						for(int i = input.length-1; i>=4; i--)
+							tmp[i+1] = input[i];
+						
+						input = tmp;
 					}
 				}
 			}
 			
-		} else {
-			JOptionPane.showMessageDialog(null, "깃 명령어가 아닙니다.", "명령어 입력 오류", JOptionPane.ERROR_MESSAGE);
-			String[] error = new  String[2];
-			error[0] = "error"; error[1] = "";
-			return error;
+			if(input.length < 8) {
+				String[] tmp = new String[8];
+				for(int i = 0; i<input.length; i++)
+					tmp[i] = input[i];
+				input = tmp;
+			}
+			
+			//예외처리. 옵션 영역 이후에 옵션이 있으면 에러
+			for(int i = 5; i<input.length; i++) {
+				if(input[i] != null && input[i].charAt(0) == '-')
+					return printError("잘못 입력하였습니다.");
+			}
+			
+			//예외처리. 큰 따옴표로 메시지를 입력할 경우 띄어쓰기가 분할되므로 메시지는 합치기.
+			boolean checkEndDoubleQuotationMarks = false;	//큰 따옴표가 쌍으로 오지 않으면 false
+			int checkEndDoubleQuotationIndex = 0;
+			int checkStartDoubleQuotationIndex = 0;
+			for(int i = 5; i<input.length; i++) {
+				if(input[i] != null && input[i].charAt(0) == '"') {
+					checkStartDoubleQuotationIndex = i;
+					for(int j = i; j <input.length; j++) {
+						if(input[j] != null && input[j].charAt(input[j].length()-1) == '"') {
+							checkEndDoubleQuotationIndex = j;
+							for(int k = i+1; k < j; k++) {
+								input[i] = input[i].concat(" "+input[k]);
+								input[k] = null;
+							}
+							checkEndDoubleQuotationMarks = true;
+							break;
+						}
+					}
+					break;
+				}
+			}
+			//예외처리. 큰 따옴표가 쌍으로 오지 않으면 에러
+			if(checkStartDoubleQuotationIndex != 0 && !checkEndDoubleQuotationMarks)
+				return printError("잘못 입력하였습니다.");
+			
+			//예외처리.따옴표가 있든 없든 입력 값(8) 초과시 에러.
+			if(input.length-(checkEndDoubleQuotationIndex-checkStartDoubleQuotationIndex) > 8) {
+				printError("잘못 입력하였습니다.");
+			} else {
+				String[] tmp = new String[8];
+				int j = 0;
+				for(int i = 0; i<input.length; i++) {
+					if(checkStartDoubleQuotationIndex < j && j <= checkEndDoubleQuotationIndex) {
+						j++; continue;
+					}
+					tmp[i] = input[j++];
+				}
+				input = tmp;
+			}
+			return input;
 		}
-		return input;
+		
+		return printError("깃 명령어가 아닙니다.");
+	}
+	
+	//에러 메시지창 호출 메소드, 0번 째 인덱스에 "error"리턴
+	private static String[] printError(String msg) {
+		JOptionPane.showMessageDialog(null, msg, "명령어 입력 오류", JOptionPane.ERROR_MESSAGE);
+		String[] error = new  String[2];
+		error[0] = "error"; error[1] = null;
+		return error;
+	}
+
+	public static void execute(String action, String Clazz, String[] input){
+		try {
+        	Class<?> clazz = Class.forName(Clazz);	//Clazz를 통해 클래스 생성
+        	Object newObj = clazz.getDeclaredConstructor().newInstance();	//클래스로 객체생성
+        	
+        	Method m = clazz.getDeclaredMethod(action, String.class, String.class, String.class);	//파라미터로 메소드 이름, 해당 메소드의 파라미터들의 타입(.class 붙임)
+        	m.invoke(newObj,input[5],input[6],input[7]);	//파라미터로 메소드의 클래스, 메소드의 파리미터들     	
+        } catch (ClassNotFoundException e1) {
+        	System.out.println("error1");
+        } catch (Exception e1) {
+        	System.out.println("error2");
+        }
 	}
 }
