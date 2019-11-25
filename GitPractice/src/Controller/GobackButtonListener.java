@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
 import javax.swing.*;
 
 import Model.CommandStack;
+import Model.CommandListOperation;
 
 public class GobackButtonListener implements ActionListener{
 
@@ -24,27 +25,14 @@ public class GobackButtonListener implements ActionListener{
 				  * 받아온 명령어로 cancelCommand 메소드 실행
 				  * 방식은 CommandInputListener에서 실행하는 방식과 동일
 				  */
-				 File f = new File(cmdlistPath,cmd);
-				 FileReader fin;
-				 char []buf = new char [1024];
-					try {
-						fin = new FileReader(cmdlistPath + File.separator + cmd);
-						fin.read(buf);
-						fin.close();
-					} catch (FileNotFoundException e1) {} catch (IOException e1) {}
-				String Clazz = String.valueOf(buf).trim();
-				try {
-		        	Class<?> clazz = Class.forName(Clazz);	//Clazz를 통해 클래스 생성
-		        	Object newObj = clazz.getDeclaredConstructor().newInstance();	//클래스로 객체생성
-		        	
-		        	Method m = clazz.getDeclaredMethod("cancelCommand", null);	//파라미터로 메소드 이름, 해당 메소000드의 파라미터들의 타입(.class 붙임)
-		        	m.invoke(newObj,null);	//파라미터로 메소드의 클래스, 메소드의 파리미터들     	
-		        } catch (ClassNotFoundException e1) {
-		        	System.out.println("error1");
-		        } catch (Exception e1) {
-		        	System.out.println("error2");
-		        }
-				JOptionPane.showMessageDialog(null, "'"+cmd +"'가 취소되었습니다.", "뒤로 가기", JOptionPane.INFORMATION_MESSAGE);	//알림 팝업
+				 String input[] = CommandListOperation.devideInputText(cmd);
+				 
+				 String Clazz = CommandListOperation.getFileReadData(cmdlistPath, combineCmd(input));	//명령어 받아오기
+				 
+				 CommandListOperation.execute("cancelCommand",Clazz, input);
+				JOptionPane.showMessageDialog(null, "'"+cmd.trim().replaceAll(" +", " ") +"'가 취소되었습니다.", "뒤로 가기", JOptionPane.INFORMATION_MESSAGE);	//알림 팝업
+			 } else {
+				 JOptionPane.showMessageDialog(null, "수행할 명령어가 없습니다.", "오류", JOptionPane.WARNING_MESSAGE);	//알림 팝업
 			 }
 		}
 		
@@ -55,30 +43,28 @@ public class GobackButtonListener implements ActionListener{
 				  * 받아온 명령어로 executeCommand 메소드 실행
 				  * 방식은 CommandInputListener에서 실행하는 방식과 동일
 				  */
-				 File f = new File(cmdlistPath,cmd);
-				 FileReader fin;
-				 char []buf = new char [1024];
-					try {
-						fin = new FileReader(cmdlistPath + File.separator + cmd);
-						fin.read(buf);
-						fin.close();
-					} catch (FileNotFoundException e1) {} catch (IOException e1) {}
-				String Clazz = String.valueOf(buf).trim();
-				try {
-		        	Class<?> clazz = Class.forName(Clazz);	//Clazz를 통해 클래스 생성
-		        	Object newObj = clazz.getDeclaredConstructor().newInstance();	//클래스로 객체생성
-		        	
-		        	Method m = clazz.getDeclaredMethod("executeCommand", null);	//파라미터로 메소드 이름, 해당 메소드의 파라미터들의 타입(.class 붙임)
-		        	m.invoke(newObj,null);	//파라미터로 메소드의 클래스, 메소드의 파리미터들     	
-		        } catch (ClassNotFoundException e1) {
-		        	System.out.println("error1");
-		        } catch (Exception e1) {
-		        	System.out.println("error2");
-		        }
-				
-				JOptionPane.showMessageDialog(null, "'"+cmd +"'가 실행되었습니다.", "앞으로 가기", JOptionPane.INFORMATION_MESSAGE);	//알림 팝업
-			 }	
+				 String input[] = CommandListOperation.devideInputText(cmd);
+				 
+				 String Clazz = CommandListOperation.getFileReadData(cmdlistPath, combineCmd(input));	//명령어 받아오기
+				 
+				 CommandListOperation.execute("executeCommand",Clazz, input);		
+				JOptionPane.showMessageDialog(null, "'"+cmd.trim().replaceAll(" +", " ") +"'가 실행되었습니다.", "앞으로 가기", JOptionPane.INFORMATION_MESSAGE);	//알림 팝업
+			 } else {
+				 JOptionPane.showMessageDialog(null, "수행할 명령어가 없습니다.", "오류", JOptionPane.WARNING_MESSAGE);	//알림 팝업
+			 }
 		 }
+	}
+	
+	private String combineCmd(String[] input) {
+		if(input[2] == null)
+			return input[0].concat(" "+input[1]);
+		else if (input[3] == null) {
+			return input[0].concat(" "+input[1]).concat(" "+input[2]);
+		}
+		else if (input[4] == null) {
+			return input[0].concat(" "+input[1]).concat(" "+input[2]).concat(" "+input[3]);
+		} else
+			return input[0].concat(" "+input[1]).concat(" "+input[2]).concat(" "+input[3]).concat(" "+input[4]);
 	}
 }
 
