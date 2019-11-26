@@ -30,15 +30,8 @@ public class NewRepoClickListener extends JFrame implements MouseListener {
 	}
 	
 	public void getRepoName() {
-		//String[] repoName = new String[100];
-		//String[] buttons = {"create", "close"};
-		// showInputDialog로는 확인/취소 버튼 문자열 조정이 안되네요ㅠㅠ
-		// 방법이 있는지 더 찾아보고 없으면 이 주석 지우겠습니다 
-		
-		
 		input = JOptionPane.showInputDialog(null, "Repository name", "Repository 생성",
 								JOptionPane.PLAIN_MESSAGE);
-		//System.out.println(input);
 		
 		if (input != null) {
 			dirCreate();
@@ -48,29 +41,40 @@ public class NewRepoClickListener extends JFrame implements MouseListener {
 	}
 	
 	public void dirCreate() { // 로컬 저장소에 디렉토리를 만들어주는 함수입니다.
-		String repoDir = "C:\\" + input;
-		String repoFile = input;
-		File fdir = new File(repoDir); // 파일 폴더를 다루기 위한 객체
-		File file = new File(repoFile);
+		String repoName = input;
+		
+		File fdir = new File("." + File.separator + "GitHub", repoName);
+		File file = new File("." + File.separator + "GitHub" + File.separator + repoName + File.separator + "origin" +  File.separator + "master",repoName);
+		File origin = new File("." + File.separator + "GitHub" + File.separator + repoName, "origin");
+		File master = new File("." + File.separator + "GitHub" + File.separator + repoName + File.separator + "origin", "master");
+		File add = new File("." + File.separator + "GitHub" + File.separator + repoName + File.separator + "origin" + File.separator + "master", "add");
+		File commit = new File("." + File.separator + "GitHub" + File.separator + repoName + File.separator + "origin" +  File.separator + "master", "commit");
+		File push = new File("." + File.separator + "GitHub" + File.separator + repoName + File.separator + "origin" +  File.separator + "master", "push");
+		
+
 		
 		if (!fdir.exists()) {
 			if (fdir.mkdirs()) {
-				//폴더 생성  
-				if (!file.exists()) {
-					try {
-						if (file.createNewFile()) {
-							// repository 생성  
-						} else {
-							System.out.println("Repository 생성에 실패했습니다.");
+				if (origin.mkdirs()) {
+				if (master.mkdirs() && add.mkdirs() && commit.mkdirs() && push.mkdirs()) {
+					if (!file.exists()) {
+						try {
+							if (file.createNewFile()) {
+								JOptionPane.showMessageDialog(null, "Repository 생성 완료.	");
+							} else {
+								JOptionPane.showMessageDialog(null, "Repository 생성에 실패했습니다.");
+							}
+						} catch (IOException e) {
+							e.printStackTrace();
+							JOptionPane.showMessageDialog(null, "같은 이름의 Repository가 존재합니다!");
 						}
-					} catch (IOException e) {
-						//TODO Auto-generated catch block
-						e.printStackTrace();
+					} else {
+						JOptionPane.showMessageDialog(null, "같은 이름의 Repository가 이미 존재합니다.");
+						System.out.println("같은 이름의 Repository가 이미 존재합니다.");
 					}
-				} else {
-					System.out.println("같은 이름의 Repository가 이미 존재합니다.");
 				}
-			} 
+			}
+			}
 		}
 		
 	}
