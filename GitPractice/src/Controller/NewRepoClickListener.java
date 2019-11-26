@@ -2,15 +2,21 @@ package Controller;
 
 import java.awt.event.MouseEvent;
 
+
 import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import View.TemporaryExplorerPane;
+
 import java.io.File;
 import java.io.IOException;
+
+
 
 /*
  new 버튼을 누르면 깃헙에서처럼 창이 뜨면서
@@ -21,7 +27,11 @@ public class NewRepoClickListener extends JFrame implements MouseListener {
 
 	private static final long serialVersionUID = 1L;
 	String input = "";
+	private TemporaryExplorerPane view;
 	
+	public NewRepoClickListener (TemporaryExplorerPane view) {
+		this.view = view;
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -77,6 +87,8 @@ public class NewRepoClickListener extends JFrame implements MouseListener {
 			}
 		}
 		
+		LoadRepository init = new LoadRepository(view);
+		init.setRepositoryList();
 	}
 	
 	public void repoCreate() { // GUI 창에서 새로운 JTextArea 창을 띄워주는 함수입니다.
