@@ -40,7 +40,7 @@ public class ExecutionCommit {
 				e.printStackTrace();
 			}
 			commit.commitAdd(inputContent,ManagementSetting.currentBranch);
-			commit.commitListSave();
+			commit.commitListSave(commit.Path);
 		}
 	}
 

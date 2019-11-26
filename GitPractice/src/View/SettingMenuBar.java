@@ -31,7 +31,6 @@ public class SettingMenuBar extends JMenuBar {
 			fcd=new JFileChooser();
 		}
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(null, "WorkSpace 경로가 설정되어 있지 않습니다.");	
 			fcd.setCurrentDirectory(new File("."));
 			fcd.setFileSelectionMode(fcd.DIRECTORIES_ONLY);
 				int ret = fcd.showOpenDialog(null);

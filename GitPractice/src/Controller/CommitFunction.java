@@ -1,10 +1,13 @@
 package Controller;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -42,7 +45,7 @@ public class CommitFunction {
 	public void commitListOpen() throws IOException, ParseException {
 		
 		if(!new File(Path).exists())
-			this.commitListSave();
+			this.commitListSave(Path);
 		
 		JSONParser parser = new JSONParser();
 		
@@ -70,13 +73,14 @@ public class CommitFunction {
 		CMArray.add(content);
 		BranchArray.add(branch);
 		JsonArray.commit(content,branch);
+		workspaceCopy(ManagementSetting.workspace,new File("."+File.separator+ManagementSetting.workspace.getName()));
 		
 	}
 	
 	//CommitList를 파일로 저장.
-	public void commitListSave() {
+	public void commitListSave(String path) {
 		try {
-			FileWriter fw = new FileWriter(Path);
+			FileWriter fw = new FileWriter(path);
 			fw.write(CommitArray.Arrayreturn());
 			fw.flush();
 			fw.close();
@@ -84,6 +88,49 @@ public class CommitFunction {
 		catch(IOException e) {
 			e.printStackTrace();
 		}
+	}
+	public void workspaceCopy(File sourceF,File targetF) {		
+		File[] ff = sourceF.listFiles();
+		for (File file : ff) {
+			String Filepath = targetF.getPath()+File.separator+ManagementSetting.currentBranch+File.separator+JsonArray.ArrayCountreturn();
+			File temp = new File(Filepath+File.separator+file.getName());
+			if(!new File(Filepath).exists()) {
+				new File("."+File.separator+ManagementSetting.workspace.getName()).mkdir();
+				new File("."+File.separator+ManagementSetting.workspace.getName()+File.separator+ManagementSetting.currentBranch).mkdir();
+				new File("."+File.separator+ManagementSetting.workspace.getName()+File.separator+ManagementSetting.currentBranch+File.separator+JsonArray.ArrayCountreturn()).mkdir();
+			}
+			if(file.isDirectory()) {
+				temp.mkdir();
+				workspaceCopy(file,temp);
+			}
+			else {
+				try {
+					FileWriter fileWriter = new FileWriter(temp);
+					fileWriter.write(getTextFromFile(temp));
+					fileWriter.close();
+				}catch(IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+	public static String getTextFromFile(File txtFile){
+	    String text = "";
+	 
+	    BufferedReader br = null;
+	    try{
+	      br = new BufferedReader(new InputStreamReader(new FileInputStream(txtFile)));
+	      String line;
+	      while((line = br.readLine()) != null){
+	        text= text + line + "\n";
+	      }
+	    } catch (FileNotFoundException e) {
+	      e.printStackTrace();
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    }
+		return text;
 	}
 
 }

@@ -25,6 +25,9 @@ public class CommitArray {
 	public static String Arrayreturn() {
 		return commitArray.toString();
 	}
+	public int ArrayCountreturn() {
+		return commitArray.size();
+	}
 	
 
 }
