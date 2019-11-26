@@ -9,12 +9,11 @@ import Model.FileOperation;
 
 public class ExecutionPush {
 	private String currentRepository;	//현재 레포지토리 이름
-	private String sls;	//File.separator
+	private String sls = File.separator;	//File.separator
 	private String filePath;	//파일 디렉토리 경로
 	
 	public void executeCommand(String a, String b, String c) {
 		currentRepository = "MyProject";	/**임시. 추후 모델에서 입력 받기*/
-		sls = File.separator;
 		filePath = new String("."+sls+"GitHub"+sls);
 		
 		if(c == null) {
@@ -27,9 +26,7 @@ public class ExecutionPush {
 					filePath = filePath.concat(currentRepository+sls+"origin"+sls+"master"+sls);
 				}
 			}
-			int fileName = Model.CommandStack.printTop();
-			//스택 값으로 백업 폴더 생성
-			String backupFolder = new String("."+sls+"BackUp"+sls+fileName);
+			String backupFolder = Model.CommandStack.createBackup();
 			File backup = new File(backupFolder);
 			backup.mkdir();
 			
@@ -54,7 +51,6 @@ public class ExecutionPush {
 	
 	public void cancelCommand(String a, String b, String c) {
 		currentRepository = "MyProject";	/**임시. 추후 모델에서 입력 받기*/
-		sls = File.separator;
 		filePath = new String("."+sls+"GitHub"+sls);
 		if(b != null) {	//a/b에 push
 			filePath = filePath.concat("a의 레포지토리"+sls+a+sls+b+sls);
@@ -65,8 +61,7 @@ public class ExecutionPush {
 				filePath = filePath.concat(currentRepository+sls+"origin"+sls+"master"+sls);
 			}
 		}
-		int fileName = Model.CommandStack.printTop()+1;	//백업 폴더 값 가져오기
-		String backupFolder = new String("."+sls+"BackUp"+sls+fileName);
+		String backupFolder = Model.CommandStack.loadBackup();
 		File backup = new File(backupFolder);
 		backup.mkdir();
 		

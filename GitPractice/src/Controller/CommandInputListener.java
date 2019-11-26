@@ -49,8 +49,8 @@ public class CommandInputListener implements ActionListener {
 				String Clazz = CommandListOperation.getFileReadData(cmdlistPath, cmds, index);	//파일 내부 데이터를 읽어오는 메소드 호출
 		        
 		        //명렁어 실행
-				CommandListOperation.execute("executeCommand",Clazz, input);
 				JOptionPane.showMessageDialog(null, textFieldValue.trim().replaceAll(" +", " ") + " 명령어를 수행합니다.", "명령어 입력", JOptionPane.INFORMATION_MESSAGE);
+				CommandListOperation.execute("executeCommand",Clazz, input);
 			}
 		}
 	}
