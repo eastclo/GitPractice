@@ -24,7 +24,6 @@ public class ExecutionBranch {
 			CurrentLocation.addBranch(a);
 			BranchFunction bf = new BranchFunction();
 			bf.BranchListSave();
-			CurrentLocation.changeBranch(a);
 			findswt=false;
 		}
 	}
