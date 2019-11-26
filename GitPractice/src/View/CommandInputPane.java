@@ -1,5 +1,7 @@
 package View;
 
+import java.util.List;
+import java.util.LinkedList;
 import java.awt.*;
 import java.io.File;
 
@@ -41,7 +43,7 @@ public class CommandInputPane extends JPanel{
 		CommandInputPane.add(allCommandtxt);
 		
 		JTextField input = new JTextField();
-		input.setBounds(14, 373, 442, 24);
+		input.setBounds(14, 373, 429, 24);
 		CommandInputPane.add(input);
 		input.addActionListener(new CommandInputListener()); //리스너 적용
 		
@@ -68,9 +70,19 @@ public class CommandInputPane extends JPanel{
 		CommandInputPane.add(btnForward);
 		
 		JButton btnUpload = new JButton("upload");
-		btnUpload.setBounds(460, 371, 65, 26);
+		btnUpload.setBounds(448, 372, 77, 26);
 		CommandInputPane.add(btnUpload);
 		btnUpload.addActionListener(new DocumentUploadListener());
+		
+		JComboBox<List> brcomboBox = new JComboBox<List>();
+		brcomboBox.setModel(new DefaultComboBoxModel(new String[] {"master","hotfix"})); //master와 일단은 hotfix 추가, 추후에 checkout 명령어 입력시 branch가 추가되도록 해야할 것
+		brcomboBox.setBounds(201, 9, 100, 24);
+		CommandInputPane.add(brcomboBox);
+
+		JLabel lblSelect = new JLabel("브랜치 선택"); //브랜치를 선택하는 라벨 추가
+		lblSelect.setBounds(119, 12, 83, 18); 
+		CommandInputPane.add(lblSelect);
+    
 	}
 	
 		 class buttonPress implements ActionListener {
@@ -79,4 +91,5 @@ public class CommandInputPane extends JPanel{
 		            CommandInputPane  pF = new CommandInputPane();
 		          // btnBack.dispose();
 		    }
-		 }	 }
+		 }	
+	 }
