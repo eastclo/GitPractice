@@ -15,10 +15,12 @@ public class CommitArray {
 		commitArray = new JSONArray();
 	}
 	
-	public void commit(String content,String branch) {
+	public void commit(String content,String branch,String AuthorName,String AuthorAddress) {
 		JSONObject jsonOb=new JSONObject();
 		jsonOb.put("content", content);
 		jsonOb.put("branch",branch);
+		jsonOb.put("AuthorName", AuthorName);
+		jsonOb.put("AuthorAddress", AuthorAddress);
 		commitArray.add(jsonOb);
 		
 	}
@@ -27,6 +29,10 @@ public class CommitArray {
 	}
 	public int ArrayCountreturn() {
 		return commitArray.size();
+	}
+
+	public void init() {
+		commitArray = new JSONArray();
 	}
 	
 

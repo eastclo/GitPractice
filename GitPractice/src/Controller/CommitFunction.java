@@ -26,8 +26,10 @@ public class CommitFunction {
 	String Path = CurrentLocation.workspace + File.separator +"CommitArray.ini";
 	
 	//다른 기능에서도 쉽게 정보를 출력하거나 사용하기 위해 CommitList를 ArrayList로도 관리 
-	public List<Object> CMArray;
-	public List<Object> BranchArray;
+	public List<String> CMArray;
+	public List<String> BranchArray;
+	public List<String> AuthorNameArray;
+	public List<String> AuthorAddressArray;
 	
 	//실제로 Controller 내부에서 관리할 CommitList로 JSON을 사용.
 	CommitArray JsonArray;
@@ -35,8 +37,10 @@ public class CommitFunction {
 	int cnt;
 	
 	public CommitFunction() {
-		CMArray = new ArrayList<Object>();
-		BranchArray = new ArrayList<Object>();
+		CMArray = new ArrayList<String>();
+		BranchArray = new ArrayList<String>();
+		AuthorNameArray = new ArrayList<String>();
+		AuthorAddressArray = new ArrayList<String>();
 		JsonArray = new CommitArray();
 		cnt =0;
 	}
@@ -56,13 +60,15 @@ public class CommitFunction {
 			
 			JSONArray jsonArray = (JSONArray)obj;
 			Iterator<JSONObject> iterator =jsonArray.iterator();
-			
+			JsonArray.init();
 			while(iterator.hasNext()) {
 				JSONObject jsonObject = (JSONObject)iterator.next();
 				String content =String.valueOf(jsonObject.get("content"));
 				String branch = String.valueOf(jsonObject.get("branch"));
+				String Authorname = String.valueOf(jsonObject.get("AuthorName"));
+				String Authoraddress=String.valueOf(jsonObject.get("AuthorAddress"));
 				if(content!=null&&content!="null")
-					commitAdd(content,branch);
+					commitAdd(content,branch,Authorname,Authoraddress);
 			}
 		}
 		catch(FileNotFoundException e) {
@@ -70,10 +76,12 @@ public class CommitFunction {
 		}
 	}
 	//Commit 저장. 명령어 Controller에서는 직접 Model에 접속하는 것이 아닌, 이 명령어를 통해 접속.
-	public void commitAdd(String content,String branch) {
+	public void commitAdd(String content,String branch,String Authorname,String Authoraddress) {
 		CMArray.add(content);
 		BranchArray.add(branch);
-		JsonArray.commit(content,branch);
+		AuthorNameArray.add(Authorname);
+		AuthorAddressArray.add(Authoraddress);
+		JsonArray.commit(content,branch,Authorname,Authoraddress);
 		workspaceCopy(CurrentLocation.workspace,new File("."+File.separator+CurrentLocation.workspace.getName()));
 		
 	}

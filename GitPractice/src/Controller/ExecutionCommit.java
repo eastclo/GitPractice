@@ -40,7 +40,7 @@ public class ExecutionCommit {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			commit.commitAdd(inputContent,CurrentLocation.getBranch());
+			commit.commitAdd(inputContent,CurrentLocation.getBranch(),CurrentLocation.AuthorName,CurrentLocation.AuthorAddress);
 			commit.commitListSave(commit.Path);
 		}
 	}
