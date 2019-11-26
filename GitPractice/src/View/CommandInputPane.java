@@ -71,14 +71,14 @@ public class CommandInputPane extends JPanel{
 		btnUpload.setBounds(448, 372, 77, 26);
 		CommandInputPane.add(btnUpload);
 		
-		JComboBox<List> brcomboBox = new JComboBox<List>();
-		brcomboBox.setModel(new DefaultComboBoxModel(new String[] {"master","hotfix"})); //master와 일단은 hotfix 추가, 추후에 checkout 명령어 입력시 branch가 추가되도록 해야할 것
-		brcomboBox.setBounds(201, 9, 100, 24);
-		CommandInputPane.add(brcomboBox);
+		JComboBox<List> repoComboBox = new JComboBox<List>();
+		repoComboBox.setModel(new DefaultComboBoxModel(new String[] {})); //clone할 시 저장소를 배열에 추가하도록 해야 함, 비워둠
+		repoComboBox.setBounds(201, 9, 100, 24);
+		CommandInputPane.add(repoComboBox);
 
-		JLabel lblSelect = new JLabel("브랜치 선택"); //브랜치를 선택하는 라벨 추가
-		lblSelect.setBounds(119, 12, 83, 18); 
-		CommandInputPane.add(lblSelect);
+		JLabel lblSelectRepo = new JLabel("저장소 선택"); //저장소를 선택하는 라벨로 변경
+		lblSelectRepo.setBounds(119, 12, 83, 18); 
+		CommandInputPane.add(lblSelectRepo);
 
 	}
 	
