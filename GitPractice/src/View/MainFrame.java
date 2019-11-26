@@ -26,7 +26,7 @@ public class MainFrame extends JFrame {
 	//메인 프레임 생성
 	public MainFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1060, 651);
+		setBounds(100, 100, 1080, 680);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
