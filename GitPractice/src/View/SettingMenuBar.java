@@ -10,7 +10,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-import Controller.ManagementSetting;
+import Model.CurrentLocation;
 
 public class SettingMenuBar extends JMenuBar {
 	
@@ -39,7 +39,7 @@ public class SettingMenuBar extends JMenuBar {
 				JOptionPane.showMessageDialog(null, "경로를 선택하지 않았습니다.","경고",JOptionPane.WARNING_MESSAGE);
 				return;
 				}
-			ManagementSetting.workspace=fcd.getSelectedFile();
+			CurrentLocation.workspace=fcd.getSelectedFile();
 			
 		}
 	
