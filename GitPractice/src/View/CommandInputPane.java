@@ -23,6 +23,8 @@ public class CommandInputPane extends JPanel{
 	
 	private static final String EXIT_ON_CLOSE = null;
 	private JButton btnBack; 
+	private static JComboBox repoComboBox;
+	private static DefaultComboBoxModel comboModel;
 	public CommandInputPane(){
 		JPanel CommandInputPane = new JPanel();
 		CommandInputPane.setBounds(236, 0, 539, 409);
@@ -75,8 +77,9 @@ public class CommandInputPane extends JPanel{
 		CommandInputPane.add(btnUpload);
 		btnUpload.addActionListener(new DocumentUploadListener());
 		
-		JComboBox<List> repoComboBox = new JComboBox<List>();
-		repoComboBox.setModel(new DefaultComboBoxModel(new String[] {})); //clone할 시 저장소를 배열에 추가하도록 해야 함, 비워둠
+		comboModel = new DefaultComboBoxModel();
+		repoComboBox = new JComboBox();
+		repoComboBox.setModel(comboModel); //clone할 시 저장소를 배열에 추가하도록 해야 함, 비워둠
 		repoComboBox.setBounds(201, 9, 100, 24);
 		CommandInputPane.add(repoComboBox);
 
@@ -84,6 +87,14 @@ public class CommandInputPane extends JPanel{
 		lblSelectRepo.setBounds(119, 12, 83, 18); 
 		CommandInputPane.add(lblSelectRepo);
 
+	}
+	
+	public static JComboBox getComboBox() {
+		return repoComboBox;
+	}
+	
+	public static DefaultComboBoxModel getComboModel() {
+		return comboModel;
 	}
 	
 		 class buttonPress implements ActionListener {

@@ -13,7 +13,10 @@ public class CurrentLocation {
 	public static String AuthorAddress = "user@example.com";
 	
 	public static void changeRepo(String targetRepo) {
-		repo = new String(targetRepo);
+		if(targetRepo != null)
+			repo = new String(targetRepo);
+		else
+			repo = null;
 	}
 	
 	public static void changeBranch(String targetBranch) {
