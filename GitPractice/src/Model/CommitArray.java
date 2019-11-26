@@ -15,14 +15,18 @@ public class CommitArray {
 		commitArray = new JSONArray();
 	}
 	
-	public void commit(int checksum) {
+	public void commit(String content,String branch) {
 		JSONObject jsonOb=new JSONObject();
-		jsonOb.put("checksum", checksum);
+		jsonOb.put("content", content);
+		jsonOb.put("branch",branch);
 		commitArray.add(jsonOb);
 		
 	}
 	public static String Arrayreturn() {
 		return commitArray.toString();
+	}
+	public int ArrayCountreturn() {
+		return commitArray.size();
 	}
 	
 

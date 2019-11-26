@@ -9,6 +9,7 @@ import javax.swing.*;
 
 
 import Controller.CommandInputListener;
+import Controller.DocumentUploadListener;
 import Controller.GobackButtonListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
@@ -18,6 +19,7 @@ import javax.swing.JFrame;
 
 
 public class CommandInputPane extends JPanel{
+	public JTextArea allCommandtxt;
 	
 	private static final String EXIT_ON_CLOSE = null;
 	private JButton btnBack; 
@@ -36,7 +38,7 @@ public class CommandInputPane extends JPanel{
 		scrollInput.setBounds(512, 40, 13, 325);
 		CommandInputPane.add(scrollInput);
 		
-		JTextArea allCommandtxt = new JTextArea();
+		allCommandtxt = new JTextArea();
 		allCommandtxt.setBounds(14, 40, 511, 325);
 		CommandInputPane.add(allCommandtxt);
 		
@@ -70,6 +72,7 @@ public class CommandInputPane extends JPanel{
 		JButton btnUpload = new JButton("upload");
 		btnUpload.setBounds(448, 372, 77, 26);
 		CommandInputPane.add(btnUpload);
+		btnUpload.addActionListener(new DocumentUploadListener());
 		
 		JComboBox<List> repoComboBox = new JComboBox<List>();
 		repoComboBox.setModel(new DefaultComboBoxModel(new String[] {})); //clone할 시 저장소를 배열에 추가하도록 해야 함, 비워둠

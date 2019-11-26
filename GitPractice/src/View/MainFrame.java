@@ -37,5 +37,7 @@ public class MainFrame extends JFrame {
 		new CommitGraphPane();
 		new TemporaryExplorerPane();
 		
+		this.setJMenuBar(new SettingMenuBar());
+		
 	}
 }
