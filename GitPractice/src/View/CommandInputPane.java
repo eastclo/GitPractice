@@ -19,7 +19,7 @@ import javax.swing.JFrame;
 
 
 public class CommandInputPane extends JPanel{
-	public JTextArea allCommandtxt;
+	public static JTextArea allCommandtxt;
 	
 	private static final String EXIT_ON_CLOSE = null;
 	private JButton btnBack; 

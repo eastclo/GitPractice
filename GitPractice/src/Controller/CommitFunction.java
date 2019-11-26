@@ -18,11 +18,12 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import Model.CommitArray;
+import Model.CurrentLocation;
 
 public class CommitFunction {
 	
 	//Commit List의 정보가 담긴 파일이 생성될 ComitArray.ini의 경로. 상대경로이며, 프로젝트의 root폴더로 설정되어있음.
-	String Path = ManagementSetting.workspace + File.separator +"CommitArray.ini";
+	String Path = CurrentLocation.workspace + File.separator +"CommitArray.ini";
 	
 	//다른 기능에서도 쉽게 정보를 출력하거나 사용하기 위해 CommitList를 ArrayList로도 관리 
 	public List<Object> CMArray;
@@ -73,7 +74,7 @@ public class CommitFunction {
 		CMArray.add(content);
 		BranchArray.add(branch);
 		JsonArray.commit(content,branch);
-		workspaceCopy(ManagementSetting.workspace,new File("."+File.separator+ManagementSetting.workspace.getName()));
+		workspaceCopy(CurrentLocation.workspace,new File("."+File.separator+CurrentLocation.workspace.getName()));
 		
 	}
 	
@@ -92,12 +93,12 @@ public class CommitFunction {
 	public void workspaceCopy(File sourceF,File targetF) {		
 		File[] ff = sourceF.listFiles();
 		for (File file : ff) {
-			String Filepath = targetF.getPath()+File.separator+ManagementSetting.currentBranch+File.separator+JsonArray.ArrayCountreturn();
+			String Filepath = targetF.getPath()+File.separator+CurrentLocation.getBranch()+File.separator+JsonArray.ArrayCountreturn();
 			File temp = new File(Filepath+File.separator+file.getName());
 			if(!new File(Filepath).exists()) {
-				new File("."+File.separator+ManagementSetting.workspace.getName()).mkdir();
-				new File("."+File.separator+ManagementSetting.workspace.getName()+File.separator+ManagementSetting.currentBranch).mkdir();
-				new File("."+File.separator+ManagementSetting.workspace.getName()+File.separator+ManagementSetting.currentBranch+File.separator+JsonArray.ArrayCountreturn()).mkdir();
+				new File("."+File.separator+CurrentLocation.workspace.getName()).mkdir();
+				new File("."+File.separator+CurrentLocation.workspace.getName()+File.separator+CurrentLocation.getBranch()).mkdir();
+				new File("."+File.separator+CurrentLocation.workspace.getName()+File.separator+CurrentLocation.getBranch()+File.separator+JsonArray.ArrayCountreturn()).mkdir();
 			}
 			if(file.isDirectory()) {
 				temp.mkdir();
