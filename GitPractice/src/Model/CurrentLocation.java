@@ -18,11 +18,32 @@ public class CurrentLocation {
 		branch = new String(targetBranch);
 	}
 	
+	public static void addBranch(String targetBranch) {
+		boolean findswt=false;
+		for(String s : BranchList) {
+			if(s.equals(targetBranch))
+			{
+				findswt=true;
+				break;
+			}
+		}
+		if(findswt==false)
+			BranchList.add(targetBranch);
+	}
+	
+	public static void setBranchList(List<String> branchList) {
+		BranchList=branchList;
+	}
+	
 	public static String getRepo() {
 		return repo;
 	}
 	
 	public static String getBranch() {
 		return branch;
+	}
+	
+	public static List<String> getBranchList() {
+		return BranchList;
 	}
 }

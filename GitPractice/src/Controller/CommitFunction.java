@@ -82,6 +82,8 @@ public class CommitFunction {
 	public void commitListSave(String path) {
 		try {
 			FileWriter fw = new FileWriter(path);
+			if(new File(Path).exists())
+				new File(Path).delete();
 			fw.write(CommitArray.Arrayreturn());
 			fw.flush();
 			fw.close();

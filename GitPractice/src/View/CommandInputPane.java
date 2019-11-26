@@ -34,13 +34,14 @@ public class CommandInputPane extends JPanel{
 		lblCommandInput.setBounds(14, 12, 100, 18);
 		CommandInputPane.add(lblCommandInput);
 		
-		JScrollBar scrollInput = new JScrollBar();
-		scrollInput.setBounds(512, 40, 13, 325);
-		CommandInputPane.add(scrollInput);
 		
 		allCommandtxt = new JTextArea();
 		allCommandtxt.setBounds(14, 40, 511, 325);
 		CommandInputPane.add(allCommandtxt);
+
+		JScrollBar scrollInput = new JScrollBar();
+		scrollInput.setBounds(498, 0, 13, 325);
+		allCommandtxt.add(scrollInput);
 		
 		JTextField input = new JTextField();
 		input.setBounds(14, 373, 429, 24);
