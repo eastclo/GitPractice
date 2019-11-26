@@ -9,6 +9,8 @@ public class CurrentLocation {
 	private static String branch;
 	public static File workspace=new File(".");
 	public static List<String> BranchList=new ArrayList<String>();
+	public static String AuthorName = "user";
+	public static String AuthorAddress = "user@example.com";
 	
 	public static void changeRepo(String targetRepo) {
 		repo = new String(targetRepo);
@@ -29,6 +31,12 @@ public class CurrentLocation {
 		}
 		if(findswt==false)
 			BranchList.add(targetBranch);
+	}
+	public static void changeAuthorname(String name) {
+		AuthorName=new String(name);
+	}
+	public static void changeAuthorAddress(String address) {
+		AuthorAddress=new String(address);
 	}
 	
 	public static void setBranchList(List<String> branchList) {
