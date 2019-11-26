@@ -32,22 +32,5 @@ public class CommitGraphPane extends JPanel{
 	DrawingGraph.setBounds(14, 38, 511, 145);
 	CommitGraphPane.add(DrawingGraph);
 	
-	//Commit 내용을 저장하는 TEST입니다.
-	CommitFunction commit = new CommitFunction();
-	commit.commitAdd(1);
-	commit.commitAdd(2);
-	commit.commitListSave();
-	//Commit 내용을 불러오는 TEST입니다.
-	try {
-		CommitFunction commitOpen = new CommitFunction();
-		commitOpen.commitListOpen();
-		List<Object> Array = commitOpen.CMArray;
-	}
-	catch (ParseException e) {
-	      e.printStackTrace();
-	    } 
-	catch(IOException e) {
-		e.printStackTrace();
-	}
 }
 }
