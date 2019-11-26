@@ -3,16 +3,46 @@ package View;
 import javax.swing.JFrame;
 import javax.swing.text.View;
 
+import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
-public class AutomaticSizeFrame extends JFrame { //Ã¢ÀÇ ºñÀ²À» ÀÚµ¿À¸·Î ¼³Á¤ÇÏ´Â Å¬·¡½º
+class AutomaticSizeFrame extends Application {  //í¬ê¸°ë¥¼ ìë™ìœ¼ë¡œ ì¡°ì ˆ
 
-	//Test
+	
+	@Override
+	public void start(Stage stage) {
+		try {
+
+			//stage > scene > container > node
+			Button button1 = new Button();
+			button1.setText("Test");
+			button1.prefWidthProperty().bind(pane.widthProperty()); //í”„ë¡œê·¸ë¨ ì‚¬ì´ì¦ˆì— ë§ì¶° ìë™ ì¡°ì ˆ
+			button1.prefHeightProperty().bind(pane.maxHeightProperty());
+			pane.getChildren().add(grid);//ë²„íŠ¼ì€ ì¡°ì ˆ ë¶ˆê°€
+			Button button2 = new Button();
+			button2.setText("Test2");
+			button2.setMinWidth(50); //ìµœì†Œ ì‚¬ì´ì¦ˆ ìœ ì§€
+			button2.setMinHeight(100); //ìµœì†Œ ì‚¬ì´ì¦ˆ ìœ ì§€ 
+			grid.addRow(0, button1, button2);
+			
+			//label.setAlignment(Pos.CENTER); //ê°€ìš´ë° ì •ë ¬
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	GridPane grid = new GridPane();
 	StackPane pane = new StackPane();
 	Scene scene = new Scene(pane, 500, 500);
 	
-		/* ºê·£Ä¡ ÀÌ¸§ º¯°æ
+	
+		/* 
 	* 
 	* View auto = new View();
 	* auto.setPreserveRatio(true);
@@ -21,5 +51,4 @@ public class AutomaticSizeFrame extends JFrame { //Ã¢ÀÇ ºñÀ²À» ÀÚµ¿À¸·Î ¼³Á¤ÇÏ´Â
 	* pane.getChilderen().add(auto);
 	* 
 		*/
-	
 }
