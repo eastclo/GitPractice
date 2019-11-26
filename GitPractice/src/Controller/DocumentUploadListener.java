@@ -14,28 +14,24 @@ import javax.swing.*;
 import javax.swing.JFileChooser.*;
 import javax.swing.event.*;
 
+import View.CommandInputPane;
+
 
 //Workspace로 파일을 업로드하는 Controller
 public class DocumentUploadListener implements ActionListener {
 	JFileChooser fc;
-	JFileChooser fcd;
 	File file;
-	File workSpace;
 	public String fileName;
 	public String fileIn;
-	boolean wsSetting=false;
 	
 	public DocumentUploadListener(){
 		fc = new JFileChooser();
-		fcd = new JFileChooser();
 		
 	}
 	
 	@Override
 	//버튼 Click시 실행.
 	public void actionPerformed(ActionEvent e) {
-		//저장할 workspace설정.
-		workspaceSetting();
 		
 		//업로드할 파일 Open
 		fileOpen();
@@ -55,7 +51,7 @@ public class DocumentUploadListener implements ActionListener {
 		fileName = file.getName();
 		fileIn =getTextFromFile(file);
 		
-		String wsFile = workSpace + File.separator + fileName;
+		String wsFile = ManagementSetting.workspace + File.separator + fileName;
 		JOptionPane.showMessageDialog(null, fileIn);
 		try {
 			FileWriter fileWriter = new FileWriter(wsFile);
@@ -65,6 +61,8 @@ public class DocumentUploadListener implements ActionListener {
 			   // TODO Auto-generated catch block
 			   e.printStackTrace();
 			  }
+		CommandInputPane inputPane = new CommandInputPane();
+		inputPane.allCommandtxt.setText(fileIn);
 		
 		
 	}
@@ -85,25 +83,6 @@ public class DocumentUploadListener implements ActionListener {
 	      e.printStackTrace();
 	    }
 		return text;
-	}
-	//Workspace의 경로를 세팅. 폴더만 선택가능
-	public void workspaceSetting() {
-		if(!wsSetting)
-		{
-			JOptionPane.showMessageDialog(null, "WorkSpace 경로가 설정되어 있지 않습니다.");	
-			fcd.setCurrentDirectory(new File("."));
-			fcd.setFileSelectionMode(fcd.DIRECTORIES_ONLY);
-
-			int ret = fcd.showOpenDialog(null);
-			
-			if(ret!=JFileChooser.APPROVE_OPTION) {
-				JOptionPane.showMessageDialog(null, "경로를 선택하지 않았습니다.","경고",JOptionPane.WARNING_MESSAGE);
-				return;
-			}
-			workSpace=fcd.getSelectedFile();
-			wsSetting=true;
-		}
-		
 	}
 
 }

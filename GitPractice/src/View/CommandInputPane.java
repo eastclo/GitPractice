@@ -9,6 +9,7 @@ import javax.swing.*;
 
 
 import Controller.CommandInputListener;
+import Controller.DocumentUploadListener;
 import Controller.GobackButtonListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
@@ -18,6 +19,7 @@ import javax.swing.JFrame;
 
 
 public class CommandInputPane extends JPanel{
+	public JTextArea allCommandtxt;
 	
 	private static final String EXIT_ON_CLOSE = null;
 	private JButton btnBack; 
@@ -36,7 +38,7 @@ public class CommandInputPane extends JPanel{
 		scrollInput.setBounds(512, 40, 13, 325);
 		CommandInputPane.add(scrollInput);
 		
-		JTextArea allCommandtxt = new JTextArea();
+		allCommandtxt = new JTextArea();
 		allCommandtxt.setBounds(14, 40, 511, 325);
 		CommandInputPane.add(allCommandtxt);
 		
@@ -70,6 +72,7 @@ public class CommandInputPane extends JPanel{
 		JButton btnUpload = new JButton("upload");
 		btnUpload.setBounds(448, 372, 77, 26);
 		CommandInputPane.add(btnUpload);
+		btnUpload.addActionListener(new DocumentUploadListener());
 		
 		JComboBox<List> brcomboBox = new JComboBox<List>();
 		brcomboBox.setModel(new DefaultComboBoxModel(new String[] {"master","hotfix"})); //master와 일단은 hotfix 추가, 추후에 checkout 명령어 입력시 branch가 추가되도록 해야할 것
@@ -79,7 +82,7 @@ public class CommandInputPane extends JPanel{
 		JLabel lblSelect = new JLabel("브랜치 선택"); //브랜치를 선택하는 라벨 추가
 		lblSelect.setBounds(119, 12, 83, 18); 
 		CommandInputPane.add(lblSelect);
-
+    
 	}
 	
 		 class buttonPress implements ActionListener {
