@@ -62,8 +62,7 @@ public class DocumentUploadListener implements ActionListener {
 			   // TODO Auto-generated catch block
 			   e.printStackTrace();
 			  }
-		CommandInputPane inputPane = new CommandInputPane();
-		inputPane.allCommandtxt.setText(fileIn);
+		CommandInputPane.allCommandtxt.setText(fileIn);
 		
 		
 	}
