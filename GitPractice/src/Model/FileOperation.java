@@ -36,6 +36,7 @@ public class FileOperation {
 			}
 	 }
 	
+	 //디렉토리 내부 파일 전부 복사
 	public static void copyFileAll(File sourceF, File targetF){
 		File[] target_file = sourceF.listFiles();
 		for (File file : target_file) {
@@ -65,6 +66,31 @@ public class FileOperation {
 						e.printStackTrace();
 					}
 				}
+			}
+		}
+	}
+	//단일 파일 복사		//sourceF파일을 targetFolder에 복사
+	public static void copyFile(File sourceF, File targetFolder) {
+		File targetF = new File(targetFolder.getPath()+File.separator+sourceF.getName());
+		FileInputStream fis = null;
+		FileOutputStream fos = null;
+		try {
+			fis = new FileInputStream(sourceF);
+			fos = new FileOutputStream(targetF) ;
+			byte[] b = new byte[4096];
+			int cnt = 0;
+			while((cnt=fis.read(b)) != -1){
+				fos.write(b, 0, cnt);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			try {
+				fis.close();
+				fos.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
