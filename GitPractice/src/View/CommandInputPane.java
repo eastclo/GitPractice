@@ -72,10 +72,9 @@ public class CommandInputPane extends JPanel{
 		CommandInputPane.add(btnUpload);
 		
 		JComboBox<List> brcomboBox = new JComboBox<List>();
+		brcomboBox.setModel(new DefaultComboBoxModel(new String[] {"master","hotfix"})); //master와 일단은 hotfix 추가, 추후에 checkout 명령어 입력시 branch가 추가되도록 해야할 것
 		brcomboBox.setBounds(201, 9, 100, 24);
 		CommandInputPane.add(brcomboBox);
-		List branchName = new LinkedList(); //콤보박스에 들어갈 내용을 저장하는 리스트
-		branchName.add("master"); 			//master 추가, 추후에 checkout 명령어 입력시 branch가 추가되도록 해야할 것
 
 		JLabel lblSelect = new JLabel("브랜치 선택"); //브랜치를 선택하는 라벨 추가
 		lblSelect.setBounds(119, 12, 83, 18); 
