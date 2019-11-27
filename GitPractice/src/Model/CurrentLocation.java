@@ -7,7 +7,7 @@ import java.util.List;
 public class CurrentLocation {
 	private static String repo;
 	private static String branch;
-	public static File workspace=new File(".");
+	public static File workspace=new File("."+File.separator+"tmpWorkspace");
 	public static List<String> BranchList=new ArrayList<String>();
 	public static String AuthorName = "user";
 	public static String AuthorAddress = "user@example.com";

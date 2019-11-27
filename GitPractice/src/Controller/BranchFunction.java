@@ -19,12 +19,15 @@ import org.json.simple.parser.ParseException;
 import Model.CurrentLocation;
 
 public class BranchFunction {
-	String Path = CurrentLocation.workspace + File.separator +"BranchArray.ini";
+	String Path = "." + File.separator +"Commit" + File.separator +"BranchArray.ini";
 	
 	public List<String> branchArray;
 	
 	public BranchFunction() {
 		branchArray=new ArrayList<String>();
+		
+		if(!new File("." + File.separator +"Commit").exists())
+			new File("." + File.separator +"Commit").mkdir();
 	}
 	
 	public void BranchListOpen() {
@@ -78,7 +81,7 @@ public class BranchFunction {
 		}
 	}
 	public void refreshPath() {
-		String Path = CurrentLocation.workspace + File.separator +"BranchArray.ini";
+		String Path = "." + File.separator +"Commit" + File.separator +"BranchArray.ini";
 	}
 
 }
