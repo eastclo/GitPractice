@@ -40,6 +40,19 @@ public class SettingMenuBar extends JMenuBar {
 		
 		
 		this.add(menu);
+		
+
+		BranchFunction bf = new BranchFunction();
+		if(!new File("." + File.separator +"Commit" + File.separator +"BranchArray.ini").exists())
+		{
+			CurrentLocation.BranchList=new ArrayList<String>();
+			CurrentLocation.changeBranch("master");
+			CurrentLocation.addBranch("master");
+			List<String> branchList = CurrentLocation.getBranchList();
+			bf.setArray(branchList);
+			bf.BranchListSave();
+		}
+		bf.BranchListOpen();
 	}
 
 	//Workspace의 경로를 세팅. 폴더만 선택가능
