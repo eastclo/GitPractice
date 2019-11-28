@@ -42,7 +42,7 @@ public class CommandInputPane extends JPanel{
 		allCommandtxt = new JTextArea(); //모든 명령어 창
 		allCommandtxt.setBounds(14, 40, 511, 325);
 		CommandInputPane.add(allCommandtxt);
-		inputScroll.setViewportView(allCommandtxt);  //스크롤바->스크롤페인 변경
+		inputScroll.setViewportView(allCommandtxt);  //스크롤바->스크롤페인 변경(오류수정)
 		inputScroll.setBounds(14, 42, 511, 325);
 		CommandInputPane.add(inputScroll);
 		
