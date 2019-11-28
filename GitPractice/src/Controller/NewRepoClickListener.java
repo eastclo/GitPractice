@@ -65,9 +65,12 @@ public class NewRepoClickListener extends JFrame implements MouseListener {
 				    String str ="https://github.com/userName/" + repoName;
 				    byte[] by=str.getBytes();
 				    output.write(by);
+				    
+				    JOptionPane.showMessageDialog(null, "Repository 생성 완료", "New Repository", JOptionPane.PLAIN_MESSAGE);
 						
 				} catch (Exception e) {
 			            e.getStackTrace();
+			            JOptionPane.showMessageDialog(null, "Repository 생성 실패", "Error!", JOptionPane.ERROR_MESSAGE);
 				}
 				
 			}
