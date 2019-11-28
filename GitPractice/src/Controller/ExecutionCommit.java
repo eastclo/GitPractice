@@ -8,19 +8,20 @@ import javax.swing.JButton;
 
 import org.json.simple.parser.ParseException;
 
+import Model.CurrentLocation;
 import View.CommitInputDialog;
 
 public class ExecutionCommit {
 	
 	CommitInputDialog comDialog;
-	public void executeCommand() {
+	public void executeCommand(String a,String b,String c) {
 		comDialog = new CommitInputDialog();
 
 		JButton btn = comDialog.btn;
 		btn.addActionListener(new btnclick());
 		
 	}
-	public void cancelCommand() {
+	public void cancelCommand(String a,String b,String c) {
 		System.out.println("Cancel git log --all");
 	}
 	
@@ -39,7 +40,7 @@ public class ExecutionCommit {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			commit.commitAdd(inputContent,ManagementSetting.currentBranch);
+			commit.commitAdd(inputContent,CurrentLocation.getBranch(),CurrentLocation.AuthorName,CurrentLocation.AuthorAddress);
 			commit.commitListSave(commit.Path);
 		}
 	}
