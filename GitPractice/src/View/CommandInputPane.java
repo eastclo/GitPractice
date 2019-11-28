@@ -19,11 +19,16 @@ import javax.swing.JFrame;
 
 
 public class CommandInputPane extends JPanel{
-	public JTextArea allCommandtxt;
+	public static JTextArea allCommandtxt;
 	
 	private static final String EXIT_ON_CLOSE = null;
 	private JButton btnBack; 
+	private static JComboBox repoComboBox;
+	private static DefaultComboBoxModel comboModel;
+	private final JScrollPane inputScroll = new JScrollPane();
 	public CommandInputPane(){
+		
+		
 		JPanel CommandInputPane = new JPanel();
 		CommandInputPane.setBounds(236, 0, 539, 409);
 		
@@ -34,15 +39,14 @@ public class CommandInputPane extends JPanel{
 		lblCommandInput.setBounds(14, 12, 100, 18);
 		CommandInputPane.add(lblCommandInput);
 		
-		JScrollBar scrollInput = new JScrollBar();
-		scrollInput.setBounds(512, 40, 13, 325);
-		CommandInputPane.add(scrollInput);
-		
-		allCommandtxt = new JTextArea();
+		allCommandtxt = new JTextArea(); //모든 명령어 창
 		allCommandtxt.setBounds(14, 40, 511, 325);
 		CommandInputPane.add(allCommandtxt);
+		inputScroll.setViewportView(allCommandtxt);  //스크롤바->스크롤페인 변경
+		inputScroll.setBounds(14, 42, 511, 325);
+		CommandInputPane.add(inputScroll);
 		
-		JTextField input = new JTextField();
+		JTextField input = new JTextField(); //명령어 1줄 입력창
 		input.setBounds(14, 373, 429, 24);
 		CommandInputPane.add(input);
 		input.addActionListener(new CommandInputListener()); //리스너 적용
@@ -74,8 +78,9 @@ public class CommandInputPane extends JPanel{
 		CommandInputPane.add(btnUpload);
 		btnUpload.addActionListener(new DocumentUploadListener());
 		
-		JComboBox<List> repoComboBox = new JComboBox<List>();
-		repoComboBox.setModel(new DefaultComboBoxModel(new String[] {})); //clone할 시 저장소를 배열에 추가하도록 해야 함, 비워둠
+		comboModel = new DefaultComboBoxModel();
+		repoComboBox = new JComboBox();
+		repoComboBox.setModel(comboModel); //clone할 시 저장소를 배열에 추가하도록 해야 함, 비워둠
 		repoComboBox.setBounds(201, 9, 100, 24);
 		CommandInputPane.add(repoComboBox);
 
@@ -83,6 +88,15 @@ public class CommandInputPane extends JPanel{
 		lblSelectRepo.setBounds(119, 12, 83, 18); 
 		CommandInputPane.add(lblSelectRepo);
 
+
+	}
+	
+	public static JComboBox getComboBox() {
+		return repoComboBox;
+	}
+	
+	public static DefaultComboBoxModel getComboModel() {
+		return comboModel;
 	}
 	
 		 class buttonPress implements ActionListener {
