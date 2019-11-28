@@ -25,7 +25,11 @@ public class CommandInputPane extends JPanel{
 	private JButton btnBack; 
 	private static JComboBox repoComboBox;
 	private static DefaultComboBoxModel comboModel;
+	private final JScrollPane inputScroll = new JScrollPane();
+
 	public CommandInputPane(){
+		
+		
 		JPanel CommandInputPane = new JPanel();
 		CommandInputPane.setBounds(236, 0, 539, 409);
 		
@@ -36,6 +40,12 @@ public class CommandInputPane extends JPanel{
 		lblCommandInput.setBounds(14, 12, 100, 18);
 		CommandInputPane.add(lblCommandInput);
 		
+		allCommandtxt = new JTextArea(); //모든 명령어 창
+		allCommandtxt.setBounds(14, 40, 511, 325);
+		CommandInputPane.add(allCommandtxt);
+		inputScroll.setViewportView(allCommandtxt);  //스크롤바->스크롤페인 변경(오류수정)
+		inputScroll.setBounds(14, 42, 511, 325);
+		CommandInputPane.add(inputScroll);
 		
 		allCommandtxt = new JTextArea();
 		allCommandtxt.setBounds(14, 40, 511, 325);
@@ -44,8 +54,9 @@ public class CommandInputPane extends JPanel{
 		JScrollBar scrollInput = new JScrollBar();
 		scrollInput.setBounds(498, 0, 13, 325);
 		allCommandtxt.add(scrollInput);
-		
-		JTextField input = new JTextField();
+
+  
+		JTextField input = new JTextField(); //명령어 1줄 입력창
 		input.setBounds(14, 373, 429, 24);
 		CommandInputPane.add(input);
 		input.addActionListener(new CommandInputListener()); //리스너 적용
@@ -87,6 +98,15 @@ public class CommandInputPane extends JPanel{
 		lblSelectRepo.setBounds(119, 12, 83, 18); 
 		CommandInputPane.add(lblSelectRepo);
 
+
+	}
+	
+	public static JComboBox getComboBox() {
+		return repoComboBox;
+	}
+	
+	public static DefaultComboBoxModel getComboModel() {
+		return comboModel;
 	}
 	
 	public static JComboBox getComboBox() {
