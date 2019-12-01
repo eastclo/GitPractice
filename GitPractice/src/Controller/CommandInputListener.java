@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import Model.CommandStack;
 import Model.CommandListOperation;
+import Model.FileOperation;
 
 
 public class CommandInputListener implements ActionListener {
@@ -41,16 +42,15 @@ public class CommandInputListener implements ActionListener {
 			
 			if(index == -1) {	/**예외처리: 입력한 명령어가 없으면 오류 출력*/
 				JOptionPane.showMessageDialog(null, "없는 명령어입니다.", "명령어 입력 오류", JOptionPane.ERROR_MESSAGE);
-			} else {
-				Model.CommandStack.push(textFieldValue);	//명령어 스택에 저장
-				
+			} else {				
 				//명령어를 파일 이름으로 저장했으므로 해당 명령어파일 내부에 적힌 클래스 이름을 얻기 위해 파일 객체와  FileReader를 사용함.
 				String cmdlistPath = "." + File.separator + "src" + File.separator + "Model" + File.separator + "cmdlist";
-				String Clazz = CommandListOperation.getFileReadData(cmdlistPath, cmds, index);	//파일 내부 데이터를 읽어오는 메소드 호출
+				String Clazz = FileOperation.getFileReadData(cmdlistPath, cmds, index);	//파일 내부 데이터를 읽어오는 메소드 호출
 		        
 		        //명렁어 실행
 				JOptionPane.showMessageDialog(null, textFieldValue.trim().replaceAll(" +", " ") + " 명령어를 수행합니다.", "명령어 입력", JOptionPane.INFORMATION_MESSAGE);
-				CommandListOperation.execute("executeCommand",Clazz, input);
+				if(CommandListOperation.execute("executeCommand",Clazz, input))
+					Model.CommandStack.push(textFieldValue);
 			}
 		}
 	}
