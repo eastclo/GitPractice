@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 
 import javax.swing.JOptionPane;
@@ -93,5 +94,34 @@ public class FileOperation {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	//cmdlistpath 경로에 있는 cmds[index] 파일의 내부 정보를 읽어서 String 타입으로 리턴해주는 메소드 
+	public static String getFileReadData(String cmdlistPath, String[] cmds, int index) {
+		File f = new File(cmdlistPath,cmds[index]);
+		FileReader fin;
+		char []buf = new char [1024];
+		try {
+			fin = new FileReader(cmdlistPath + File.separator + cmds[index]);
+			fin.read(buf);
+			fin.close();
+		} catch (FileNotFoundException e1) {} catch (IOException e1) {}
+		
+		return String.valueOf(buf).trim();	//버퍼에 공백 제거
+	}
+	
+	//cmdlistpath 경로에 있는 cmd 파일의 내부 정보를 읽어서 String 타입으로 리턴해주는 메소드 
+	public static String getFileReadData(String cmdlistPath, String cmd) {
+		File f = new File(cmdlistPath,cmd);
+		 FileReader fin;
+		 char []buf = new char [1024];
+			try {
+				fin = new FileReader(cmdlistPath + File.separator + cmd);
+				fin.read(buf);
+				fin.close();
+			} catch (FileNotFoundException e1) {} catch (IOException e1) {}
+		String Clazz = String.valueOf(buf).trim();
+		
+		return String.valueOf(buf).trim();	//버퍼에 공백 제거
 	}
 }
