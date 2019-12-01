@@ -11,6 +11,7 @@ import javax.swing.*;
 
 import Model.CommandStack;
 import Model.CommandListOperation;
+import Model.FileOperation;
 
 public class GobackButtonListener implements ActionListener{
 
@@ -27,7 +28,7 @@ public class GobackButtonListener implements ActionListener{
 				  */
 				 String input[] = CommandListOperation.devideInputText(cmd);
 				 
-				 String Clazz = CommandListOperation.getFileReadData(cmdlistPath, combineCmd(input));	//명령어 받아오기
+				 String Clazz = FileOperation.getFileReadData(cmdlistPath, combineCmd(input));	//명령어 받아오기
 				 
 				 CommandListOperation.execute("cancelCommand",Clazz, input);
 				JOptionPane.showMessageDialog(null, "'"+cmd.trim().replaceAll(" +", " ") +"'가 취소되었습니다.", "뒤로 가기", JOptionPane.INFORMATION_MESSAGE);	//알림 팝업
@@ -45,7 +46,7 @@ public class GobackButtonListener implements ActionListener{
 				  */
 				 String input[] = CommandListOperation.devideInputText(cmd);
 				 
-				 String Clazz = CommandListOperation.getFileReadData(cmdlistPath, combineCmd(input));	//명령어 받아오기
+				 String Clazz = FileOperation.getFileReadData(cmdlistPath, combineCmd(input));	//명령어 받아오기
 				 
 				 CommandListOperation.execute("executeCommand",Clazz, input);		
 				 JOptionPane.showMessageDialog(null, "'"+cmd.trim().replaceAll(" +", " ") +"'가 실행되었습니다.", "앞으로 가기", JOptionPane.INFORMATION_MESSAGE);	//알림 팝업
