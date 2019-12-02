@@ -2,32 +2,61 @@ package Controller;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
-import javax.swing.JButton;
+import javax.swing.JList;
+
+import View.RepoInfoDialog;
+import View.TemporaryExplorerPane;
 
 public class ExplorerClickListener implements MouseListener {
 	
-	MouseEvent e;
+	private JList list;
 	
-	public ExplorerClickListener() {
-		// Model에 정의되어 있는 Remote Repository 리스트
-		Model.RemoteRepository rmrepo = new Model.RemoteRepository();
+	public ExplorerClickListener(TemporaryExplorerPane view) {
+		this.list = view.getJList();
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) { // 마우스가 클릭 되었을 때 
 		// TODO Auto-generated method stub
-		mkRepository();
-		
-		
+		popUpRepo(e);
 	}
 	
-	private void mkRepository() {
-		JButton linkButton = (JButton) e.getSource();
-		// 리스너 객체 생성
-		ExplorerClickListener listener = new ExplorerClickListener();
-		
+	public void popUpRepo(MouseEvent e) {
+		if (e.getClickCount() == 2) {
+			String repo = list.getSelectedValue().toString();
+			String repoPath = "." + File.separator + "GitHub";
+			
+			System.out.println(repo);
+			
+			File f = new File(repoPath + File.separator + repo + File.separator + "address.txt");
+			
+			System.out.println(f);
+			
+			char[] buf = new char[1024];
+			try {
+				FileReader fr = new FileReader(f);
+				
+				fr.read(buf);
+				fr.close();
+			} catch(FileNotFoundException e1) {
+				System.out.println("error1");
+				e1.getStackTrace();
+			} catch (IOException e1) {
+				System.out.println("error2");
+				e1.getStackTrace();
+			}
+			String repoInfo = String.copyValueOf(buf).trim();
+			
+			new RepoInfoDialog(repoInfo);
+		}
 	}
+	
+	
 	
 	@Override
 	public void mouseEntered(MouseEvent e) {

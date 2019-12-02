@@ -1,5 +1,7 @@
 package Model;
 
+import java.io.File;
+
 public class CommandStack {
 	private static String[] commandStack = new String[50];
 	private static int top = -1;
@@ -30,5 +32,17 @@ public class CommandStack {
 	
 	public static int printTop() {
 		return top;
+	}
+	
+	public static String createBackup() {
+		int fileName = Model.CommandStack.printTop();
+		String backupPath = new String("."+File.separator+"BackUp"+File.separator+fileName);
+		return backupPath;
+	}
+	
+	public static String loadBackup() {
+		int fileName = Model.CommandStack.printTop()+1;
+		String backupPath = new String("."+File.separator+"BackUp"+File.separator+fileName);
+		return backupPath;
 	}
 }

@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import Controller.DelRepoClickListener;
+import Controller.ExplorerClickListener;
 import Controller.LoadRepository;
 import Controller.NewRepoClickListener;
 
@@ -31,7 +32,8 @@ public class TemporaryExplorerPane extends JPanel{
 		lblGitSimul.setBounds(14, 12, 106, 18);
 		TemporaryExplorerPane.add(lblGitSimul);
 		
-		//MainFrame.textField = new JTextField();
+		//혹시 JList가 오류가 나면 TextField로 변경하고 싶을 수 있으니 살려 둠
+    //MainFrame.textField = new JTextField();
 		//MainFrame.textField.setBounds(14, 42, 237, 550);
 		//TemporaryExplorerPane.add(MainFrame.textField);
 		//MainFrame.textField.setBackground(Color.WHITE);
@@ -58,6 +60,7 @@ public class TemporaryExplorerPane extends JPanel{
 		repoList = new JList();
 		repoList.setBounds(14, 42, 237, 550);
 		TemporaryExplorerPane.add(repoList);
+		repoList.addMouseListener(new ExplorerClickListener(this));
 		
 		repoScroll.setBounds(14, 42, 237, 550); //저장소 내 스크롤바 수정(세로스크롤 자동 생성)
 		TemporaryExplorerPane.add(repoScroll);
@@ -66,7 +69,7 @@ public class TemporaryExplorerPane extends JPanel{
 		LoadRepository init = new LoadRepository(this);
 		init.setRepositoryList();
 		
-		repoList.addMouseListener(new DelRepoClickListener());
+		//repoList.addMouseListener(new DelRepoClickListener());
 		
 	}
 	

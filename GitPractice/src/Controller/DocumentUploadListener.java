@@ -14,6 +14,7 @@ import javax.swing.*;
 import javax.swing.JFileChooser.*;
 import javax.swing.event.*;
 
+import Model.CurrentLocation;
 import View.CommandInputPane;
 
 
@@ -51,7 +52,7 @@ public class DocumentUploadListener implements ActionListener {
 		fileName = file.getName();
 		fileIn =getTextFromFile(file);
 		
-		String wsFile = ManagementSetting.workspace + File.separator + fileName;
+		String wsFile = CurrentLocation.workspace + File.separator + fileName;
 		JOptionPane.showMessageDialog(null, fileIn);
 		try {
 			FileWriter fileWriter = new FileWriter(wsFile);
@@ -61,8 +62,7 @@ public class DocumentUploadListener implements ActionListener {
 			   // TODO Auto-generated catch block
 			   e.printStackTrace();
 			  }
-		CommandInputPane inputPane = new CommandInputPane();
-		inputPane.allCommandtxt.setText(fileIn);
+		CommandInputPane.allCommandtxt.setText(fileIn);
 		
 		
 	}
