@@ -59,10 +59,9 @@ public class TemporaryExplorerPane extends JPanel{
 		repoList.setBounds(14, 42, 237, 550);
 		TemporaryExplorerPane.add(repoList);
 		
-		repoScroll.setBounds(14, 42, 237, 550); //저장소 내 스크롤바 수정
+		repoScroll.setBounds(14, 42, 237, 550); //저장소 내 스크롤바 수정(세로스크롤 자동 생성)
 		TemporaryExplorerPane.add(repoScroll);
 		repoScroll.setViewportView(repoList); //자동으로 스크롤 조절
-		
 		
 		LoadRepository init = new LoadRepository(this);
 		init.setRepositoryList();
