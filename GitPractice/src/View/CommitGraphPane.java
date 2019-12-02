@@ -27,7 +27,7 @@ public class CommitGraphPane extends JPanel{
 	DrawingGraph.setBounds(14, 38, 511, 145);
 	CommitGraphPane.add(DrawingGraph);
 	
-	JScrollPane graphScroll = new JScrollPane();
+	JScrollPane graphScroll = new JScrollPane(); //커밋 그래프가 길어지면 가로스크롤 자동생성 
 	graphScroll.setViewportView(DrawingGraph);  //스크롤바->스크롤페인 변경(오류수정)
 	graphScroll.setBounds(14, 38, 511, 145);
 	CommitGraphPane.add(graphScroll);
