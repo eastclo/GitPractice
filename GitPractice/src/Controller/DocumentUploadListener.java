@@ -51,8 +51,11 @@ public class DocumentUploadListener implements ActionListener {
 		file=fc.getSelectedFile();
 		fileName = file.getName();
 		fileIn =getTextFromFile(file);
-		
-		String wsFile = CurrentLocation.workspace + File.separator + fileName;
+		String wsFile;
+		if(new File(CurrentLocation.workspace.getPath()+File.separator+".git").exists())
+			wsFile= CurrentLocation.workspace.getPath()+File.separator+".git"+File.separator+CurrentLocation.getBranch()+File.separator+"workspace"+File.separator+fileName;
+		else
+			wsFile=CurrentLocation.workspace.getPath()+File.separator+fileName;
 		JOptionPane.showMessageDialog(null, fileIn);
 		try {
 			FileWriter fileWriter = new FileWriter(wsFile);

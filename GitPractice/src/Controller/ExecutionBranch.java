@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,28 +9,34 @@ import View.CommandExplainDialog;
 import View.CommandInputPane;
 
 public class ExecutionBranch {
-	public void executeCommand(String a, String b, String c) {
+	public boolean executeCommand(String[] parameter) {
 		List<String>branchList = new ArrayList<String>();
 		branchList = CurrentLocation.getBranchList();
-		boolean findswt = false;
-		if(a==null)
+		if(parameter==null)
 		{
 			String outputS = new String("////branch List////\n\n");
 			for(int i=0;i<branchList.size();i++)
 				outputS=outputS+branchList.get(i)+"\n";
 			CommandInputPane.allCommandtxt.setText(outputS);
+			return true;
 		}
-		else
+		else if(parameter.length==1)
 		{
-			CurrentLocation.addBranch(a);
+			CurrentLocation.addBranch(parameter[0]);
 			BranchFunction bf = new BranchFunction();
 			bf.BranchListSave();
-			findswt=false;
+			new File(CurrentLocation.workspace.getPath()+File.separator+".git"+File.separator+parameter[0]).mkdir();
+			new File(CurrentLocation.workspace.getPath()+File.separator+".git"+File.separator+parameter[0]+File.separator+"workspace").mkdir();
+			new File(CurrentLocation.workspace.getPath()+File.separator+".git"+File.separator+parameter[0]+File.separator+"add").mkdir();
+			new File(CurrentLocation.workspace.getPath()+File.separator+".git"+File.separator+parameter[0]+File.separator+"commit").mkdir();
+			return true;
 		}
+		else
+			return false;
 	}
 	
-	public void cancelCommand(String a, String b, String c) {
-		System.out.println("Cancel git log --all --graph");
+	public boolean cancelCommand(String[] parameter) {
+		return true;
 	}
 
 }

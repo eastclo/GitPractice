@@ -23,7 +23,7 @@ import Model.CurrentLocation;
 public class CommitFunction {
 	
 	//Commit List의 정보가 담긴 파일이 생성될 ComitArray.ini의 경로. 상대경로이며, 프로젝트의 root폴더로 설정되어있음.
-	String Path = "." + File.separator +"Commit" + File.separator +"CommitArray.ini";
+	String Path = CurrentLocation.workspace.getPath()+File.separator+ ".git" +File.separator+"CommitList.ini";
 	
 	//다른 기능에서도 쉽게 정보를 출력하거나 사용하기 위해 CommitList를 ArrayList로도 관리 
 	public List<String> CMArray;
@@ -57,7 +57,8 @@ public class CommitFunction {
 		
 		//JSON Array로 파일에 저장, 및 불러오기를 위하여, JSON parser기능을 사용.
 		try {
-			Object obj = parser.parse(new FileReader(new File(Path)));
+			FileReader fr= new FileReader(new File(Path));
+			Object obj = parser.parse(fr);
 			
 			JSONArray jsonArray = (JSONArray)obj;
 			Iterator<JSONObject> iterator =jsonArray.iterator();
@@ -71,8 +72,7 @@ public class CommitFunction {
 				if(content!=null&&content!="null")
 					commitAdd(content,branch,Authorname,Authoraddress);
 			}
-			//나중에 사용할때 CurrentLocation.wrokspace를 add폴더(Staging Area)로 변경하면됨.
-			workspaceCopy(CurrentLocation.workspace,new File("."+File.separator+"Commit"));
+			fr.close();
 		}
 		catch(FileNotFoundException e) {
 			e.printStackTrace();
@@ -104,13 +104,12 @@ public class CommitFunction {
 	}
 	public void workspaceCopy(File sourceF,File targetF) {
 		File[] ff = sourceF.listFiles();
+		String Filepath = targetF.getPath()+File.separator+JsonArray.totalSize();
+		if(!new File(Filepath).exists()) {
+			new File(targetF.getPath()+File.separator+JsonArray.totalSize()).mkdir();
+		}
 		for (File file : ff) {
-			String Filepath = targetF.getPath()+File.separator+CurrentLocation.getBranch()+File.separator+JsonArray.ArrayCountreturn(CurrentLocation.getBranch());
 			File temp = new File(Filepath+File.separator+file.getName());
-			if(!new File(Filepath).exists()) {
-				new File(targetF.getPath()+File.separator+CurrentLocation.getBranch()).mkdir();
-				new File(targetF.getPath()+File.separator+CurrentLocation.getBranch()+File.separator+JsonArray.ArrayCountreturn(CurrentLocation.getBranch())).mkdir();
-			}
 			if(file.isDirectory()) {
 				temp.mkdir();
 				workspaceCopy(file,temp);
