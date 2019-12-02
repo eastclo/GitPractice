@@ -23,37 +23,53 @@ public class ExplorerClickListener implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) { // 마우스가 클릭 되었을 때 
 		// TODO Auto-generated method stub
-		popUpRepo(e);
+		if (e.getClickCount() == 2) 
+			popUpRepo();
 	}
 	
-	public void popUpRepo(MouseEvent e) {
-		if (e.getClickCount() == 2) {
-			String repo = list.getSelectedValue().toString();
-			String repoPath = "." + File.separator + "GitHub";
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		delRepo();
+	}
+	
+	public void popUpRepo() {
+		String repo = list.getSelectedValue().toString();
+		String repoPath = "." + File.separator + "GitHub";
 			
-			System.out.println(repo);
+		System.out.println(repo);
 			
-			File f = new File(repoPath + File.separator + repo + File.separator + "address.txt");
+		File f = new File(repoPath + File.separator + repo + File.separator + "address.txt");
 			
-			System.out.println(f);
+		System.out.println(f);
 			
-			char[] buf = new char[1024];
-			try {
-				FileReader fr = new FileReader(f);
-				
-				fr.read(buf);
-				fr.close();
-			} catch(FileNotFoundException e1) {
-				System.out.println("error1");
-				e1.getStackTrace();
-			} catch (IOException e1) {
-				System.out.println("error2");
-				e1.getStackTrace();
-			}
-			String repoInfo = String.copyValueOf(buf).trim();
+		char[] buf = new char[1024];
+		try {
+			FileReader fr = new FileReader(f);
 			
-			new RepoInfoDialog(repoInfo);
+			fr.read(buf);
+			fr.close();
+		} catch(FileNotFoundException e1) {
+			System.out.println("error1");
+			e1.getStackTrace();
+		} catch (IOException e1) {
+			System.out.println("error2");
+			e1.getStackTrace();
 		}
+		String repoInfo = String.copyValueOf(buf).trim();
+		
+		new RepoInfoDialog(repoInfo);
+		
+	}
+	
+	public void delRepo() {
+		System.out.println("확인용 메시지  ");
+		String repoName = list.getSelectedValue().toString();
+		
+		System.out.println(repoName); // 리스트 이름 확인용 출력 
+		TemporaryExplorerPane view = new TemporaryExplorerPane();
+		
+		new DelRepoClickListener(view, repoName);
 	}
 	
 	
@@ -63,11 +79,7 @@ public class ExplorerClickListener implements MouseListener {
 		// TODO Auto-generated method stub
 	}
 
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
