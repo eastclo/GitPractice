@@ -12,7 +12,9 @@ public class ExecutionLogOptionAll {
 		return true; //명령어를 올바르게 입력하여 실행하면 true
 		//return false; //명령어를 올바르지 않게 입력하여 에러가 뜨면 에러 문구 출력 후 false를 리턴
 	}
-	public void cancelCommand(String[] parameter) {
+	public boolean cancelCommand(String[] parameter) {
+		/* 리턴값 true, false 상관 없음. */
 		System.out.println("Cancel git log --all");
+		return true;
 	}
 }
