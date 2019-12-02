@@ -35,13 +35,13 @@ public class CommandStack {
 	}
 	
 	public static String createBackup() {
-		int fileName = Model.CommandStack.printTop();
+		int fileName = Model.CommandStack.printTop()+2;
 		String backupPath = new String("."+File.separator+"BackUp"+File.separator+fileName);
 		return backupPath;
 	}
 	
 	public static String loadBackup() {
-		int fileName = Model.CommandStack.printTop()+1;
+		int fileName = Model.CommandStack.printTop()+2;
 		String backupPath = new String("."+File.separator+"BackUp"+File.separator+fileName);
 		return backupPath;
 	}

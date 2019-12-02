@@ -27,6 +27,16 @@ public class CommitArray {
 		branchC=new ArrayList<String>();
 		AuthorNameC=new ArrayList<String>();
 		AuthorAddressC=new ArrayList<String>();
+	private JSONArray json;
+	public String repoKey = "repoName";	//json에 key값으로 들어갈 "repoName"
+	public String workspaceKey = "workspaceName"; //json에 key값으로 들어갈 "workspaceName"
+	public String existKey = "exist";
+	public String remoteKey = "remote"; 
+	public String urlKey = "url"; 
+	
+	public CommitArray() {
+		commitArray = new JSONArray();
+		json = new JSONArray();
 	}
 	
 	public void commit(String content,String branch,String AuthorName,String AuthorAddress) {
@@ -40,8 +50,25 @@ public class CommitArray {
 		branchC.add(branch);
 		AuthorNameC.add(AuthorName);
 		AuthorAddressC.add(AuthorAddress);
-		
 	}
+	
+	public String backupClone(String clonedRepo, String currWorkspace, boolean exist) {
+		JSONObject jsonOb = new JSONObject();
+		jsonOb.put(repoKey, clonedRepo);
+		jsonOb.put(workspaceKey, currWorkspace);
+		jsonOb.put(existKey,exist);
+		json.add(jsonOb);
+		return json.toString();
+	}
+	
+	public String clone(String url) {
+		JSONObject jsonOb = new JSONObject();
+		jsonOb.put(remoteKey, "origin");
+		jsonOb.put(urlKey,url);
+		json.add(jsonOb);
+		return json.toString();
+	}
+	
 	public static String Arrayreturn() {
 		return commitArray.toString();
 	}
