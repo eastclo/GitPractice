@@ -49,13 +49,10 @@ public class TemporaryExplorerPane extends JPanel{
 		TemporaryExplorerPane.add(btnNewRepo);
 		btnNewRepo.addMouseListener(new NewRepoClickListener(this));
 		
-		// LoadClickListener와 연동되는 load 버튼입니다.
-		// 시작하자마자 저장소의 repository 파일을 불러오는 쪽으로 결정될 경우 
-		// 이 버튼은 삭제될 예정입니다.
 		JButton btnDelRepo = new JButton("del");
 		btnDelRepo.setBounds(122, 11, 60, 20);
 		TemporaryExplorerPane.add(btnDelRepo);
-		btnDelRepo.addMouseListener(new DelRepoClickListener());
+		btnDelRepo.addMouseListener(new DelRepoClickListener(this));
 		
 		repoList = new JList();
 		repoList.setBounds(14, 42, 237, 550);

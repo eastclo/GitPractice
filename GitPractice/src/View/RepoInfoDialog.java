@@ -16,10 +16,12 @@ public class RepoInfoDialog extends JFrame{
 	public RepoInfoDialog(String str) {
 		JPanel pane = new JPanel();
 		
-		FlowLayout flowLayout = (FlowLayout)pane.getLayout();
-		pane.setBackground(Color.CYAN);
+		setTitle("Repository Information");
+		setLayout(new FlowLayout(FlowLayout.LEFT, 30, 40));
+		//FlowLayout flowLayout = (FlowLayout)pane.getLayout();
+		pane.setBackground(Color.LIGHT_GRAY);
 		infoArea.setEditable(false);
-		infoArea.setBackground(Color.GREEN);
+		infoArea.setBackground(Color.LIGHT_GRAY);
 		pane.add(infoArea);
 		pane.setBorder(BorderFactory.createEmptyBorder(200, 200, 200, 200));
 		infoArea.setText(str.toString());
