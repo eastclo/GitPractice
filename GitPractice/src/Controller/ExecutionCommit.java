@@ -2,6 +2,7 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -14,14 +15,14 @@ import View.CommitInputDialog;
 public class ExecutionCommit {
 	
 	CommitInputDialog comDialog;
-	public void executeCommand(String a,String b,String c) {
+	public boolean executeCommand(String[] parameter) {
 		comDialog = new CommitInputDialog();
 
 		JButton btn = comDialog.btn;
 		btn.addActionListener(new btnclick());
-		
+		return true;
 	}
-	public void cancelCommand(String a,String b,String c) {
+	public void cancelCommand(String[] parameter) {
 		System.out.println("Cancel git log --all");
 	}
 	
@@ -41,6 +42,8 @@ public class ExecutionCommit {
 				e.printStackTrace();
 			}
 			commit.commitAdd(inputContent,CurrentLocation.getBranch(),CurrentLocation.AuthorName,CurrentLocation.AuthorAddress);
+			commit.workspaceCopy(new File(CurrentLocation.workspace.getPath()+File.separator+".git"+File.separator+CurrentLocation.getBranch()+File.separator+"add"),new File(CurrentLocation.workspace.getPath()+File.separator+".git"+File.separator+CurrentLocation.getBranch()+File.separator+"commit"));
+			
 			commit.commitListSave(commit.Path);
 		}
 	}

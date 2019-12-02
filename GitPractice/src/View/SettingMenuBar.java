@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import org.json.simple.parser.ParseException;
+
 import Controller.BranchFunction;
+import Controller.CommitFunction;
+import Model.CommitArray;
 import Model.CurrentLocation;
 
 public class SettingMenuBar extends JMenuBar {
@@ -31,7 +36,7 @@ public class SettingMenuBar extends JMenuBar {
 		
 		
 		JMenuItem openworkspace = new JMenuItem("workSpace");
-		openworkspace.addActionListener(new workspaceSetting());
+		openworkspace.addActionListener(new workspaceAdd());
 		menu.add(openworkspace);
 		
 		JMenuItem openauthor = new JMenuItem("Author");
@@ -43,47 +48,49 @@ public class SettingMenuBar extends JMenuBar {
 		
 
 		BranchFunction bf = new BranchFunction();
-		if(!new File("." + File.separator +"Commit" + File.separator +"BranchArray.ini").exists())
+		if(!new File("." + File.separator + "root").exists())
 		{
-			CurrentLocation.BranchList=new ArrayList<String>();
-			CurrentLocation.changeBranch("master");
-			CurrentLocation.addBranch("master");
-			List<String> branchList = CurrentLocation.getBranchList();
-			bf.setArray(branchList);
-			bf.BranchListSave();
+			new File("." + File.separator + "root").mkdir();
+			CurrentLocation.workspace = new File("." + File.separator + "root");
+			CurrentLocation.workspace.mkdir();
 		}
-		bf.BranchListOpen();
+		else
+		{
+			CurrentLocation.workspace=new File("." + File.separator + "root");
+			new BranchFunction().BranchListOpen();
+			try {
+				new CommitFunction().commitListOpen();
+			} catch (IOException | ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			CurrentLocation.changeBranch("master");
+		}
 	}
 
 	//Workspace의 경로를 세팅. 폴더만 선택가능
-	class workspaceSetting implements ActionListener {
-		JFileChooser fcd;
-		workspaceSetting(){
-			fcd=new JFileChooser();
+	class workspaceAdd implements ActionListener {
+		File workspaceName;
+		workspaceAdd(){
 		}
 		public void actionPerformed(ActionEvent e) {
-			fcd.setCurrentDirectory(new File("."));
-			fcd.setFileSelectionMode(fcd.DIRECTORIES_ONLY);
-				int ret = fcd.showOpenDialog(null);
+
+			String workspaceName = JOptionPane.showInputDialog(null, "New workspace", "workspace 생성",
+									JOptionPane.PLAIN_MESSAGE);
 			
-			if(ret!=JFileChooser.APPROVE_OPTION) {
-				JOptionPane.showMessageDialog(null, "경로를 선택하지 않았습니다.","경고",JOptionPane.WARNING_MESSAGE);
-				return;
+			if (workspaceName != null) {
+				File workPath = new File("." + File.separator + "root" + File.separator + workspaceName);
+				if(!workPath.exists())
+				{
+					new File("." + File.separator + "root" + File.separator + workspaceName).mkdir();
+					CurrentLocation.workspace=workPath;
 				}
-			CurrentLocation.workspace=fcd.getSelectedFile();
-			BranchFunction bf = new BranchFunction();
-			if(!new File(CurrentLocation.workspace+File.separator+"BranchArray.ini").exists())
-			{
-				CurrentLocation.BranchList=new ArrayList<String>();
-				CurrentLocation.changeBranch("master");
-				CurrentLocation.addBranch("master");
-				List<String> branchList = CurrentLocation.getBranchList();
-				bf.setArray(branchList);
-				bf.BranchListSave();
-			}
-			bf.BranchListOpen();
-			System.out.println(CurrentLocation.getBranchList().toString());
-			
+				else
+				{
+					JOptionPane.showMessageDialog(null, "이미 존재하는 workspace입니다.", "입력 오류", JOptionPane.ERROR_MESSAGE);
+					System.out.println("error");
+				}
+			} 		
 		}
 	}
 	class AuthorSetting implements ActionListener {

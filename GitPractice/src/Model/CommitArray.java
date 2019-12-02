@@ -8,6 +8,7 @@ import org.json.simple.parser.ParseException;
 import org.json.simple.ItemList;
 
 import java.awt.Component;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,6 +16,17 @@ import java.util.List;
 //받아온 정보를 Array에 저장하는 기능을 함.
 public class CommitArray {
 	static JSONArray commitArray;
+	static List<String> contentC;
+	static List<String> branchC;
+	static List<String> AuthorNameC;
+	static List<String> AuthorAddressC;
+	
+	public CommitArray() {
+		commitArray = new JSONArray();
+		contentC=new ArrayList<String>();
+		branchC=new ArrayList<String>();
+		AuthorNameC=new ArrayList<String>();
+		AuthorAddressC=new ArrayList<String>();
 	private JSONArray json;
 	public String repoKey = "repoName";	//json에 key값으로 들어갈 "repoName"
 	public String workspaceKey = "workspaceName"; //json에 key값으로 들어갈 "workspaceName"
@@ -34,6 +46,10 @@ public class CommitArray {
 		jsonOb.put("AuthorName", AuthorName);
 		jsonOb.put("AuthorAddress", AuthorAddress);
 		commitArray.add(jsonOb);
+		contentC.add(content);
+		branchC.add(branch);
+		AuthorNameC.add(AuthorName);
+		AuthorAddressC.add(AuthorAddress);
 	}
 	
 	public String backupClone(String clonedRepo, String currWorkspace, boolean exist) {
@@ -75,7 +91,22 @@ public class CommitArray {
 		}
 		return cnt;
 	}
-
+	public List<String> returnContent(){
+		return contentC;
+	}
+	public List<String> returnbranchC(){
+		return branchC;
+	}
+	public List<String> returnAuthorName(){
+		return AuthorNameC;
+	}
+	public List<String> returnAuthorAddress(){
+		return AuthorAddressC;
+	}
+	
+	public int totalSize() {
+		return commitArray.size();
+	}
 	public void init() {
 		commitArray = new JSONArray();
 	}
