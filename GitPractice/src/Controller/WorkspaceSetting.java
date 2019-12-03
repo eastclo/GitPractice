@@ -9,12 +9,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.JComboBox;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import Model.CurrentLocation;
+import View.CommandInputPane;
 
 public class WorkspaceSetting {
 	
@@ -119,6 +122,15 @@ public class WorkspaceSetting {
 	public static void initList() {
 		workspaceArray=new JSONArray();
 		workspaceList=new ArrayList<String>();
+	}
+	public static void settingComboBox(String filePath) {
+		CurrentLocation.workspace=new File(filePath);
+		WorkspaceSetting.initList();
+		new WorkspaceSetting();
+		JComboBox cb = CommandInputPane.getComboBox();
+		cb.removeAllItems();
+		for(int i=0;i<WorkspaceSetting.workspaceList.size();i++)
+			cb.addItem(new String(WorkspaceSetting.workspaceList.get(i)));
 	}
 
 }

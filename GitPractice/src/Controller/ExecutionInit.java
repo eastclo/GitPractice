@@ -47,8 +47,33 @@ public class ExecutionInit {
 			return false;
 		}
 	}
-	public void cancelCommand(String[] parameter) {
-		System.out.println("Cancel git log --all");
+	public boolean cancelCommand(String[] parameter) {
+		File gitpath = new File(CurrentLocation.workspace.getPath());
+		if(!new File(gitpath.getPath()+File.separator+".git").exists())
+		{
+			new File(gitpath.getPath()+File.separator+".git").mkdir();
+			new File(gitpath.getPath()+File.separator+"master").mkdir();
+			new File(gitpath.getPath()+File.separator+"master"+File.separator+"workspace").mkdir();
+			new File(gitpath.getPath()+File.separator+"master"+File.separator+"add").mkdir();
+			new File(gitpath.getPath()+File.separator+"master"+File.separator+"commit").mkdir();
+			BranchFunction bf = new BranchFunction();
+			CurrentLocation.changeBranch("master");
+			CurrentLocation.BranchList=new ArrayList<String>();
+			CurrentLocation.addBranch("master");
+			List<String> branchList = CurrentLocation.getBranchList();
+			bf.setArray(branchList);
+			bf.BranchListSave();
+			bf.BranchListOpen();
+			new CommitArray().init();
+			workspaceCopy(CurrentLocation.workspace,new File(gitpath.getPath()+File.separator+"master"+File.separator+"workspace"));
+			workspaceDelete(CurrentLocation.workspace.getPath());
+			return true;
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "이미 초기화 되어있습니다.", "입력 오류", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
 	}
 	private void workspaceCopy(File sourceF,File targetF) {
 		File[] ff = sourceF.listFiles();

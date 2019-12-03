@@ -54,27 +54,14 @@ public class SettingMenuBar extends JMenuBar {
 		if(!new File("." + File.separator + "root").exists())
 		{
 			new File("." + File.separator + "root").mkdir();
-			CurrentLocation.workspace = new File("." + File.separator + "root");
-			CurrentLocation.workspace.mkdir();
-			new WorkspaceSetting();
-			JComboBox cb = CommandInputPane.getComboBox();
-			cb.removeAllItems();
-			for(int i=0;i<WorkspaceSetting.workspaceList.size();i++)
-				cb.addItem(new String(WorkspaceSetting.workspaceList.get(i)));
+			WorkspaceSetting.settingComboBox("."+File.separator+"root");
 		}
-		else if(!new File("."+File.separator+"root"+File.separator+".git").exists())
-		{
-			CurrentLocation.workspace=new File("." + File.separator + "root");
-			WorkspaceSetting.initList();
-			new WorkspaceSetting();
-			JComboBox cb = CommandInputPane.getComboBox();
-			cb.removeAllItems();
-			for(int i=0;i<WorkspaceSetting.workspaceList.size();i++)
-				cb.addItem(new String(WorkspaceSetting.workspaceList.get(i)));
+		else if(!new File("."+File.separator+"root"+File.separator+".git").exists()){
+			WorkspaceSetting.settingComboBox("."+File.separator+"root");
 		}
 		else
 		{
-			CurrentLocation.workspace=new File("." + File.separator + "root");
+			WorkspaceSetting.settingComboBox("."+File.separator+"root");
 			new BranchFunction().BranchListOpen();
 			try {
 				new CommitFunction().commitListOpen();
@@ -82,13 +69,6 @@ public class SettingMenuBar extends JMenuBar {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			CurrentLocation.changeBranch("master");
-			WorkspaceSetting.initList();
-			new WorkspaceSetting();
-			JComboBox cb = CommandInputPane.getComboBox();
-			cb.removeAllItems();
-			for(int i=0;i<WorkspaceSetting.workspaceList.size();i++)
-				cb.addItem(new String(WorkspaceSetting.workspaceList.get(i)));
 		}
 	}
 
