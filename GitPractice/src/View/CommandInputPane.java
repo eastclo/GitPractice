@@ -36,6 +36,7 @@ public class CommandInputPane extends JPanel{
 	private static JComboBox repoComboBox;
 	private static DefaultComboBoxModel comboModel;
 	private static JScrollPane inputScroll = new JScrollPane();
+	private static JTextField input;
 
 	public CommandInputPane(){
 		
@@ -65,7 +66,7 @@ public class CommandInputPane extends JPanel{
 		allCommandtxt.add(scrollInput);*/
 
   
-		JTextField input = new JTextField(); //명령어 1줄 입력창
+		input = new JTextField(); //명령어 1줄 입력창
 		input.setBounds(14, 373, 429, 24);
 		CommandInputPane.add(input);
 		input.addActionListener(new CommandInputListener()); //리스너 적용
@@ -128,6 +129,9 @@ public class CommandInputPane extends JPanel{
 		CommandInputPane.add(lblSelectRepo);
 
 
+	}
+	public static JTextField getTextField() {
+		return input;
 	}
 
 	public static JComboBox getComboBox() {
