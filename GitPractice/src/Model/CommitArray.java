@@ -31,10 +31,13 @@ public class CommitArray {
 	}
 	private JSONArray json;
 	public String repoKey = "repoName";	//json에 key값으로 들어갈 "repoName"
-	public String workspaceKey = "workspaceName"; //json에 key값으로 들어갈 "workspaceName"
+	public String currworkspaceKey = "currworkspaceName"; //json에 key값으로 들어갈 "workspaceName"
+	public String clonedworkspaceKey = "clonedworkspaceName";
 	public String existKey = "exist";
 	public String remoteKey = "remote"; 
 	public String urlKey = "url"; 
+	public String branchKey = "branch"; 
+
 	
 	public void commit(String content,String branch,String AuthorName,String AuthorAddress) {
 		JSONObject jsonOb=new JSONObject();
@@ -49,10 +52,12 @@ public class CommitArray {
 		AuthorAddressC.add(AuthorAddress);
 	}
 	
-	public String backupClone(String clonedRepo, String currWorkspace, boolean exist) {
+	public String backupClone(String clonedRepo, String currWorkspace, String clonedWorkspace , String currBranch , boolean exist) {
 		JSONObject jsonOb = new JSONObject();
 		jsonOb.put(repoKey, clonedRepo);
-		jsonOb.put(workspaceKey, currWorkspace);
+		jsonOb.put(currworkspaceKey, currWorkspace);
+		jsonOb.put(clonedworkspaceKey, clonedWorkspace);
+		jsonOb.put(branchKey,currBranch);
 		jsonOb.put(existKey,exist);
 		json.add(jsonOb);
 		return json.toString();

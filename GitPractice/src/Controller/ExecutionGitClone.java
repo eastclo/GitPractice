@@ -5,7 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -68,10 +70,10 @@ public class ExecutionGitClone {
 			if(!masterFolder.exists()) { //master 폴더가 존재하지 않으면 새로 만든다.(clone이 한 번도 되지 않았을 경우)
 				masterFolder.mkdir();
 				//백업
-				makeBackup(repoList,index,clonedWorkspace.getPath(),false);
+				makeBackup(repoList,index,currWorkspace.getPath(),clonedWorkspace.getPath(),false);
 			}
 			else
-				makeBackup(repoList,index, clonedWorkspace.getPath(),true);
+				makeBackup(repoList,index, currWorkspace.getPath(), clonedWorkspace.getPath(),true);
 			
 			//깃 폴더와 마스터브랜치 폴더 생성
 			File masterBranch = new File(clonedWorkspace,"master");
@@ -84,8 +86,15 @@ public class ExecutionGitClone {
 			workspace.mkdir(); add.mkdir(); commit.mkdir();
 			//리모트 리스트 생성
 			makeRemoteList(gitFolder, parameter[0]);
+			Model.CurrentLocation.workspace = clonedWorkspace;
 
-			//콤보박스 바꿔주면 끝
+			BranchFunction bf = new BranchFunction();
+			CurrentLocation.changeBranch("master");
+			CurrentLocation.BranchList = new ArrayList<String>();
+			CurrentLocation.addBranch("master");
+			List<String> branchList = CurrentLocation.getBranchList();
+			bf.setArray(branchList);
+			bf.BranchListSave();
 			return true;
 		} else {
 			JOptionPane.showMessageDialog(null, "잘못 입력하였습니다.", "명령어 입력 오류", JOptionPane.ERROR_MESSAGE);
@@ -100,7 +109,7 @@ public class ExecutionGitClone {
 		//backup을 읽음.
 		JSONParser parser = new JSONParser();
 		CommitArray json = new CommitArray();
-		String repoName = null, workspaceName = null, exist = null;
+		String repoName = null, currworkspaceName = null, clonedworkspaceName = null, exist = null, branch = null;
 		try {
 			FileReader rd = new FileReader(new File(backupPath+File.separator+"backup.ini"));
 			Object obj = parser.parse(rd);
@@ -109,8 +118,10 @@ public class ExecutionGitClone {
 			
 			JSONObject jsonObject = (JSONObject)iterator.next();
 			repoName = String.valueOf(jsonObject.get(json.repoKey));
-			workspaceName = String.valueOf(jsonObject.get(json.workspaceKey));
+			currworkspaceName = String.valueOf(jsonObject.get(json.currworkspaceKey));
+			clonedworkspaceName = String.valueOf(jsonObject.get(json.clonedworkspaceKey));
 			exist = String.valueOf(jsonObject.get(json.existKey));
+			branch = String.valueOf(jsonObject.get(json.branchKey));
 			rd.close();
 		}
 		catch(FileNotFoundException e) {
@@ -122,12 +133,16 @@ public class ExecutionGitClone {
 			Model.FileOperation.deleteFile(remote);
 			remote.delete();
 		}
-		File workspace = new File(workspaceName);
-		Model.FileOperation.deleteFile(workspace);
-		workspace.delete();
+		File clonedworkspace = new File(clonedworkspaceName);
+		Model.FileOperation.deleteFile(clonedworkspace);
+		clonedworkspace.delete();
 		
 		Model.FileOperation.deleteFile(backupFolder);
 		backupFolder.delete();
+		
+		//위치 값 바꾸기
+		Model.CurrentLocation.changeBranch(branch);
+		Model.CurrentLocation.workspace = new File(currworkspaceName);
 		return true;
 	}
 	
@@ -146,7 +161,7 @@ public class ExecutionGitClone {
 		}
 	}
 	
-	public void makeBackup(String[] repoList, int index, String currWorkspace , boolean exist) {
+	public void makeBackup(String[] repoList, int index, String currWorkspace, String clonedWorkspace , boolean exist) {
 		/* clone한 저장소, 현재  workspace의 이름으로 된 폴더 생성
 		 * 나중에 
 		 * */
@@ -157,7 +172,7 @@ public class ExecutionGitClone {
 		String json;
 		CommitArray JSONArray = new CommitArray();
 		//clone한 레포지토리 이름과, clone한 로컬저장소의 위치 리턴
-		json = JSONArray.backupClone(repoList[index],currWorkspace,exist);
+		json = JSONArray.backupClone(repoList[index],currWorkspace,clonedWorkspace,Model.CurrentLocation.getBranch(),exist);
 	
 		try {
 			FileWriter fw = new FileWriter(backupFolder.getPath()+File.separator+"Backup.ini");

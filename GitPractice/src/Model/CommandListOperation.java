@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -197,7 +198,9 @@ public class CommandListOperation {
         	retMethod = (boolean)m.invoke(newObj,arglist);	//파라미터로 메소드의 클래스, 메소드의 파리미터들   
         } catch (ClassNotFoundException e1) {
         	System.out.println("error1");
-        } catch (Exception e1) {
+        } catch (InvocationTargetException e) {
+        	System.out.println("fail to invoke method"+ e); 
+        }catch (Exception e1) {
         	System.out.println("error2");
         }
 		return retMethod;
