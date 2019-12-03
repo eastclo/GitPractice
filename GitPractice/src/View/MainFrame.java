@@ -56,8 +56,7 @@ public class MainFrame extends JFrame {
 		//new DrawingGraph(); //그래픽 작업 중, 커밋그래프를 그려줌
 		new TemporaryExplorerPane();
 		this.setJMenuBar(new SettingMenuBar());
-		new GraphicsColorFontEx();
-		
+	
 	}
 	
 	
