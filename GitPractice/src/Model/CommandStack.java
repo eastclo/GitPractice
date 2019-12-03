@@ -25,7 +25,7 @@ public class CommandStack {
 	//앞으로가기 버튼 클릭시 호출
 	public static String go() {
 		if(top < max) 
-			return commandStack[++top];
+			return commandStack[top+1];
 		else
 			return null;
 	} 
