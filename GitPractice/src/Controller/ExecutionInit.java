@@ -2,6 +2,7 @@ package Controller;
 
 import java.util.List;
 
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 import java.io.BufferedReader;
@@ -15,13 +16,14 @@ import java.util.ArrayList;
 
 import Model.CommitArray;
 import Model.CurrentLocation;
+import View.CommandInputPane;
 
 public class ExecutionInit {
 	public boolean executeCommand(String[] parameter) {
-		File gitpath = new File(CurrentLocation.workspace+File.separator+".git");
-		if(!gitpath.exists())
+		File gitpath = new File(CurrentLocation.workspace.getPath());
+		if(!new File(gitpath.getPath()+File.separator+".git").exists())
 		{
-			gitpath.mkdir();
+			new File(gitpath.getPath()+File.separator+".git").mkdir();
 			new File(gitpath.getPath()+File.separator+"master").mkdir();
 			new File(gitpath.getPath()+File.separator+"master"+File.separator+"workspace").mkdir();
 			new File(gitpath.getPath()+File.separator+"master"+File.separator+"add").mkdir();
@@ -52,19 +54,23 @@ public class ExecutionInit {
 		File[] ff = sourceF.listFiles();
 		for (File file : ff) {
 			if(!file.getName().equals(".git")){
-				File temp = new File(targetF+File.separator+file.getName());
-				if(file.isDirectory()) {
-					temp.mkdir();
-					workspaceCopy(file,temp);
+				if(!file.getName().equals("master"))
+				{
+
+					File temp = new File(targetF+File.separator+file.getName());
+					if(file.isDirectory()) {
+						temp.mkdir();
+						workspaceCopy(file,temp);
+						}
+					else {
+						try {
+							FileWriter fileWriter = new FileWriter(temp);
+							fileWriter.write(getTextFromFile(file));
+							fileWriter.close();
+						}catch(IOException e) {
+							e.printStackTrace();
+						}
 				}
-				else {
-					try {
-						FileWriter fileWriter = new FileWriter(temp);
-						fileWriter.write(getTextFromFile(file));
-						fileWriter.close();
-					}catch(IOException e) {
-						e.printStackTrace();
-					}
 				}
 			}
 		}
@@ -93,7 +99,7 @@ public class ExecutionInit {
 			if(folder.exists()){
 				File[] folder_list = folder.listFiles();
 				for (int i = 0; i < folder_list.length; i++) {
-					if(folder.getName().equals(".git"))
+					if(folder.getName().equals(".git")||folder.getName().equals("master"))
 					{
 						if(folder_list[i].isFile()) {
 							folder_list[i].delete();

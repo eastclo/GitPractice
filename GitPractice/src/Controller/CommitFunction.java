@@ -19,6 +19,7 @@ import org.json.simple.parser.ParseException;
 
 import Model.CommitArray;
 import Model.CurrentLocation;
+import Model.FileOperation;
 
 public class CommitFunction {
 	
@@ -108,40 +109,8 @@ public class CommitFunction {
 		if(!new File(Filepath).exists()) {
 			new File(targetF.getPath()+File.separator+JsonArray.totalSize()).mkdir();
 		}
-		for (File file : ff) {
-			File temp = new File(Filepath+File.separator+file.getName());
-			if(file.isDirectory()) {
-				temp.mkdir();
-				workspaceCopy(file,temp);
-			}
-			else {
-				try {
-					FileWriter fileWriter = new FileWriter(temp);
-					fileWriter.write(getTextFromFile(file));
-					fileWriter.close();
-				}catch(IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		FileOperation.copyFileAll(sourceF, new File(Filepath));
 
-	}
-	public static String getTextFromFile(File txtFile){
-	    String text = "";
-	 
-	    BufferedReader br = null;
-	    try{
-	      br = new BufferedReader(new InputStreamReader(new FileInputStream(txtFile)));
-	      String line;
-	      while((line = br.readLine()) != null){
-	        text= text + line + "\n";
-	      }
-	    } catch (FileNotFoundException e) {
-	      e.printStackTrace();
-	    } catch (IOException e) {
-	      e.printStackTrace();
-	    }
-		return text;
 	}
 
 }

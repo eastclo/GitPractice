@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Model.CurrentLocation;
+import Model.FileOperation;
 import View.CommandExplainDialog;
 import View.CommandInputPane;
 
 public class ExecutionBranch {
+	static List<String>branchD = new ArrayList<String>();
+	static List<String>branchList = new ArrayList<String>();
+	
 	public boolean executeCommand(String[] parameter) {
-		List<String>branchList = new ArrayList<String>();
 		branchList = CurrentLocation.getBranchList();
 		if(parameter==null)
 		{
@@ -25,10 +28,11 @@ public class ExecutionBranch {
 			CurrentLocation.addBranch(parameter[0]);
 			BranchFunction bf = new BranchFunction();
 			bf.BranchListSave();
-			new File(CurrentLocation.workspace.getPath()+File.separator+".git"+File.separator+parameter[0]).mkdir();
-			new File(CurrentLocation.workspace.getPath()+File.separator+".git"+File.separator+parameter[0]+File.separator+"workspace").mkdir();
-			new File(CurrentLocation.workspace.getPath()+File.separator+".git"+File.separator+parameter[0]+File.separator+"add").mkdir();
-			new File(CurrentLocation.workspace.getPath()+File.separator+".git"+File.separator+parameter[0]+File.separator+"commit").mkdir();
+			new File(CurrentLocation.workspace.getPath()+File.separator+parameter[0]).mkdir();
+			new File(CurrentLocation.workspace.getPath()+File.separator+parameter[0]+File.separator+"workspace").mkdir();
+			FileOperation.copyFileAll(new File(CurrentLocation.workspace.getPath()+File.separator+"master"+File.separator+"workspace"), new File(CurrentLocation.workspace.getPath()+File.separator+parameter[0]+File.separator+"workspace"));
+			new File(CurrentLocation.workspace.getPath()+File.separator+parameter[0]+File.separator+"add").mkdir();
+			new File(CurrentLocation.workspace.getPath()+File.separator+parameter[0]+File.separator+"commit").mkdir();
 			return true;
 		}
 		else
@@ -36,6 +40,19 @@ public class ExecutionBranch {
 	}
 	
 	public boolean cancelCommand(String[] parameter) {
+		if(parameter==null)
+		{
+			CommandInputPane.allCommandtxt.setText("");
+		}
+		else
+		{
+			String dbranch = CurrentLocation.getBranchList().get(CurrentLocation.BranchList.size()-1);
+			CurrentLocation.BranchList.remove(CurrentLocation.BranchList.size()-1);
+			BranchFunction bf = new BranchFunction();
+			bf.BranchListSave();
+			FileOperation.deleteFile(new File(CurrentLocation.workspace.getPath()+File.separator+dbranch));
+			new File(CurrentLocation.workspace.getPath()+File.separator+dbranch).delete();
+		}
 		return true;
 	}
 

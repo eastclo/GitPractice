@@ -1,21 +1,31 @@
 package View;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.*;
 
-
+import Controller.BranchFunction;
 import Controller.CommandInputListener;
+import Controller.CommitFunction;
 import Controller.DocumentUploadListener;
 import Controller.GobackButtonListener;
+import Model.CurrentLocation;
+
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
+
+import org.json.simple.parser.ParseException;
 
 
 public class CommandInputPane extends JPanel{
@@ -92,6 +102,22 @@ public class CommandInputPane extends JPanel{
 		repoComboBox = new JComboBox();
 		repoComboBox.setModel(comboModel); //clone할 시 저장소를 배열에 추가하도록 해야 함, 비워둠
 		repoComboBox.setBounds(201, 9, 100, 24);
+		repoComboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					CurrentLocation.workspace=new File(repoComboBox.getSelectedItem().toString());
+					if(new File(repoComboBox.getSelectedItem().toString()+File.separator+".git").exists())
+					{
+						BranchFunction bf = new BranchFunction();
+						CurrentLocation.changeBranch("master");
+						bf.BranchListOpen();
+						try {
+							new CommitFunction().commitListOpen();
+						} catch (IOException | ParseException e1) {
+							e1.printStackTrace();
+						}
+					}
+			}
+		});
 		CommandInputPane.add(repoComboBox);
 
 		JLabel lblSelectRepo = new JLabel("저장소 선택"); //저장소를 선택하는 라벨로 변경
@@ -100,7 +126,7 @@ public class CommandInputPane extends JPanel{
 
 
 	}
-	
+
 	public static JComboBox getComboBox() {
 		return repoComboBox;
 	}
@@ -108,24 +134,14 @@ public class CommandInputPane extends JPanel{
 	public static DefaultComboBoxModel getComboModel() {
 		return comboModel;
 	}
-	
-	public static JComboBox getComboBox() {
-		return repoComboBox;
-	}
-	
 	public static JScrollPane getScrollPane() {
 		return inputScroll;
 	}
-	
-	public static DefaultComboBoxModel getComboModel() {
-		return comboModel;
-	}
-	
-		 class buttonPress implements ActionListener {
-		        @Override
-		        public void actionPerformed(ActionEvent arg0) {
-		            CommandInputPane  pF = new CommandInputPane();
-		          // btnBack.dispose();
-		    }
-		 }	
-	 }
+	class buttonPress implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			CommandInputPane  pF = new CommandInputPane();
+			// btnBack.dispose();
+			}
+		}
+}
