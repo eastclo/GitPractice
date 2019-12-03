@@ -126,4 +126,39 @@ public class FileOperation {
 		
 		return String.valueOf(buf).trim();	//버퍼에 공백 제거
 	}
+	
+	//sourceFolder로 폴더를 생성후 안에 sourceFile 내용을 백업
+	public static void makeBackup(File sourceFolder) {
+		//백업 폴더 생성
+		String backupFolder = Model.CommandStack.createBackup();
+		File backup = new File(backupFolder);
+		backup.mkdir();
+		
+		//백업폴더 내부에 sourceFile 이름으로 백업 폴더 생성
+		File sourceBackup = new File(backup,sourceFolder.getName());
+		sourceBackup.mkdir();
+		
+		//백업
+		FileOperation.copyFileAll(sourceFolder, sourceBackup);
+	}
+	
+	//sourceFolder 이름으로 생성된 백업파일에서 sourceFolder 내부 내용 복원 및 백업파일 삭제
+	public static void loadBackup(File sourceFolder) {
+		//백업 폴더 불러오기.
+		String backupFolder = Model.CommandStack.loadBackup();
+		File backup = new File(backupFolder);
+		backup.mkdir();
+		
+		//백업폴더 이름을 토대로 sourFile의 백업 폴더 불러오기.
+		File sourceBackup = new File(backup, sourceFolder.getName());
+		sourceBackup.mkdir();
+		
+		//sourceFile 삭제 후 백업본 복사
+		FileOperation.deleteFile(sourceFolder);
+		FileOperation.copyFileAll(sourceBackup, sourceFolder);
+		
+		//백업본 삭제
+		FileOperation.deleteFile(backup);
+		backup.delete();
+	}
 }
