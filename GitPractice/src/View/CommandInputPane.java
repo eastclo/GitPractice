@@ -108,16 +108,8 @@ public class CommandInputPane extends JPanel{
 		return comboModel;
 	}
 	
-	public static JComboBox getComboBox() {
-		return repoComboBox;
-	}
-	
 	public static JScrollPane getScrollPane() {
 		return inputScroll;
-	}
-	
-	public static DefaultComboBoxModel getComboModel() {
-		return comboModel;
 	}
 	
 		 class buttonPress implements ActionListener {
