@@ -124,13 +124,31 @@ public class WorkspaceSetting {
 		workspaceList=new ArrayList<String>();
 	}
 	public static void settingComboBox(String filePath) {
-		CurrentLocation.workspace=new File(filePath);
-		WorkspaceSetting.initList();
 		new WorkspaceSetting();
 		JComboBox cb = CommandInputPane.getComboBox();
-		cb.removeAllItems();
-		for(int i=0;i<WorkspaceSetting.workspaceList.size();i++)
-			cb.addItem(new String(WorkspaceSetting.workspaceList.get(i)));
+		for(int i=0;i<workspaceList.size();i++)
+			cb.removeItem(new String(workspaceList.get(i)));
+		CurrentLocation.workspace=new File(filePath);
+		new WorkspaceSetting();
+		for(int i=0;i<workspaceList.size();i++)
+			cb.addItem(new String(workspaceList.get(i)));
+	}
+	public static void deleteComboBox(String filePath) {
+		JComboBox cb = CommandInputPane.getComboBox();
+		new WorkspaceSetting();
+		for(int i=0;i<workspaceList.size();i++)
+			cb.removeItem(new String(workspaceList.get(i)));
+		CurrentLocation.workspace=new File("."+File.separator+"root");
+		JSONObject inputJ=new JSONObject();
+		inputJ.put("path", filePath);
+		WorkspaceSetting ws=new WorkspaceSetting();
+		workspaceArray.remove(inputJ);
+		workspaceList.remove(new String(filePath));
+		ws.workspaceSave(new File("."+File.separator+"root"));
+		System.out.println(workspaceArray);
+		System.out.println(workspaceList);
+		for(int i=0;i<workspaceList.size();i++)
+			cb.addItem(new String(workspaceList.get(i)));
 	}
 
 }
