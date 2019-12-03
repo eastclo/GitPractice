@@ -21,7 +21,13 @@ public class ExecutionAdd {
 			if(parameter[0].equals("*")||parameter[0].equals(".")) {	//workspace내의 모든 파일 add
 				/**.gitignore 예외처리 해야함
 				 * */
-				FileOperation.copyFileAll(workspace,add);
+				if(workspace.listFiles() != null)
+					FileOperation.copyFileAll(workspace,add);
+				else {
+					deleteBackup();
+					JOptionPane.showMessageDialog(null, "저장소에 파일이 존재하지 않습니다.", "명령어 입력 오류", JOptionPane.ERROR_MESSAGE);
+					return false;
+				}
 			} else {	//workspace에서 파라미터의 파일을 add
 				//파라미터의 파일을 add
 				for(int i = 0; i < parameter.length; i++) {
