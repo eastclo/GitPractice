@@ -17,16 +17,20 @@ public class LoadRepository {
 	public void setRepositoryList() {
 		Model.RepositoryList rpList = new Model.RepositoryList();
 		String repos[] = rpList.getRepoList();
-		
+				
 		DefaultListModel listModel = new DefaultListModel();
-		
+	
 		for (String rp : repos) {
-			if (rp.charAt(0) == '.') {
+			if (rp.charAt(0) == '.') { // .DS_ ~ 파일을 출력하지 않기 위함 
 				continue;
 			}
 			listModel.addElement(rp);
 		}
 		repoList.setModel(listModel);
+		
+	}
+	
+	public void rePaint() {
 		repoList.repaint();
 	}
 	

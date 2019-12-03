@@ -80,11 +80,6 @@ public class NewRepoClickListener extends JFrame implements MouseListener {
 		init.setRepositoryList();
 	}
 	
-	public void reloadRepo() {
-		LoadRepository init = new LoadRepository(view);
-		init.setRepositoryList();
-	}
-	
 
 	@Override
 	public void mousePressed(MouseEvent e) {

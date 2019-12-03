@@ -19,6 +19,10 @@ public class TemporaryExplorerPane extends JPanel{
 	
 	private JList repoList;
 	private JScrollPane repoScroll = new JScrollPane();
+	private String repositoryName;
+	JButton btnDelRepo = new JButton("del");
+	DelRepoClickListener delete = new DelRepoClickListener(this, repositoryName);
+
 	
 	public TemporaryExplorerPane() {
 		
@@ -49,10 +53,13 @@ public class TemporaryExplorerPane extends JPanel{
 		TemporaryExplorerPane.add(btnNewRepo);
 		btnNewRepo.addMouseListener(new NewRepoClickListener(this));
 		
-		JButton btnDelRepo = new JButton("del");
+		//JButton btnDelRepo = new JButton("del");
 		btnDelRepo.setBounds(122, 11, 60, 20);
 		TemporaryExplorerPane.add(btnDelRepo);
-		btnDelRepo.addMouseListener(new DelRepoClickListener(this));
+		//DelRepoClickListener delete = new DelRepoClickListener(this, repositoryName);
+		btnDelRepo.addMouseListener(delete);
+		System.out.println("뭐가 문젠데~~~~" + repositoryName);
+		//btnDelRepo.addMouseListener(new DelRepoClickListener(this, repoName));
 		
 		repoList = new JList();
 		repoList.setBounds(14, 42, 237, 550);
@@ -70,8 +77,16 @@ public class TemporaryExplorerPane extends JPanel{
 		
 	}
 	
+	
 	public JList getJList() {
 		return repoList;
+	}
+
+	public void getRepoName(String repoName) {
+		// TODO Auto-generated method stub
+		this.repositoryName = repoName;
+		System.out.println("ㅜㅜㅜ" +repositoryName);
+		//btnDelRepo.addMouseListener(delete);
 	}
 
 }

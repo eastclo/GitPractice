@@ -24,11 +24,14 @@ public class DelRepoClickListener implements MouseListener{
 	
 	public DelRepoClickListener(TemporaryExplorerPane view) {
 		this();
+		this.view = view;
 	}
 	
 	public DelRepoClickListener(TemporaryExplorerPane view, String repoName) {
 		this(view);
+		this.view = view;
 		this.repoName = repoName;
+		System.out.println("아 왜 안나오는데~~~~ " + repoName);
 	}
 
 	@Override
@@ -36,40 +39,61 @@ public class DelRepoClickListener implements MouseListener{
 		// TODO Auto-generated method stub
 		//JTextField txtField = (JTextField) e.getSource();
 		//textFieldValue = txtField.getText();
+		
 		delReposit(repoName);
+		System.out.println("mousClicked 확인용 메시지 : " + repoName);
 	}
 	
 	public void delReposit(String rn) {
-		int result = JOptionPane.showConfirmDialog(null, "파일을 삭제하시겠습니까?",
-												"파일 삭제", JOptionPane.YES_NO_OPTION);
+		System.out.println("DelRepo 확인용 메시지 : " + rn);
 		
-		if (result == JOptionPane.CLOSED_OPTION) { //사용자가 창을 닫은 경우  
-			
-		} else if (result == JOptionPane.YES_OPTION) { // 사용자가 예 를 선택한 경우 
-			File file = new File("." + File.separator + "GitHub" + File.separator + rn );
-			
-			if (file.exists()) {
-				if (file.isDirectory()) {
-					File[] files = file.listFiles();
-					
-					for (int i = 0; i < files.length; i++) {
-						if (files[i].delete()) {
-							System.out.println(files[i].getName() + "파일을 삭제했습니다.");
-						} else {
-							System.out.println(files[i].getName() + "파일을 삭제하는 데 실패했습니다.");
-						}
-					}
-				}
-			} else {
-				System.out.println("파일이 존재하지 않습니다.");
-			}
+		if (rn == null) {
+			JOptionPane.showMessageDialog(null, "일치하는 Repository가 없습니다!", "Error!", JOptionPane.ERROR_MESSAGE);
 		} else {
-			JOptionPane.showMessageDialog(null, "Repository 삭제를 취소했습니다.", "삭제 취소", JOptionPane.PLAIN_MESSAGE);
+			int result = JOptionPane.showConfirmDialog(null, "파일을 삭제하시겠습니까?",
+													"파일 삭제", JOptionPane.YES_NO_OPTION);
+			
+			if (result == JOptionPane.CLOSED_OPTION) { //사용자가 창을 닫은 경우  
+				
+			} else if (result == JOptionPane.YES_OPTION) { // 사용자가 예 를 선택한 경우 
+				String path = "." + File.separator + "GitHub" + File.separator + rn;
+				File repoDirectory = new File(path);
+				
+					while (repoDirectory.exists()) {
+						if (repoDirectory.isDirectory()) {
+							File[] files = repoDirectory.listFiles(); // 파일 리스트 얻어오기  
+							
+							for (int i = 0; i < files.length; i++) {
+								if (files[i].delete()) {
+									System.out.println(files[i].getName() + "파일을 삭제했습니다.");
+									JOptionPane.showMessageDialog(null, "파일 삭제 완료", "파일 삭제", JOptionPane.PLAIN_MESSAGE);
+								} else {
+									System.out.println(files[i].getName() + "파일을 삭제하는 데 실패했습니다.");
+									JOptionPane.showMessageDialog(null, "파일 삭제 실패", "파일 삭제", JOptionPane.ERROR_MESSAGE);
+									break;
+								}
+							}
+							
+							if(files.length == 0 && repoDirectory.isDirectory()){ 
+								repoDirectory.delete(); //대상폴더 삭제
+								System.out.println("폴더가 삭제되었습니다.");
+								JOptionPane.showMessageDialog(null, "폴더 삭제 완료", "폴더 삭제", JOptionPane.PLAIN_MESSAGE);
+							}
+						}
+						//break;
+					} 
+					loadRepo();	
+				
+				
+			} else {
+				JOptionPane.showMessageDialog(null, "Repository 삭제를 취소했습니다.", "삭제 취소", JOptionPane.PLAIN_MESSAGE);
+			}
 		}
-		
+	}
+	
+	public void loadRepo() {
 		LoadRepository init = new LoadRepository(view);
 		init.setRepositoryList();
-			
 	}
 	
 

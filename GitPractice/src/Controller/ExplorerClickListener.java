@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import javax.swing.JList;
 
+import View.MainFrame;
 import View.RepoInfoDialog;
 import View.TemporaryExplorerPane;
 
@@ -25,12 +26,17 @@ public class ExplorerClickListener implements MouseListener {
 		// TODO Auto-generated method stub
 		if (e.getClickCount() == 2) 
 			popUpRepo();
+		else if (e.getClickCount() == 1) {
+			delRepo();
+			MainFrame frame = new MainFrame();
+			frame.setVisible(true);
+		}
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		delRepo();
+		//delRepo();
 	}
 	
 	public void popUpRepo() {
@@ -67,9 +73,18 @@ public class ExplorerClickListener implements MouseListener {
 		String repoName = list.getSelectedValue().toString();
 		
 		System.out.println(repoName); // 리스트 이름 확인용 출력 
-		TemporaryExplorerPane view = new TemporaryExplorerPane();
+		//TemporaryExplorerPane view = new TemporaryExplorerPane();
 		
-		new DelRepoClickListener(view, repoName);
+		//new TemporaryExplorerPane().getRepoName(repoName);
+		
+		TemporaryExplorerPane view = new TemporaryExplorerPane();
+		view.getRepoName(repoName);
+		
+		
+		
+		//MouseEvent e = null;
+		new DelRepoClickListener(view, repoName).delReposit(repoName);
+		//new DelRepoClickListener(view, repoName).mouseClicked(e);
 	}
 	
 	
