@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import org.json.simple.parser.ParseException;
 
 import Model.CurrentLocation;
+import Model.FileOperation;
 import View.CommitInputDialog;
 
 public class ExecutionCommit {
@@ -42,8 +43,8 @@ public class ExecutionCommit {
 				e.printStackTrace();
 			}
 			commit.commitAdd(inputContent,CurrentLocation.getBranch(),CurrentLocation.AuthorName,CurrentLocation.AuthorAddress);
-			commit.workspaceCopy(new File(CurrentLocation.workspace.getPath()+File.separator+".git"+File.separator+CurrentLocation.getBranch()+File.separator+"add"),new File(CurrentLocation.workspace.getPath()+File.separator+".git"+File.separator+CurrentLocation.getBranch()+File.separator+"commit"));
-			
+			commit.workspaceCopy(new File(CurrentLocation.workspace.getPath()+File.separator+CurrentLocation.getBranch()+File.separator+"add"),new File(CurrentLocation.workspace.getPath()+File.separator+CurrentLocation.getBranch()+File.separator+"commit"));
+			FileOperation.deleteFile(new File(CurrentLocation.workspace.getPath()+File.separator+CurrentLocation.getBranch()+File.separator+"add"));
 			commit.commitListSave(commit.Path);
 		}
 	}

@@ -34,7 +34,8 @@ public class BranchFunction {
 		branchArray=new ArrayList<String>();
 		
 		try {
-			Object obj = parser.parse(new FileReader(new File(Path)));
+			FileReader fr = new FileReader(new File(Path));
+			Object obj = parser.parse(fr);
 			
 			JSONArray jsonArray=(JSONArray)obj;
 			Iterator<JSONObject>iterator = jsonArray.iterator();
@@ -45,6 +46,7 @@ public class BranchFunction {
 				if(branch!=null&&branch!="null")
 					branchArray.add(branch);
 			}
+			fr.close();
 		}catch(Exception e) {
 		}
 		CurrentLocation.setBranchList(branchArray);

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,10 +21,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 
 import Controller.BranchFunction;
 import Controller.CommitFunction;
+import Controller.WorkspaceSetting;
 import Model.CommitArray;
 import Model.CurrentLocation;
 
@@ -53,6 +56,21 @@ public class SettingMenuBar extends JMenuBar {
 			new File("." + File.separator + "root").mkdir();
 			CurrentLocation.workspace = new File("." + File.separator + "root");
 			CurrentLocation.workspace.mkdir();
+			new WorkspaceSetting();
+			JComboBox cb = CommandInputPane.getComboBox();
+			cb.removeAllItems();
+			for(int i=0;i<WorkspaceSetting.workspaceList.size();i++)
+				cb.addItem(new String(WorkspaceSetting.workspaceList.get(i)));
+		}
+		else if(!new File("."+File.separator+"root"+File.separator+".git").exists())
+		{
+			CurrentLocation.workspace=new File("." + File.separator + "root");
+			WorkspaceSetting.initList();
+			new WorkspaceSetting();
+			JComboBox cb = CommandInputPane.getComboBox();
+			cb.removeAllItems();
+			for(int i=0;i<WorkspaceSetting.workspaceList.size();i++)
+				cb.addItem(new String(WorkspaceSetting.workspaceList.get(i)));
 		}
 		else
 		{
@@ -65,6 +83,12 @@ public class SettingMenuBar extends JMenuBar {
 				e.printStackTrace();
 			}
 			CurrentLocation.changeBranch("master");
+			WorkspaceSetting.initList();
+			new WorkspaceSetting();
+			JComboBox cb = CommandInputPane.getComboBox();
+			cb.removeAllItems();
+			for(int i=0;i<WorkspaceSetting.workspaceList.size();i++)
+				cb.addItem(new String(WorkspaceSetting.workspaceList.get(i)));
 		}
 	}
 
@@ -84,6 +108,9 @@ public class SettingMenuBar extends JMenuBar {
 				{
 					new File("." + File.separator + "root" + File.separator + workspaceName).mkdir();
 					CurrentLocation.workspace=workPath;
+					new WorkspaceSetting();
+					JComboBox cb = CommandInputPane.getComboBox();
+					cb.addItem(new String(workPath.getPath()));
 				}
 				else
 				{
