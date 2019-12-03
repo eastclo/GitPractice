@@ -103,6 +103,8 @@ public class CommandInputPane extends JPanel{
 		repoComboBox.setBounds(201, 9, 100, 24);
 		repoComboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(repoComboBox.getSelectedItem()!=null)
+				{
 					CurrentLocation.workspace=new File(repoComboBox.getSelectedItem().toString());
 					if(new File(repoComboBox.getSelectedItem().toString()+File.separator+".git").exists())
 					{
@@ -115,6 +117,8 @@ public class CommandInputPane extends JPanel{
 							e1.printStackTrace();
 						}
 					}
+					
+				}
 			}
 		});
 		CommandInputPane.add(repoComboBox);

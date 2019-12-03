@@ -87,10 +87,7 @@ public class SettingMenuBar extends JMenuBar {
 				if(!workPath.exists())
 				{
 					new File("." + File.separator + "root" + File.separator + workspaceName).mkdir();
-					CurrentLocation.workspace=workPath;
-					new WorkspaceSetting();
-					JComboBox cb = CommandInputPane.getComboBox();
-					cb.addItem(new String(workPath.getPath()));
+					WorkspaceSetting.settingComboBox("." + File.separator + "root" + File.separator + workspaceName);
 				}
 				else
 				{
