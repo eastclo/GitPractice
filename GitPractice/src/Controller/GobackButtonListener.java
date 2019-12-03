@@ -58,15 +58,18 @@ public class GobackButtonListener implements ActionListener{
 	}
 	
 	private String combineCmd(String[] input) {
-		if(input[2] == null)
-			return input[0].concat(" "+input[1]);
-		else if (input[3] == null) {
-			return input[0].concat(" "+input[1]).concat(" "+input[2]);
-		}
-		else if (input[4] == null) {
-			return input[0].concat(" "+input[1]).concat(" "+input[2]).concat(" "+input[3]);
+		if(input.length>2) {
+			if(input[2] == null)
+				return input[0].concat(" "+input[1]);
+			else if (input[3] == null) {
+				return input[0].concat(" "+input[1]).concat(" "+input[2]);
+			}
+			else if (input[4] == null) {
+				return input[0].concat(" "+input[1]).concat(" "+input[2]).concat(" "+input[3]);
+			} else
+				return input[0].concat(" "+input[1]).concat(" "+input[2]).concat(" "+input[3]).concat(" "+input[4]);
 		} else
-			return input[0].concat(" "+input[1]).concat(" "+input[2]).concat(" "+input[3]).concat(" "+input[4]);
+			return input[0].concat(" "+input[1]);
 	}
 }
 
