@@ -29,8 +29,8 @@ import org.json.simple.parser.ParseException;
 
 
 public class CommandInputPane extends JPanel{
-	public static JTextArea allCommandtxt;
 	
+	public static JTextArea allCommandtxt;	
 	private static final String EXIT_ON_CLOSE = null;
 	private JButton btnBack; 
 	private static JComboBox repoComboBox;
@@ -38,7 +38,6 @@ public class CommandInputPane extends JPanel{
 	private static JScrollPane inputScroll = new JScrollPane();
 
 	public CommandInputPane(){
-		
 		
 		JPanel CommandInputPane = new JPanel();
 		CommandInputPane.setBounds(236, 0, 539, 409);
@@ -134,14 +133,16 @@ public class CommandInputPane extends JPanel{
 	public static DefaultComboBoxModel getComboModel() {
 		return comboModel;
 	}
+	
 	public static JScrollPane getScrollPane() {
 		return inputScroll;
 	}
-	class buttonPress implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			CommandInputPane  pF = new CommandInputPane();
-			// btnBack.dispose();
-			}
-		}
-}
+	
+		 class buttonPress implements ActionListener {
+		        @Override
+		        public void actionPerformed(ActionEvent arg0) {
+		            CommandInputPane  pF = new CommandInputPane();
+		          // btnBack.dispose();
+		    }
+		 }	
+	 }
