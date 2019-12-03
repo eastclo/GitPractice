@@ -19,8 +19,8 @@ import javax.swing.JFrame;
 
 
 public class CommandInputPane extends JPanel{
-	public static JTextArea allCommandtxt;
 	
+	public static JTextArea allCommandtxt;	
 	private static final String EXIT_ON_CLOSE = null;
 	private JButton btnBack; 
 	private static JComboBox repoComboBox;
@@ -28,7 +28,6 @@ public class CommandInputPane extends JPanel{
 	private static JScrollPane inputScroll = new JScrollPane();
 
 	public CommandInputPane(){
-		
 		
 		JPanel CommandInputPane = new JPanel();
 		CommandInputPane.setBounds(236, 0, 539, 409);
@@ -109,16 +108,8 @@ public class CommandInputPane extends JPanel{
 		return comboModel;
 	}
 	
-	public static JComboBox getComboBox() {
-		return repoComboBox;
-	}
-	
 	public static JScrollPane getScrollPane() {
 		return inputScroll;
-	}
-	
-	public static DefaultComboBoxModel getComboModel() {
-		return comboModel;
 	}
 	
 		 class buttonPress implements ActionListener {

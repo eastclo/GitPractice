@@ -37,6 +37,7 @@ public class CommitArray {
 	public String remoteKey = "remote"; 
 	public String urlKey = "url"; 
 	public String branchKey = "branch"; 
+
 	
 	public void commit(String content,String branch,String AuthorName,String AuthorAddress) {
 		JSONObject jsonOb=new JSONObject();
