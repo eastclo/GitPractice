@@ -80,9 +80,6 @@ public class CommandInputPane extends JPanel{
 		btnBack.addActionListener(new GobackButtonListener());	//리스너 적용
 		
 		CommandInputPane.add(btnBack);
-		btnBack.addActionListener(new buttonPress());
-		btnBack.setVisible(true);
-		//btnBack.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		ImageIcon ForwardIcon = new ImageIcon("."+File.separator+".."+File.separator+"res"+File.separator+"forward1.png"); //앞으로가기 버튼 추가
 		JButton btnForward = new JButton(ForwardIcon);//뒤로가기 버튼 이미지 추가

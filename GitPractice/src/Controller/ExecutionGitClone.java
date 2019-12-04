@@ -93,7 +93,8 @@ public class ExecutionGitClone {
 			
 			//저장소 선택 추가
 			WorkspaceSetting.settingComboBox(clonedWorkspace.getPath());
-			repoComboBox.setSelectedItem(currWorkspace.getPath());
+			repoComboBox.setSelectedItem(clonedWorkspace.getPath());
+
 			
 			return true;
 		} else {
@@ -144,7 +145,10 @@ public class ExecutionGitClone {
 		Model.CurrentLocation.changeBranch(branch);
 		Model.CurrentLocation.workspace = new File(currworkspaceName);
 		
-		WorkspaceSetting.deleteComboBox(clonedWorkspace.getPath());
+    //콤보박스 바꾸기
+		WorkspaceSetting.deleteComboBox(clonedworkspaceName);
+		repoComboBox.setSelectedItem(currworkspaceName);
+
 		return true;
 	}
 	
