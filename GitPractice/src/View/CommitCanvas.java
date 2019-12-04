@@ -22,16 +22,30 @@ public class CommitCanvas extends Canvas{ //커밋 그래프를 그려주는 캔
 		graph.setColor(Color.YELLOW);
 		graph.fillOval(260, 40, 70, 35);
 		
+		/*
 		graph.setColor(Color.YELLOW);
 		graph.fillOval(380, 40, 70, 35);
+		*/
 		
 		graph.setColor(Color.ORANGE); //master branch
-		graph.fillRoundRect(385, 12, 60, 20, 2, 2);
+		graph.fillRoundRect(265, 12, 60, 20, 2, 2);
 		
 		graph.setColor(Color.DARK_GRAY);
-		Font font = new Font("Serif", Font.PLAIN, 11);
-		graph.setFont(font);
-		graph.drawString("master", 400, 25); //추후에 branch 이름을 받아오도록
+		Font font1 = new Font("Serif", Font.PLAIN, 11);
+		graph.setFont(font1);
+		graph.drawString("master", 280, 25); //추후에 branch 이름을 받아오도록
+	
+		
+		graph.setColor(Color.ORANGE); //hotfix branch
+		graph.fillRoundRect(265, 82, 60, 20, 2, 2);
+		
+		graph.setColor(Color.RED); //HEAD
+		graph.drawRoundRect(265, 82, 60, 20, 2, 2);
+		
+		graph.setColor(Color.DARK_GRAY);
+		Font font2 = new Font("Serif", Font.PLAIN, 11);
+		graph.setFont(font2);
+		graph.drawString("hotfix", 280, 96);
 		
 		//현재 스크롤Pane에 인식이 안 되는 현상 발생
 		
