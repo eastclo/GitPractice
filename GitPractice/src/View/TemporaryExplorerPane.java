@@ -17,11 +17,12 @@ import Controller.NewRepoClickListener;
 
 public class TemporaryExplorerPane extends JPanel{
 	
-	private JList repoList;
+	private static JList repoList;
+	public static String repo;
 	private JScrollPane repoScroll = new JScrollPane();
 	private String repositoryName;
 	JButton btnDelRepo = new JButton("del");
-	DelRepoClickListener delete = new DelRepoClickListener(this, repositoryName);
+	
 
 	
 	public TemporaryExplorerPane() {
@@ -57,8 +58,10 @@ public class TemporaryExplorerPane extends JPanel{
 		btnDelRepo.setBounds(122, 11, 60, 20);
 		TemporaryExplorerPane.add(btnDelRepo);
 		//DelRepoClickListener delete = new DelRepoClickListener(this, repositoryName);
-		btnDelRepo.addMouseListener(delete);
 		//btnDelRepo.addMouseListener(new DelRepoClickListener(this, repoName));
+		btnDelRepo.addActionListener(new DelRepoClickListener());
+
+		
 		
 		repoList = new JList();
 		repoList.setBounds(14, 42, 237, 550);
@@ -77,8 +80,13 @@ public class TemporaryExplorerPane extends JPanel{
 	}
 	
 	
-	public JList getJList() {
+	public static JList getJList() {
 		return repoList;
+	}
+	
+	public void connectToDel(String repoName) {
+		System.out.println(repoName);
+
 	}
 
 	public void getRepoName(String repoName) {

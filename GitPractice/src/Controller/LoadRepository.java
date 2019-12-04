@@ -27,10 +27,6 @@ public class LoadRepository {
 			listModel.addElement(rp);
 		}
 		repoList.setModel(listModel);
-		
-	}
-	
-	public void rePaint() {
 		repoList.repaint();
 	}
 	

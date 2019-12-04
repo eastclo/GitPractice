@@ -27,8 +27,8 @@ public class ExplorerClickListener implements MouseListener {
 		if (e.getClickCount() == 2) 
 			popUpRepo();
 		else if (e.getClickCount() == 1) {
-			
-			//delRepo();
+			View.TemporaryExplorerPane.repo = list.getSelectedValue().toString();
+			delRepo();
 			//MainFrame frame = new MainFrame();
 			//frame.setVisible(true);
 		}
@@ -44,7 +44,7 @@ public class ExplorerClickListener implements MouseListener {
 		String repo = list.getSelectedValue().toString();
 		String repoPath = "." + File.separator + "GitHub";
 			
-		System.out.println(repo);
+		//System.out.println(repo);
 			
 		File f = new File(repoPath + File.separator + repo + File.separator + "address.txt");
 			
@@ -73,9 +73,10 @@ public class ExplorerClickListener implements MouseListener {
 		String repoName = list.getSelectedValue().toString();
 		
 		TemporaryExplorerPane view = new TemporaryExplorerPane();
-		view.getRepoName(repoName);
+		view.connectToDel(repoName);
+		//view.getRepoName(repoName);
 		
-		new DelRepoClickListener(view, repoName).delReposit(repoName);
+		//new DelRepoClickListener(view, repoName).delReposit(repoName);
 	}
 	
 	

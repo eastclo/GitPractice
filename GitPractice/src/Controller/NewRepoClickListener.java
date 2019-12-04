@@ -74,6 +74,8 @@ public class NewRepoClickListener extends JFrame implements MouseListener {
 				}
 				
 			}
+		} else {
+			JOptionPane.showMessageDialog(null, "같은 이름의 Repository가 존재합니다!", "Error!", JOptionPane.ERROR_MESSAGE);
 		}
 		
 		LoadRepository init = new LoadRepository(view);
