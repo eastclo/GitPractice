@@ -8,16 +8,18 @@ import Model.FileOperation;
 
 public class ExecutionAdd {
 	private File currentBranch;	//현재 브랜치 이름
+	private File git;
 	private String sep = File.separator;	//File.separator
 	private String filePath;	//파일 디렉토리 경로
 	
 	public boolean executeCommand(String[] parameter) {
 		currentBranch = new File(Model.CurrentLocation.workspace,Model.CurrentLocation.getBranch());
-		File add = new File(currentBranch,"add");	//현재 저장소 현재 브랜치의 add폴더 접근
+		git = new File(Model.CurrentLocation.workspace,".git");
+		File add = new File(git,"add");	//현재 저장소 현재 브랜치의 add폴더 접근
 		File workspace = new File(currentBranch, "workspace");
 		
 		if(parameter!=null) {	//입력값이 하나라도 있어야 함
-			makeBackup(add);	//백업
+			Model.FileOperation.makeBackup(add);	//백업
 			if(parameter[0].equals("*")||parameter[0].equals(".")) {	//workspace내의 모든 파일 add
 				/**.gitignore 예외처리 해야함
 				 * */
@@ -55,57 +57,19 @@ public class ExecutionAdd {
 	}
 
 	public boolean cancelCommand(String[] parameter) {
-		currentBranch = new File(Model.CurrentLocation.workspace,Model.CurrentLocation.getBranch());
-		File add = new File(currentBranch,"add");	//현재 저장소 현재 브랜치의 add폴더 접근
+		git = new File(Model.CurrentLocation.workspace,".git");
+		File add = new File(git,"add");	//현재 저장소 현재 브랜치의 add폴더 접근
 
-		loadBackup(add);
+		Model.FileOperation.loadBackup(add);
 		return true;
 	}
 	
-	private void makeBackup(File sourceFile) {
-		//백업 폴더 생성
-		File backup = createBackupFolder();
-		
-		//백업폴더 내부에 sourceFile 이름으로 백업 폴더 생성
-		File sourceBackup = new File(backup,sourceFile.getName());
-		sourceBackup.mkdir();
-		
-		//백업
-		FileOperation.copyFileAll(sourceFile, sourceBackup);
-	}
+
 	
-	private void loadBackup(File sourceFile) {
-		//백업 폴더 불러오기.
-		File backup = loadBackupFolder();
-		//백업폴더 이름을 토대로 sourFile의 백업 폴더 불러오기.
-		File sourceBackup = new File(backup, sourceFile.getName());
-		sourceBackup.mkdir();
-		
-		//sourceFile 삭제 후 백업본 복사
-		FileOperation.deleteFile(sourceFile);
-		FileOperation.copyFileAll(sourceBackup, sourceFile);
-		
-		//백업본 삭제
-		FileOperation.deleteFile(backup);
-		backup.delete();
-	}
-	
-	private File loadBackupFolder() {	//백업폴더 참조
+	private void deleteBackup() {	//백업 삭제
 		String backupFolder = Model.CommandStack.loadBackup();
 		File backup = new File(backupFolder);
 		backup.mkdir();
-		return backup;
-	}
-	
-	private File createBackupFolder() {		//백업 폴더 생성
-		String backupFolder = Model.CommandStack.createBackup();
-		File backup = new File(backupFolder);
-		backup.mkdir();
-		return backup;
-	}
-	
-	private void deleteBackup() {	//백업 삭제
-		File backup = loadBackupFolder();
 		FileOperation.deleteFile(backup);
 		backup.delete();
 	}
