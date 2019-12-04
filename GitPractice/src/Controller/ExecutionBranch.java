@@ -13,6 +13,7 @@ import View.CommandInputPane;
 
 public class ExecutionBranch {
 	static List<String>branchList = new ArrayList<String>();
+	
 	static List<File> dfile=new ArrayList<File>();
 	
 	public boolean executeCommand(String[] parameter) {
@@ -64,6 +65,8 @@ public class ExecutionBranch {
 		}
 		else
 		{
+			CurrentLocation.changeBranch(dfile.get(dfile.size()-1).getPath());
+			dfile.remove(dfile.size()-1);
 			String dbranch = CurrentLocation.getBranchList().get(CurrentLocation.BranchList.size()-1);
 			CurrentLocation.BranchList.remove(CurrentLocation.BranchList.size()-1);
 			BranchFunction bf = new BranchFunction();
