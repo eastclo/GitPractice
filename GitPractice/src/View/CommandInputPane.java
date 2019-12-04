@@ -109,10 +109,13 @@ public class CommandInputPane extends JPanel{
 						BranchFunction bf = new BranchFunction();
 						CurrentLocation.changeBranch("master");
 						bf.BranchListOpen();
-						try {
-							new CommitFunction().commitListOpen();
-						} catch (IOException | ParseException e1) {
-							e1.printStackTrace();
+						if(new File(repoComboBox.getSelectedItem().toString()+File.separator+".git"+File.separator+"CommitList.ini").exists())
+						{
+							try {
+								new CommitFunction().commitListOpen();
+							} catch (IOException | ParseException e1) {
+								e1.printStackTrace();
+							}
 						}
 					}
 					

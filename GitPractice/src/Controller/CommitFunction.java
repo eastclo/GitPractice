@@ -24,7 +24,7 @@ import Model.FileOperation;
 public class CommitFunction {
 	
 	//Commit List의 정보가 담긴 파일이 생성될 ComitArray.ini의 경로. 상대경로이며, 프로젝트의 root폴더로 설정되어있음.
-	String Path = CurrentLocation.workspace.getPath()+File.separator+ ".git" +File.separator+"CommitList.ini";
+	public String Path = CurrentLocation.workspace.getPath()+File.separator+ ".git" +File.separator+"CommitList.ini";
 	
 	//다른 기능에서도 쉽게 정보를 출력하거나 사용하기 위해 CommitList를 ArrayList로도 관리 
 	public List<String> CMArray;
@@ -86,7 +86,6 @@ public class CommitFunction {
 		AuthorNameArray.add(Authorname);
 		AuthorAddressArray.add(Authoraddress);
 		JsonArray.commit(content,branch,Authorname,Authoraddress);
-		
 	}
 	
 	//CommitList를 파일로 저장.
@@ -105,12 +104,11 @@ public class CommitFunction {
 	}
 	public void workspaceCopy(File sourceF,File targetF) {
 		File[] ff = sourceF.listFiles();
-		String Filepath = targetF.getPath()+File.separator+JsonArray.totalSize();
+		String Filepath = targetF.getPath()+File.separator+(JsonArray.totalSize()-1);
 		if(!new File(Filepath).exists()) {
-			new File(targetF.getPath()+File.separator+JsonArray.totalSize()).mkdir();
+			new File(Filepath).mkdir();
 		}
 		FileOperation.copyFileAll(sourceF, new File(Filepath));
-
 	}
 
 }
