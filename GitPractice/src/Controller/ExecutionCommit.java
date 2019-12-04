@@ -26,7 +26,6 @@ public class ExecutionCommit {
 		return true;
 	}
 	public void cancelCommand(String[] parameter) {
-		System.out.println("Cancel git log --all");
 	}
 	
 	class btnclick implements ActionListener{
@@ -47,6 +46,7 @@ public class ExecutionCommit {
 			commit.commitAdd(inputContent,CurrentLocation.getBranch(),CurrentLocation.AuthorName,CurrentLocation.AuthorAddress);
 			commit.workspaceCopy(new File(CurrentLocation.workspace.getPath()+File.separator+".git"+File.separator+"add"),new File(CurrentLocation.workspace.getPath()+File.separator+CurrentLocation.getBranch()+File.separator+"commit"));
 
+			FileOperation.makeBackup(new File(CurrentLocation.workspace.getPath()+File.separator+".git"+File.separator+"add"));
 			List<String> branchList = commit.BranchArray;
 			List<Integer> check=new ArrayList<Integer>();
 			for(int i=0;i<branchList.size();i++)
@@ -54,8 +54,9 @@ public class ExecutionCommit {
 				if(branchList.get(i).equals(CurrentLocation.getBranch()))
 					check.add(i);
 			}
+			System.out.println(check);
 			if(check.size()>1)
-				commit.workspaceCopy(new File(CurrentLocation.workspace.getPath()+File.separator+CurrentLocation.getBranch()+File.separator+"commit"+File.separator+check.get(check.size()-1)), new File(CurrentLocation.workspace.getPath()+File.separator+CurrentLocation.getBranch()+File.separator+"commit"));
+				commit.workspaceCopy(new File(CurrentLocation.workspace.getPath()+File.separator+CurrentLocation.getBranch()+File.separator+"commit"+File.separator+check.get(check.size()-2)), new File(CurrentLocation.workspace.getPath()+File.separator+CurrentLocation.getBranch()+File.separator+"commit"));
 			FileOperation.deleteFile(new File(CurrentLocation.workspace.getPath()+File.separator+".git"+File.separator+"add"));
 			commit.commitListSave(commit.Path);
 		}
