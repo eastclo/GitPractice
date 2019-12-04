@@ -59,7 +59,7 @@ public class TemporaryExplorerPane extends JPanel{
 		TemporaryExplorerPane.add(btnDelRepo);
 		//DelRepoClickListener delete = new DelRepoClickListener(this, repositoryName);
 		//btnDelRepo.addMouseListener(new DelRepoClickListener(this, repoName));
-		btnDelRepo.addActionListener(new DelRepoClickListener());
+		btnDelRepo.addActionListener(new DelRepoClickListener(this));
 
 		
 		
