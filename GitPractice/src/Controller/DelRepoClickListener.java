@@ -31,7 +31,6 @@ public class DelRepoClickListener implements MouseListener{
 		this(view);
 		this.view = view;
 		this.repoName = repoName;
-		System.out.println("아 왜 안나오는데~~~~ " + repoName);
 	}
 
 	@Override
@@ -41,11 +40,9 @@ public class DelRepoClickListener implements MouseListener{
 		//textFieldValue = txtField.getText();
 		
 		delReposit(repoName);
-		System.out.println("mousClicked 확인용 메시지 : " + repoName);
 	}
 	
 	public void delReposit(String rn) {
-		System.out.println("DelRepo 확인용 메시지 : " + rn);
 		
 		if (rn == null) {
 			JOptionPane.showMessageDialog(null, "일치하는 Repository가 없습니다!", "Error!", JOptionPane.ERROR_MESSAGE);
@@ -77,7 +74,7 @@ public class DelRepoClickListener implements MouseListener{
 							if(files.length == 0 && repoDirectory.isDirectory()){ 
 								repoDirectory.delete(); //대상폴더 삭제
 								System.out.println("폴더가 삭제되었습니다.");
-								JOptionPane.showMessageDialog(null, "폴더 삭제 완료", "폴더 삭제", JOptionPane.PLAIN_MESSAGE);
+								//JOptionPane.showMessageDialog(null, "폴더 삭제 완료", "폴더 삭제", JOptionPane.PLAIN_MESSAGE);
 							}
 						}
 						//break;

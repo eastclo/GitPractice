@@ -27,9 +27,10 @@ public class ExplorerClickListener implements MouseListener {
 		if (e.getClickCount() == 2) 
 			popUpRepo();
 		else if (e.getClickCount() == 1) {
-			delRepo();
-			MainFrame frame = new MainFrame();
-			frame.setVisible(true);
+			
+			//delRepo();
+			//MainFrame frame = new MainFrame();
+			//frame.setVisible(true);
 		}
 	}
 	
@@ -69,22 +70,12 @@ public class ExplorerClickListener implements MouseListener {
 	}
 	
 	public void delRepo() {
-		System.out.println("확인용 메시지  ");
 		String repoName = list.getSelectedValue().toString();
-		
-		System.out.println(repoName); // 리스트 이름 확인용 출력 
-		//TemporaryExplorerPane view = new TemporaryExplorerPane();
-		
-		//new TemporaryExplorerPane().getRepoName(repoName);
 		
 		TemporaryExplorerPane view = new TemporaryExplorerPane();
 		view.getRepoName(repoName);
 		
-		
-		
-		//MouseEvent e = null;
 		new DelRepoClickListener(view, repoName).delReposit(repoName);
-		//new DelRepoClickListener(view, repoName).mouseClicked(e);
 	}
 	
 	

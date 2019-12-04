@@ -58,7 +58,6 @@ public class TemporaryExplorerPane extends JPanel{
 		TemporaryExplorerPane.add(btnDelRepo);
 		//DelRepoClickListener delete = new DelRepoClickListener(this, repositoryName);
 		btnDelRepo.addMouseListener(delete);
-		System.out.println("뭐가 문젠데~~~~" + repositoryName);
 		//btnDelRepo.addMouseListener(new DelRepoClickListener(this, repoName));
 		
 		repoList = new JList();
@@ -85,8 +84,6 @@ public class TemporaryExplorerPane extends JPanel{
 	public void getRepoName(String repoName) {
 		// TODO Auto-generated method stub
 		this.repositoryName = repoName;
-		System.out.println("ㅜㅜㅜ" +repositoryName);
-		//btnDelRepo.addMouseListener(delete);
 	}
 
 }
