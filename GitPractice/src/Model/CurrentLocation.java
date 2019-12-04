@@ -23,7 +23,7 @@ public class CurrentLocation {
 		branch = new String(targetBranch);
 	}
 	
-	public static void addBranch(String targetBranch) {
+	public static boolean addBranch(String targetBranch) {
 		boolean findswt=false;
 		for(String s : BranchList) {
 			if(s.equals(targetBranch))
@@ -33,7 +33,11 @@ public class CurrentLocation {
 			}
 		}
 		if(findswt==false)
+		{
 			BranchList.add(targetBranch);
+			return true;
+		}
+		return false;
 	}
 	public static void changeAuthorname(String name) {
 		AuthorName=new String(name);
