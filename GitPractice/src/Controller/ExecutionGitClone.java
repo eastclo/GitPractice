@@ -24,7 +24,7 @@ import Model.CurrentLocation;
 import Model.FileOperation;
 
 public class ExecutionGitClone {
-	private JComboBox repoComboBox;
+	private JComboBox repoComboBox = View.CommandInputPane.getComboBox();	//View에서 콤보박스 가져오기
 	private DefaultComboBoxModel comboModel;
 	private String sep = File.separator;
 	private File currWorkspace;
@@ -32,7 +32,6 @@ public class ExecutionGitClone {
 	
 	public boolean executeCommand(String[] parameter) {
 		if(parameter.length == 1 || parameter.length == 2) {
-			repoComboBox = View.CommandInputPane.getComboBox();	//View에서 콤보박스 가져오기
 			//레포지토리 리스트 가져오기
 			Model.RepositoryList tmp = new Model.RepositoryList();
 			String[] repoList = tmp.getRepoList();
@@ -75,26 +74,27 @@ public class ExecutionGitClone {
 			else
 				makeBackup(repoList,index, currWorkspace.getPath(), clonedWorkspace.getPath(),true);
 			
+			//현재 저장소 위치 수정
+			Model.CurrentLocation.workspace = clonedWorkspace;
+			
 			//깃 폴더와 마스터브랜치 폴더 생성
 			File masterBranch = new File(clonedWorkspace,"master");
 			File gitFolder = new File(clonedWorkspace,".git");
 			masterBranch.mkdir();
 			gitFolder.mkdir();
 			File workspace = new File(masterBranch, "workspace");
-			File add = new File(masterBranch, "add");
+			File add = new File(gitFolder, "add");
 			File commit = new File(masterBranch, "commit");
 			workspace.mkdir(); add.mkdir(); commit.mkdir();
-			//리모트 리스트 생성
+			//RemoteList.ini 생성
 			makeRemoteList(gitFolder, parameter[0]);
-			Model.CurrentLocation.workspace = clonedWorkspace;
-
-			BranchFunction bf = new BranchFunction();
-			CurrentLocation.changeBranch("master");
-			CurrentLocation.BranchList = new ArrayList<String>();
-			CurrentLocation.addBranch("master");
-			List<String> branchList = CurrentLocation.getBranchList();
-			bf.setArray(branchList);
-			bf.BranchListSave();
+			//BranchList.ini 생성, 현재 브랜치 위치 수정
+			makeBranchList();
+			
+			//저장소 선택 추가
+			WorkspaceSetting.settingComboBox(clonedWorkspace.getPath());
+			repoComboBox.setSelectedItem(clonedWorkspace.getPath());
+			
 			return true;
 		} else {
 			JOptionPane.showMessageDialog(null, "잘못 입력하였습니다.", "명령어 입력 오류", JOptionPane.ERROR_MESSAGE);
@@ -139,11 +139,24 @@ public class ExecutionGitClone {
 		
 		Model.FileOperation.deleteFile(backupFolder);
 		backupFolder.delete();
-		
+				
 		//위치 값 바꾸기
 		Model.CurrentLocation.changeBranch(branch);
 		Model.CurrentLocation.workspace = new File(currworkspaceName);
+		
+		WorkspaceSetting.deleteComboBox(clonedworkspaceName);
+		repoComboBox.setSelectedItem(currworkspaceName);
 		return true;
+	}
+	
+	public void makeBranchList() {
+		BranchFunction bf = new BranchFunction();
+		CurrentLocation.changeBranch("master");
+		CurrentLocation.BranchList = new ArrayList<String>();
+		CurrentLocation.addBranch("master");
+		List<String> branchList = CurrentLocation.getBranchList();
+		bf.setArray(branchList);
+		bf.BranchListSave();
 	}
 	
 	public void makeRemoteList(File gitFolder, String url) {
