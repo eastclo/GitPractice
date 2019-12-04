@@ -1,50 +1,40 @@
 package Controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
 import java.awt.event.MouseListener;
 
 import java.io.File;
 
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import View.TemporaryExplorerPane;
 
-public class DelRepoClickListener implements MouseListener{
+public class DelRepoClickListener implements ActionListener{
 	
 	String textFieldValue;
 	String repoName;
 	
 	private TemporaryExplorerPane view;
 	
-	public DelRepoClickListener() {
-		
-	}
 	
-	public DelRepoClickListener(TemporaryExplorerPane view) {
-		this();
-		this.view = view;
-	}
-	
-	public DelRepoClickListener(TemporaryExplorerPane view, String repoName) {
-		this(view);
-		this.view = view;
-		this.repoName = repoName;
+	public void loadRepo() {
+		LoadRepository init = new LoadRepository(view);
+		init.setRepositoryList();
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		//JTextField txtField = (JTextField) e.getSource();
-		//textFieldValue = txtField.getText();
+		System.out.println("아아아ㅏ " + View.TemporaryExplorerPane.repo);
 		
-		delReposit(repoName);
-	}
-	
-	public void delReposit(String rn) {
+		String repoName = View.TemporaryExplorerPane.repo;
 		
-		if (rn == null) {
+		if (View.TemporaryExplorerPane.repo == null) {
 			JOptionPane.showMessageDialog(null, "일치하는 Repository가 없습니다!", "Error!", JOptionPane.ERROR_MESSAGE);
 		} else {
 			int result = JOptionPane.showConfirmDialog(null, "파일을 삭제하시겠습니까?",
@@ -53,7 +43,7 @@ public class DelRepoClickListener implements MouseListener{
 			if (result == JOptionPane.CLOSED_OPTION) { //사용자가 창을 닫은 경우  
 				
 			} else if (result == JOptionPane.YES_OPTION) { // 사용자가 예 를 선택한 경우 
-				String path = "." + File.separator + "GitHub" + File.separator + rn;
+				String path = "." + File.separator + "GitHub" + File.separator + View.TemporaryExplorerPane.repo;
 				File repoDirectory = new File(path);
 				
 					while (repoDirectory.exists()) {
@@ -79,43 +69,15 @@ public class DelRepoClickListener implements MouseListener{
 						}
 						//break;
 					} 
-					loadRepo();	
-				
+					//loadRepo();	
+					LoadRepository init = new LoadRepository(view);
+					init.setRepositoryList();
 				
 			} else {
 				JOptionPane.showMessageDialog(null, "Repository 삭제를 취소했습니다.", "삭제 취소", JOptionPane.PLAIN_MESSAGE);
 			}
 		}
-	}
 	
-	public void loadRepo() {
-		LoadRepository init = new LoadRepository(view);
-		init.setRepositoryList();
-	}
-	
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
