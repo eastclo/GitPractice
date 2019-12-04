@@ -13,25 +13,7 @@ public class MainFrame extends JFrame {
 
 	static JPanel contentPane;
 	static JTextField textField;
-
-		Container container; //그래프 그릴 작업 중
 		
-		void GraphicsColorFontEx() {
-			container = getContentPane();
-			MyPanel panel = new MyPanel();
-			container.add(panel , BorderLayout.CENTER);
-			setVisible(true);
-		}
-		
-		class MyPanel extends JPanel {
-			public void paintComponent(Graphics g) { //그래픽 TEST, 지금 실행 자체가 안됨..ㅠ
-				super.paintComponent(g);
-				g.setColor(Color.BLUE);
-				g.drawString("Test", 30,30);
-
-				}
-		}
-
 	//실행
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
