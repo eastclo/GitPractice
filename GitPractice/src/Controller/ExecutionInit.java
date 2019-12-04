@@ -5,6 +5,8 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
+import org.json.simple.parser.ParseException;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,17 +18,20 @@ import java.util.ArrayList;
 
 import Model.CommitArray;
 import Model.CurrentLocation;
+import Model.FileOperation;
 import View.CommandInputPane;
 
 public class ExecutionInit {
+	static List<File> dfile=new ArrayList<File>();
 	public boolean executeCommand(String[] parameter) {
 		File gitpath = new File(CurrentLocation.workspace.getPath());
+		dfile.add(gitpath);
 		if(!new File(gitpath.getPath()+File.separator+".git").exists())
 		{
 			new File(gitpath.getPath()+File.separator+".git").mkdir();
 			new File(gitpath.getPath()+File.separator+"master").mkdir();
 			new File(gitpath.getPath()+File.separator+"master"+File.separator+"workspace").mkdir();
-			new File(gitpath.getPath()+File.separator+"master"+File.separator+"add").mkdir();
+			new File(gitpath.getPath()+File.separator+".git"+File.separator+"add").mkdir();
 			new File(gitpath.getPath()+File.separator+"master"+File.separator+"commit").mkdir();
 			BranchFunction bf = new BranchFunction();
 			CurrentLocation.changeBranch("master");
@@ -48,30 +53,20 @@ public class ExecutionInit {
 		}
 	}
 	public boolean cancelCommand(String[] parameter) {
-		File gitpath = new File(CurrentLocation.workspace.getPath());
-		if(!new File(gitpath.getPath()+File.separator+".git").exists())
+		File gitpath = dfile.get(dfile.size()-1);
+		dfile.remove(dfile.size()-1);
+		if(new File(gitpath.getPath()+File.separator+".git").exists())
 		{
-			new File(gitpath.getPath()+File.separator+".git").mkdir();
-			new File(gitpath.getPath()+File.separator+"master").mkdir();
-			new File(gitpath.getPath()+File.separator+"master"+File.separator+"workspace").mkdir();
-			new File(gitpath.getPath()+File.separator+"master"+File.separator+"add").mkdir();
-			new File(gitpath.getPath()+File.separator+"master"+File.separator+"commit").mkdir();
-			BranchFunction bf = new BranchFunction();
-			CurrentLocation.changeBranch("master");
-			CurrentLocation.BranchList=new ArrayList<String>();
-			CurrentLocation.addBranch("master");
-			List<String> branchList = CurrentLocation.getBranchList();
-			bf.setArray(branchList);
-			bf.BranchListSave();
-			bf.BranchListOpen();
-			new CommitArray().init();
-			workspaceCopy(CurrentLocation.workspace,new File(gitpath.getPath()+File.separator+"master"+File.separator+"workspace"));
-			workspaceDelete(CurrentLocation.workspace.getPath());
+			FileOperation.copyFileAll(new File(gitpath.getPath()+File.separator+"master"+File.separator+"workspace"),CurrentLocation.workspace);
+			FileOperation.deleteFile(new File(gitpath.getPath()+File.separator+".git"));
+			FileOperation.deleteFile(new File(gitpath.getPath()+File.separator+"master"));
+			new File(gitpath.getPath()+File.separator+".git").delete();
+			new File(gitpath.getPath()+File.separator+"master").delete();
 			return true;
 		}
 		else
 		{
-			JOptionPane.showMessageDialog(null, "이미 초기화 되어있습니다.", "입력 오류", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "init되지 않은 파일입니다.", "입력 오류", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 	}
@@ -111,6 +106,7 @@ public class ExecutionInit {
 	      while((line = br.readLine()) != null){
 	        text= text + line + "\n";
 	      }
+	      br.close();
 	    } catch (FileNotFoundException e) {
 	      e.printStackTrace();
 	    } catch (IOException e) {
@@ -124,15 +120,18 @@ public class ExecutionInit {
 			if(folder.exists()){
 				File[] folder_list = folder.listFiles();
 				for (int i = 0; i < folder_list.length; i++) {
-					if(folder.getName().equals(".git")||folder.getName().equals("master"))
+					if(!folder.getName().equals(".git"))
 					{
-						if(folder_list[i].isFile()) {
+						if(!folder.getName().equals("master"))
+						{
+							if(folder_list[i].isFile()) {
+								folder_list[i].delete();
+							}
+							else {
+								workspaceDelete(folder_list[i].getPath());
+							}
 							folder_list[i].delete();
 						}
-						else {
-							workspaceDelete(folder_list[i].getPath());
-						}
-						folder_list[i].delete();
 					}
 				}
 			}

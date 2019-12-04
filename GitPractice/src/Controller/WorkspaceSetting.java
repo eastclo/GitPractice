@@ -73,7 +73,6 @@ public class WorkspaceSetting {
 		workspaceArray=workspaceJList;
 	}
 	private void workspaceOpen() {
-		System.out.println("open");
 		JSONParser parser = new JSONParser();
 		
 		//JSON Array로 파일에 저장, 및 불러오기를 위하여, JSON parser기능을 사용.
@@ -125,30 +124,29 @@ public class WorkspaceSetting {
 	}
 	public static void settingComboBox(String filePath) {
 		new WorkspaceSetting();
-		JComboBox cb = CommandInputPane.getComboBox();
 		for(int i=0;i<workspaceList.size();i++)
-			cb.removeItem(new String(workspaceList.get(i)));
+			CommandInputPane.repoComboBox.removeItem(new String(workspaceList.get(i)));
 		CurrentLocation.workspace=new File(filePath);
 		new WorkspaceSetting();
 		for(int i=0;i<workspaceList.size();i++)
-			cb.addItem(new String(workspaceList.get(i)));
+			CommandInputPane.repoComboBox.addItem(new String(workspaceList.get(i)));
 	}
 	public static void deleteComboBox(String filePath) {
-		JComboBox cb = CommandInputPane.getComboBox();
-		new WorkspaceSetting();
+		WorkspaceSetting ws =new WorkspaceSetting();
 		for(int i=0;i<workspaceList.size();i++)
-			cb.removeItem(new String(workspaceList.get(i)));
-		CurrentLocation.workspace=new File("."+File.separator+"root");
+		{
+			CommandInputPane.getComboBox().removeItem(new String(workspaceList.get(i)));
+		}
 		JSONObject inputJ=new JSONObject();
+		CurrentLocation.workspace=new File("."+File.separator+"root");
 		inputJ.put("path", filePath);
-		WorkspaceSetting ws=new WorkspaceSetting();
 		workspaceArray.remove(inputJ);
 		workspaceList.remove(new String(filePath));
 		ws.workspaceSave(new File("."+File.separator+"root"));
-		System.out.println(workspaceArray);
-		System.out.println(workspaceList);
 		for(int i=0;i<workspaceList.size();i++)
-			cb.addItem(new String(workspaceList.get(i)));
+		{
+			CommandInputPane.getComboBox().addItem(new String(workspaceList.get(i)));
+		}
 	}
 
 }
