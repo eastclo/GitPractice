@@ -8,12 +8,14 @@ import Model.FileOperation;
 
 public class ExecutionAdd {
 	private File currentBranch;	//현재 브랜치 이름
+	private File git;
 	private String sep = File.separator;	//File.separator
 	private String filePath;	//파일 디렉토리 경로
 	
 	public boolean executeCommand(String[] parameter) {
 		currentBranch = new File(Model.CurrentLocation.workspace,Model.CurrentLocation.getBranch());
-		File add = new File(currentBranch,"add");	//현재 저장소 현재 브랜치의 add폴더 접근
+		git = new File(Model.CurrentLocation.workspace,".git");
+		File add = new File(git,"add");	//현재 저장소 현재 브랜치의 add폴더 접근
 		File workspace = new File(currentBranch, "workspace");
 		
 		if(parameter!=null) {	//입력값이 하나라도 있어야 함
@@ -55,8 +57,8 @@ public class ExecutionAdd {
 	}
 
 	public boolean cancelCommand(String[] parameter) {
-		currentBranch = new File(Model.CurrentLocation.workspace,Model.CurrentLocation.getBranch());
-		File add = new File(currentBranch,"add");	//현재 저장소 현재 브랜치의 add폴더 접근
+		git = new File(Model.CurrentLocation.workspace,".git");
+		File add = new File(git,"add");	//현재 저장소 현재 브랜치의 add폴더 접근
 
 		Model.FileOperation.loadBackup(add);
 		return true;
