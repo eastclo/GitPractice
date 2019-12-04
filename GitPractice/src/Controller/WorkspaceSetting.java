@@ -125,11 +125,11 @@ public class WorkspaceSetting {
 	public static void settingComboBox(String filePath) {
 		new WorkspaceSetting();
 		for(int i=0;i<workspaceList.size();i++)
-			CommandInputPane.repoComboBox.removeItem(new String(workspaceList.get(i)));
+			CommandInputPane.getComboBox().removeItem(new String(workspaceList.get(i)));
 		CurrentLocation.workspace=new File(filePath);
 		new WorkspaceSetting();
 		for(int i=0;i<workspaceList.size();i++)
-			CommandInputPane.repoComboBox.addItem(new String(workspaceList.get(i)));
+			CommandInputPane.getComboBox().addItem(new String(workspaceList.get(i)));
 	}
 	public static void deleteComboBox(String filePath) {
 		WorkspaceSetting ws =new WorkspaceSetting();
