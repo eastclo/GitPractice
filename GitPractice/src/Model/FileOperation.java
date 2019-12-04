@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.JOptionPane;
@@ -160,5 +161,19 @@ public class FileOperation {
 		//백업본 삭제
 		FileOperation.deleteFile(backup);
 		backup.delete();
+	}
+	
+	//target파일에 text를 삽입
+	public static void writeFile(File target, String text) {
+		try {
+		      //파일에 문자열을 쓴다.
+		      //하지만 이미 파일이 존재하면 모든 내용을 삭제하고 그위에 덮어쓴다
+		      //파일이 손산될 우려가 있다.
+		      FileWriter fw = new FileWriter(target);
+		      fw.write(text);
+		      fw.close();
+		    } catch (IOException e) {
+		      e.printStackTrace();
+		    }
 	}
 }
