@@ -28,17 +28,15 @@ public class CommitGraphPane extends JPanel{
 	JLabel lblGraphResult = new JLabel("커밋 내역");
 	lblGraphResult.setBounds(14, 12, 78, 18);
 	CommitGraphPane.add(lblGraphResult);
-	//CommitGraphPane.add(DrawingGraph);
 	
 	JScrollPane graphScroll = new JScrollPane();
 	graphScroll.setBounds(14, 38, 511, 145);
 	CommitGraphPane.add(graphScroll);
 	
-	CommitCanvas canvas = new CommitCanvas();
-	canvas.setBackground(Color.WHITE);
+	CommitCanvas canvas = new CommitCanvas(); //CommitCanvas 객체 생성
+	canvas.setBackground(Color.WHITE); //캔버스 배경을 흰색으로 설정
 	graphScroll.setViewportView(canvas);
 	
 	}
-	
 	
 }

@@ -62,7 +62,7 @@ public class MainFrame extends JFrame {
 		new TemporaryExplorerPane();
 		this.setJMenuBar(new SettingMenuBar());
 
-//		new GraphicsColorFontEx();
+		
 		this.addWindowListener((WindowListener) new WindowAdapter(){	//창을 닫으면 백업파일 삭제 후 프로그램 종료
             public void windowClosing(WindowEvent e) { 
             	File backup = new File(".","BackUp");
