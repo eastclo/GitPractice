@@ -10,8 +10,14 @@ import javax.swing.*;
 import org.json.simple.parser.ParseException;
 
 import Controller.CommitFunction;
+import java.awt.Panel;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public class CommitGraphPane extends JPanel{
+
 
 	public CommitGraphPane() {
 	JPanel CommitGraphPane = new JPanel();
@@ -22,16 +28,17 @@ public class CommitGraphPane extends JPanel{
 	JLabel lblGraphResult = new JLabel("커밋 내역");
 	lblGraphResult.setBounds(14, 12, 78, 18);
 	CommitGraphPane.add(lblGraphResult);
+	//CommitGraphPane.add(DrawingGraph);
 	
-	JTextArea DrawingGraph = new JTextArea();
-	DrawingGraph.setBounds(14, 38, 511, 145);
-	CommitGraphPane.add(DrawingGraph);
-	
-	JScrollPane graphScroll = new JScrollPane(); //커밋 그래프가 길어지면 가로스크롤 자동생성 
-	graphScroll.setViewportView(DrawingGraph);  //스크롤바->스크롤페인 변경(오류수정)
+	JScrollPane graphScroll = new JScrollPane();
 	graphScroll.setBounds(14, 38, 511, 145);
 	CommitGraphPane.add(graphScroll);
-
 	
-}
+	CommitCanvas canvas = new CommitCanvas();
+	canvas.setBackground(Color.WHITE);
+	graphScroll.setViewportView(canvas);
+	
+	}
+	
+	
 }
