@@ -14,6 +14,7 @@ import Controller.CommandInputListener;
 import Controller.CommitFunction;
 import Controller.DocumentUploadListener;
 import Controller.GobackButtonListener;
+import Model.CommitArray;
 import Model.CurrentLocation;
 
 import java.awt.event.WindowEvent;
@@ -112,11 +113,23 @@ public class CommandInputPane extends JPanel{
 						if(new File(repoComboBox.getSelectedItem().toString()+File.separator+".git"+File.separator+"CommitList.ini").exists())
 						{
 							try {
-								new CommitFunction().commitListOpen();
+								CommitFunction cm = new CommitFunction();
+								cm.commitListOpen();
+								int checki=0;
+								for(int i=0;i<cm.BranchArray.size();i++)
+								{
+									if(cm.BranchArray.get(i).equals(CurrentLocation.getBranch()))
+									{
+										checki=i;
+									}
+								}
+								CurrentLocation.HEADLocation=checki;
+								CommitGraphPane.canvas.repaint();
 							} catch (IOException | ParseException e1) {
 								e1.printStackTrace();
 							}
 						}
+						CommitGraphPane.canvas.repaint();
 					}
 					
 				}

@@ -37,6 +37,7 @@ public class CommitFunction {
 	
 	int cnt;
 	
+	//클래스 선언시, 메소드에 사용될 리스트들을 초기화함.
 	public CommitFunction() {
 		CMArray = new ArrayList<String>();
 		BranchArray = new ArrayList<String>();
@@ -102,6 +103,7 @@ public class CommitFunction {
 			e.printStackTrace();
 		}
 	}
+	//add의 파일들을 새로운 커밋에 저장하는 메소드이다.
 	public void workspaceCopy(File sourceF,File targetF) {
 		File[] ff = sourceF.listFiles();
 		String Filepath = targetF.getPath()+File.separator+(JsonArray.totalSize()-1);

@@ -19,8 +19,10 @@ import org.json.simple.parser.ParseException;
 import Model.CurrentLocation;
 
 public class BranchFunction {
+	//.git 폴더 내부의 branchList 파일 경로
 	String Path = CurrentLocation.workspace.getPath()+File.separator+ ".git"+File.separator+"BranchList.ini";
 	
+	//내부에서 기능을 수행하면서 쓸 branch들의 List
 	public List<String> branchArray;
 	
 	public BranchFunction() {
@@ -28,8 +30,10 @@ public class BranchFunction {
 	}
 	
 	public void BranchListOpen() {
+		//실행 전, workspace의 경로가 바뀌어있을 수도 있으므로, 경로를 최신화한다.
 		refreshPath();
 		
+		//BranchList.ini파일을 연다
 		JSONParser parser = new JSONParser();
 		branchArray=new ArrayList<String>();
 		
@@ -67,7 +71,10 @@ public class BranchFunction {
 			branchArrayS.add(inputJ);
 		}
 		try {
+			//실행 전, workspace의 경로가 바뀌어있을 수도 있으므로, 경로를 최신화한다.
 			refreshPath();
+			
+			//Branch들의 List를 파일화하여 저장한다.
 			FileWriter fw = new FileWriter(Path);
 			if(new File(Path).exists())
 				new File(Path).delete();
@@ -80,6 +87,7 @@ public class BranchFunction {
 		}
 	}
 	public void refreshPath() {
+		//경로를 최신화하는 메소드
 		Path = CurrentLocation.workspace.getPath()+File.separator+ ".git"+File.separator+"BranchList.ini";
 	}
 

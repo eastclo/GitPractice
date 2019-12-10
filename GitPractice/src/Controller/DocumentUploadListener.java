@@ -39,19 +39,21 @@ public class DocumentUploadListener implements ActionListener {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
+	//파일을 여는 메소드
 	public void fileOpen() {
 		int ret = fc.showOpenDialog(null);
 		
 		if(ret!=JFileChooser.APPROVE_OPTION) {
-			JOptionPane.showMessageDialog(null, "경로를 선택하지 않았습니다.","경고",JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "파일을 선택하지 않았습니다.","경고",JOptionPane.WARNING_MESSAGE);
 			return;
 		}
-		
+		//jfilechooser로 선택한 파일을 가져올 수 있음.
 		file=fc.getSelectedFile();
 		fileName = file.getName();
 		fileIn =getTextFromFile(file);
 		String wsFile;
+		//git init이 되어있으면, 현재 위치하는 브랜치의 workspace에 저장함. 아닌경우엔 그냥 경로상에 저장
 		if(new File(CurrentLocation.workspace.getPath()+File.separator+".git").exists())
 			wsFile= CurrentLocation.workspace.getPath()+File.separator+CurrentLocation.getBranch()+File.separator+"workspace"+File.separator+fileName;
 		else
@@ -65,6 +67,7 @@ public class DocumentUploadListener implements ActionListener {
 			   // TODO Auto-generated catch block
 			   e.printStackTrace();
 			  }
+		//OPEN한 파일의 내용을 Frame에 출력
 		CommandInputPane.allCommandtxt.setText(fileIn);
 		
 		

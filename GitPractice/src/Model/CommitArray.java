@@ -38,7 +38,7 @@ public class CommitArray {
 	public String urlKey = "url"; 
 	public String branchKey = "branch"; 
 
-	
+	//commit을 추가하는 메소드이다. 들어가는 인자로는 커밋내용(content),브랜치,저자이름,저자주소 가 있다.
 	public void commit(String content,String branch,String AuthorName,String AuthorAddress) {
 		JSONObject jsonOb=new JSONObject();
 		jsonOb.put("content", content);
@@ -74,6 +74,7 @@ public class CommitArray {
 	public static String Arrayreturn() {
 		return commitArray.toString();
 	}
+	//CommitList에서 해당 branch의 가장 최근 checksum을 찾는다.(checksum의 기준은, commit의 수이다.)
 	public int ArrayCountreturn(String branch) {
 		int cnt=0;
 		JSONObject jsonOb=new JSONObject();
