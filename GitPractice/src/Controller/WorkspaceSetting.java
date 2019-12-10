@@ -24,7 +24,7 @@ public class WorkspaceSetting {
 	public static JSONArray workspaceArray;
 	public static List<String> workspaceList;
 	String Path = "."+File.separator+"workspaceList.ini";
-	
+	//Workspace를 설정해주는 class이다. 설정하는 workspace들은 모두 workspaceList.ini에 경로가 저장되며, 나중에 ComboBox를 통해 이동할 수 있다.
 	public WorkspaceSetting() {
 		workspaceArray=new JSONArray();
 		workspaceList=new ArrayList<String>();
@@ -33,6 +33,7 @@ public class WorkspaceSetting {
 		workspaceSave(CurrentLocation.workspace);
 			
 	}
+	//Input으로 들어오는 workspace를 list에 추가해준다.
 	private void workspaceSave(File workspace) {
 		JSONArray workspaceJList = new JSONArray();
 		if(workspaceList!=null)
@@ -72,6 +73,7 @@ public class WorkspaceSetting {
 		}
 		workspaceArray=workspaceJList;
 	}
+	//저장되어있는 workspaceList.ini를 연다
 	private void workspaceOpen() {
 		JSONParser parser = new JSONParser();
 		
@@ -112,6 +114,7 @@ public class WorkspaceSetting {
 		if(findswt==false)
 			workspaceList.add(workspace);
 	}
+	//사용자가 workspaceList.ini파일이 있는지 확인
 	public boolean workspaceExist() {
 		if(new File("."+File.separator+"workspaceList.ini").exists())
 			return true;
@@ -122,6 +125,7 @@ public class WorkspaceSetting {
 		workspaceArray=new JSONArray();
 		workspaceList=new ArrayList<String>();
 	}
+	//ComboBox를 세팅하는 메소드이다. 콤보박스에 들어가는 내용은 workspace의 경로이다.
 	public static void settingComboBox(String filePath) {
 		new WorkspaceSetting();
 		for(int i=0;i<workspaceList.size();i++)
@@ -131,6 +135,7 @@ public class WorkspaceSetting {
 		for(int i=0;i<workspaceList.size();i++)
 			CommandInputPane.getComboBox().addItem(new String(workspaceList.get(i)));
 	}
+	//ComboBox를 취소하는 메소드이다. 콤보박스에 들어가는 내용은 workspace의 경로이다.
 	public static void deleteComboBox(String filePath) {
 		WorkspaceSetting ws =new WorkspaceSetting();
 		for(int i=0;i<workspaceList.size();i++)

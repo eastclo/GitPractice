@@ -14,8 +14,10 @@ import View.CommandInputPane;
 
 public class ExecutionLog {
 	public boolean executeCommand(String[] parameter) {
+		//git log의 명령어를 구현하는 클래스이다.
 		if(parameter==null)
 		{
+			//인자가 없을 경우, 현재 브랜치의 커밋기록을 출력한다.
 			String logtext = new String();
 			CommitFunction openCommit = new CommitFunction();
 			try {
@@ -62,6 +64,7 @@ public class ExecutionLog {
 		}
 		else if(parameter.length==1)
 		{
+			//인자가 있을경우, 해당 인자로 입력된 브랜치의 커밋기록을 출력한다.
 			boolean cnt=false;
 			for(int i=0;i<CurrentLocation.getBranchList().size();i++)
 			{
@@ -73,7 +76,7 @@ public class ExecutionLog {
 			}
 			if(cnt==false)
 			{
-				JOptionPane.showMessageDialog(null, "유효하지 않은 인자입니다.", "명령어 입력 오류", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "유효하지 않은 브랜치 이름입니다.", "명령어 입력 오류", JOptionPane.ERROR_MESSAGE);
 				return false;
 			}
 				

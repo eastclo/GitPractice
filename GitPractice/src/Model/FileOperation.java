@@ -48,6 +48,8 @@ public class FileOperation {
 					temp.mkdir();
 					copyFileAll(file, temp);
 				} else {
+					if(temp.exists())
+						temp.delete();
 					FileInputStream fis = null;
 					FileOutputStream fos = null;
 					try {

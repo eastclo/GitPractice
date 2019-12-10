@@ -62,12 +62,24 @@ public class SettingMenuBar extends JMenuBar {
 		else
 		{
 			WorkspaceSetting.settingComboBox("."+File.separator+"root");
-			new BranchFunction().BranchListOpen();
+			BranchFunction bf1 = new BranchFunction();
+			CurrentLocation.changeBranch("master");
+			bf1.BranchListOpen();
 			try {
-				new CommitFunction().commitListOpen();
-			} catch (IOException | ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				CommitFunction cm = new CommitFunction();
+				cm.commitListOpen();
+				int checki=0;
+				for(int i=0;i<cm.BranchArray.size();i++)
+				{
+					if(cm.BranchArray.get(i).equals(CurrentLocation.getBranch()))
+					{
+						checki=i;
+					}
+				}
+				CurrentLocation.HEADLocation=checki;
+				CommitGraphPane.canvas.repaint();
+			} catch (IOException | ParseException e1) {
+				e1.printStackTrace();
 			}
 		}
 	}
@@ -152,7 +164,6 @@ public class SettingMenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				CurrentLocation.changeAuthorname(nameText.getText());
 				CurrentLocation.changeAuthorAddress(addressText.getText());
-				System.out.println(CurrentLocation.AuthorName + " " + CurrentLocation.AuthorAddress);
 				ad.dispose();
 			}
 		}

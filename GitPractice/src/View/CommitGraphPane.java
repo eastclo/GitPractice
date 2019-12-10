@@ -13,10 +13,13 @@ import Controller.CommitFunction;
 import java.awt.Panel;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 public class CommitGraphPane extends JPanel{
+
+	public static CommitCanvas canvas;
 
 
 	public CommitGraphPane() {
@@ -29,13 +32,24 @@ public class CommitGraphPane extends JPanel{
 	lblGraphResult.setBounds(14, 12, 78, 18);
 	CommitGraphPane.add(lblGraphResult);
 	
-	JScrollPane graphScroll = new JScrollPane();
+	canvas = new CommitCanvas();
+	JScrollPane graphScroll = new JScrollPane(canvas);
 	graphScroll.setBounds(14, 38, 511, 145);
 	CommitGraphPane.add(graphScroll);
 	
-	CommitCanvas canvas = new CommitCanvas(); //CommitCanvas 객체 생성
-	canvas.setBackground(Color.WHITE); //캔버스 배경을 흰색으로 설정
-	graphScroll.setViewportView(canvas);
+	
+	//CommitCanvas canvas = new CommitCanvas(); //CommitCanvas 객체 생성
+	//canvas.setBackground(Color.WHITE); //캔버스 배경을 흰색으로 설정
+	//canvas.setBounds(14, 38, 511, 145);
+	
+	//
+	
+	//graphScroll.setViewportView(canvas);
+	//CommitGraphPane.add(canvas);
+	
+	//graphScroll.setBackground(Color.WHITE);
+	
+	//CommitGraphPane.add(graphScroll);
 	
 	}
 	

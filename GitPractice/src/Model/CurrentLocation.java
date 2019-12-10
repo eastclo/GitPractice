@@ -11,6 +11,7 @@ public class CurrentLocation {
 	public static List<String> BranchList=new ArrayList<String>();
 	public static String AuthorName = "user";
 	public static String AuthorAddress = "user@example.com";
+	public static int HEADLocation;
 	
 	public static void changeRepo(String targetRepo) {
 		if(targetRepo != null)
