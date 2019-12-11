@@ -65,21 +65,24 @@ public class SettingMenuBar extends JMenuBar {
 			BranchFunction bf1 = new BranchFunction();
 			CurrentLocation.changeBranch("master");
 			bf1.BranchListOpen();
-			try {
-				CommitFunction cm = new CommitFunction();
-				cm.commitListOpen();
-				int checki=0;
-				for(int i=0;i<cm.BranchArray.size();i++)
-				{
-					if(cm.BranchArray.get(i).equals(CurrentLocation.getBranch()))
+			if(new File("."+File.separator+".git"+File.separator+"CommitList.ini").exists())
+			{
+				try {
+					CommitFunction cm = new CommitFunction();
+					cm.commitListOpen();
+					int checki=0;
+					for(int i=0;i<cm.BranchArray.size();i++)
 					{
-						checki=i;
+						if(cm.BranchArray.get(i).equals(CurrentLocation.getBranch()))
+						{
+							checki=i;
+						}
 					}
+					CurrentLocation.HEADLocation=checki;
+					CommitGraphPane.canvas.repaint();
+				} catch (IOException | ParseException e1) {
+					e1.printStackTrace();
 				}
-				CurrentLocation.HEADLocation=checki;
-				CommitGraphPane.canvas.repaint();
-			} catch (IOException | ParseException e1) {
-				e1.printStackTrace();
 			}
 		}
 	}
