@@ -36,6 +36,7 @@ public class CommitGraphPane extends JPanel{
 	JScrollPane graphScroll = new JScrollPane(canvas);
 	graphScroll.setBounds(14, 38, 511, 145);
 	CommitGraphPane.add(graphScroll);
+	graphScroll.getViewport().setBackground(Color.WHITE);
 	
 	
 	//CommitCanvas canvas = new CommitCanvas(); //CommitCanvas 객체 생성

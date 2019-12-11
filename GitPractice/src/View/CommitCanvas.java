@@ -108,6 +108,11 @@ public class CommitCanvas extends JLabel{ //커밋 그래프를 그려주는 캔
 					}
 					graph.setColor(colorList[cnt%4]); //첫째 커밋 내역
 					graph.fillOval(x, y, 70, 35);
+					
+					graph.setColor(Color.BLACK);
+					Font font1 = new Font("Serif", Font.PLAIN, 11);
+					graph.setFont(font1);
+					graph.drawString(Integer.toString(i), x+30, y+20);
 
 					if(i==CurrentLocation.HEADLocation)
 					{
