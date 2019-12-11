@@ -6,4 +6,8 @@
               보여줍니다. 원하는 히스토리를 커밋 범위를 지정하여 검색할 수
               있도록 git log 명령은 매우 다양한 옵션을 지원합니다.
 
-⑶구현: 
+⑶구현: 'git log'에서 출력할 Author Name과 Address를
+              설정할 수 있습니다. 설정은 메뉴바의 setting 메뉴로 존재
+              합니다. CommitArray.ini 의  commit 정보들을 읽어
+              출력합니다. Author를 설정하지 않을 시에는 name: ueser
+              Address: user@example.com 으로 초기화하여 저장됩니다.
