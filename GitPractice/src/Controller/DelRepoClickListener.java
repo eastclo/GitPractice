@@ -25,12 +25,6 @@ public class DelRepoClickListener implements ActionListener{
 		this.view = view;
 	}
 	
-	
-	public void loadRepo() {
-		LoadRepository init = new LoadRepository(view);
-		init.setRepositoryList();
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -55,10 +49,8 @@ public class DelRepoClickListener implements ActionListener{
 							
 							for (int i = 0; i < files.length; i++) {
 								if (files[i].delete()) {
-									System.out.println(files[i].getName() + "파일을 삭제했습니다.");
 									JOptionPane.showMessageDialog(null, "파일 삭제 완료", "파일 삭제", JOptionPane.PLAIN_MESSAGE);
 								} else {
-									System.out.println(files[i].getName() + "파일을 삭제하는 데 실패했습니다.");
 									JOptionPane.showMessageDialog(null, "파일 삭제 실패", "파일 삭제", JOptionPane.ERROR_MESSAGE);
 									break;
 								}
@@ -66,13 +58,9 @@ public class DelRepoClickListener implements ActionListener{
 							
 							if(files.length == 0 && repoDirectory.isDirectory()){ 
 								repoDirectory.delete(); //대상폴더 삭제
-								System.out.println("폴더가 삭제되었습니다.");
-								//JOptionPane.showMessageDialog(null, "폴더 삭제 완료", "폴더 삭제", JOptionPane.PLAIN_MESSAGE);
 							}
 						}
-						//break;
 					} 
-					//loadRepo();	
 					LoadRepository init = new LoadRepository(view);
 					init.setRepositoryList();
 				

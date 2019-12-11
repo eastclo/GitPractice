@@ -73,20 +73,12 @@ public class TemporaryExplorerPane extends JPanel{
 		repoScroll.setViewportView(repoList); //자동으로 스크롤 조절
 		
 		LoadRepository init = new LoadRepository(this);
-		init.setRepositoryList();
-		
-		//repoList.addMouseListener(new DelRepoClickListener());
-		
+		init.setRepositoryList();		
 	}
 	
 	
 	public static JList getJList() {
 		return repoList;
-	}
-	
-	public void connectToDel(String repoName) {
-		System.out.println(repoName);
-
 	}
 
 	public void getRepoName(String repoName) {
