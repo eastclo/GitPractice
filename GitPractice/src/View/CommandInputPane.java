@@ -132,14 +132,12 @@ public class CommandInputPane extends JPanel{
 									}
 								}
 								CurrentLocation.HEADLocation=checki;
-								CommitGraphPane.canvas.repaint();
 							} catch (IOException | ParseException e1) {
 								e1.printStackTrace();
 							}
 						}
-						CommitGraphPane.canvas.repaint();
 					}
-					
+					CommitGraphPane.canvas.repaint();
 				}
 			}
 		});
