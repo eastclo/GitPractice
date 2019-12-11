@@ -14,6 +14,7 @@ import Controller.CommandInputListener;
 import Controller.CommitFunction;
 import Controller.DocumentUploadListener;
 import Controller.GobackButtonListener;
+import Controller.RemoteFunction;
 import Model.CommitArray;
 import Model.CurrentLocation;
 
@@ -116,8 +117,10 @@ public class CommandInputPane extends JPanel{
 					if(new File(repoComboBox.getSelectedItem().toString()+File.separator+".git").exists())
 					{
 						BranchFunction bf = new BranchFunction();
+						RemoteFunction rf = new RemoteFunction();
 						CurrentLocation.changeBranch("master");
 						bf.BranchListOpen();
+						rf.remoteListOpen();
 						if(new File(repoComboBox.getSelectedItem().toString()+File.separator+".git"+File.separator+"CommitList.ini").exists())
 						{
 							try {

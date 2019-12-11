@@ -6,8 +6,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -87,7 +89,7 @@ public class ExecutionGitClone {
 			File commit = new File(masterBranch, "commit");
 			workspace.mkdir(); add.mkdir(); commit.mkdir();
 			//RemoteList.ini 생성
-			makeRemoteList(gitFolder, parameter[0]);
+			makeRemoteList(parameter[0]);
 			//BranchList.ini 생성, 현재 브랜치 위치 수정
 			makeBranchList();
 			
@@ -162,19 +164,10 @@ public class ExecutionGitClone {
 		bf.BranchListSave();
 	}
 	
-	public void makeRemoteList(File gitFolder, String url) {
-		String json;
-		CommitArray JSONArray = new CommitArray();
-		json = JSONArray.clone(url);
-		try {
-			FileWriter fw = new FileWriter(gitFolder.getPath()+File.separator+"RemoteList.ini");
-			fw.write(json);
-			fw.flush();
-			fw.close();
-		}
-		catch(IOException e) {
-			e.printStackTrace();
-		}
+	public void makeRemoteList(String url) {
+		Model.CurrentLocation.addRemote("origin", url);
+		RemoteFunction rf = new RemoteFunction();
+		rf.remoteListSave();	//입력한 리모트가 삭제된 리스트로 파일 덮어씌우기
 	}
 	
 	public void makeBackup(String[] repoList, int index, String currWorkspace, String clonedWorkspace , boolean exist) {
