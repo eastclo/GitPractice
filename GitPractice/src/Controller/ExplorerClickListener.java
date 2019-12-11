@@ -17,6 +17,7 @@ public class ExplorerClickListener implements MouseListener {
 	
 	private JList list;
 	
+	
 	public ExplorerClickListener(TemporaryExplorerPane view) {
 		this.list = view.getJList();
 	}
@@ -43,40 +44,29 @@ public class ExplorerClickListener implements MouseListener {
 	public void popUpRepo() {
 		String repo = list.getSelectedValue().toString();
 		String repoPath = "." + File.separator + "GitHub";
+		
 			
 		//System.out.println(repo);
 			
 		File f = new File(repoPath + File.separator + repo + File.separator + "address.txt");
-			
-		System.out.println(f);
-			
+						
 		char[] buf = new char[1024];
 		try {
-			FileReader fr = new FileReader(f);
-			
+			FileReader fr = new FileReader(f);			
 			fr.read(buf);
 			fr.close();
 		} catch(FileNotFoundException e1) {
-			System.out.println("error1");
 			e1.getStackTrace();
 		} catch (IOException e1) {
-			System.out.println("error2");
 			e1.getStackTrace();
 		}
 		String repoInfo = String.copyValueOf(buf).trim();
 		
 		new RepoInfoDialog(repoInfo);
-		
 	}
 	
 	public void delRepo() {
 		String repoName = list.getSelectedValue().toString();
-		
-		TemporaryExplorerPane view = new TemporaryExplorerPane();
-		view.connectToDel(repoName);
-		//view.getRepoName(repoName);
-		
-		//new DelRepoClickListener(view, repoName).delReposit(repoName);
 	}
 	
 	
