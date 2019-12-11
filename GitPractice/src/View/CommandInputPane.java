@@ -38,6 +38,12 @@ public class CommandInputPane extends JPanel{
 	private static DefaultComboBoxModel comboModel;
 	private static JScrollPane inputScroll = new JScrollPane();
 	private static JTextField input;
+	private String ToolTipText = new String("<html><h3>Notice</h3>\r\n" + 
+			" <b> &nbsp앞으로가기 뒤로가기 버튼으로 이력을 되돌리는 기능은<br> 실제 깃에선</b>\r\n" + 
+			"  <b style='color:#ff3f3f'> 지원하지 않는 기능</b>\r\n" + 
+			"  <b>입니다. 깃 명령어 숙련을 <br>위해서 가급적 아래 명령어를 사용해주시기 바랍니다.</b>\r\n" + 
+			"  <center><b style='color:blue'>git reset, git revert</b></center>\r\n" + 
+			"  <b>자세한 내용은 좌측 명령어 검색 도움말을 확인해주세요.</b> </html>");
 
 	public CommandInputPane(){
 		
@@ -79,6 +85,7 @@ public class CommandInputPane extends JPanel{
 		btnBack.setContentAreaFilled(false);
 		btnBack.setBounds(372, 11, 90, 20);
 		btnBack.addActionListener(new GobackButtonListener());	//리스너 적용
+		btnBack.setToolTipText(ToolTipText);	//툴팁 텍스트 추가
 		
 		CommandInputPane.add(btnBack);
 		
@@ -89,6 +96,7 @@ public class CommandInputPane extends JPanel{
 		btnForward.setContentAreaFilled(false);
 		btnForward.setBounds(442, 11, 83, 20); 
 		btnForward.addActionListener(new GobackButtonListener());	//리스너 적용
+		btnForward.setToolTipText(ToolTipText);	//툴팁 텍스트 추가
 		CommandInputPane.add(btnForward);
 		
 		JButton btnUpload = new JButton("upload");
