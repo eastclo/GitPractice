@@ -31,6 +31,7 @@ public class CommitFunction {
 	public List<String> BranchArray;
 	public List<String> AuthorNameArray;
 	public List<String> AuthorAddressArray;
+	public List<Integer> ChecksumArray;
 	
 	//실제로 Controller 내부에서 관리할 CommitList로 JSON을 사용.
 	CommitArray JsonArray;
@@ -43,6 +44,7 @@ public class CommitFunction {
 		BranchArray = new ArrayList<String>();
 		AuthorNameArray = new ArrayList<String>();
 		AuthorAddressArray = new ArrayList<String>();
+		ChecksumArray = new ArrayList<Integer>();
 		JsonArray = new CommitArray();
 		cnt =0;
 		
@@ -71,8 +73,9 @@ public class CommitFunction {
 				String branch = String.valueOf(jsonObject.get("branch"));
 				String Authorname = String.valueOf(jsonObject.get("AuthorName"));
 				String Authoraddress=String.valueOf(jsonObject.get("AuthorAddress"));
+				String checksum=String.valueOf(jsonObject.get("checksum"));
 				if(content!=null&&content!="null")
-					commitAdd(content,branch,Authorname,Authoraddress);
+					commitAdd(content,branch,Authorname,Authoraddress,Integer.parseInt(checksum));
 			}
 			fr.close();
 		}
@@ -81,12 +84,13 @@ public class CommitFunction {
 		}
 	}
 	//Commit 저장. 명령어 Controller에서는 직접 Model에 접속하는 것이 아닌, 이 명령어를 통해 접속.
-	public void commitAdd(String content,String branch,String Authorname,String Authoraddress) {
+	public void commitAdd(String content,String branch,String Authorname,String Authoraddress,int checksum) {
 		CMArray.add(content);
 		BranchArray.add(branch);
 		AuthorNameArray.add(Authorname);
 		AuthorAddressArray.add(Authoraddress);
-		JsonArray.commit(content,branch,Authorname,Authoraddress);
+		ChecksumArray.add(checksum);
+		JsonArray.commit(content,branch,Authorname,Authoraddress,checksum);
 	}
 	
 	//CommitList를 파일로 저장.
@@ -111,6 +115,44 @@ public class CommitFunction {
 			new File(Filepath).mkdir();
 		}
 		FileOperation.copyFileAll(sourceF, new File(Filepath));
+	}
+	
+	public void reArrangeCommit() {
+		JsonArray=new CommitArray();
+		for(int i=0;i<ChecksumArray.size();i++)
+		{
+			int k=0;
+			for(int j=1;j<ChecksumArray.size();j++)
+			{
+				if(ChecksumArray.get(k)>ChecksumArray.get(j))
+					k=j;
+			}
+			System.out.println("yes");
+			JsonArray.commit(CMArray.get(k), BranchArray.get(k), AuthorNameArray.get(k), AuthorAddressArray.get(k), ChecksumArray.get(k));
+			ChecksumArray.remove(k);
+			CMArray.remove(k);
+			BranchArray.remove(k);
+			AuthorAddressArray.remove(k);
+			AuthorNameArray.remove(k);
+		}
+		JsonArray.commit(CMArray.get(0), BranchArray.get(0), AuthorNameArray.get(0), AuthorAddressArray.get(0), ChecksumArray.get(0));
+		
+		commitListSave(Path);
+
+		CMArray = new ArrayList<String>();
+		BranchArray = new ArrayList<String>();
+		AuthorNameArray = new ArrayList<String>();
+		AuthorAddressArray = new ArrayList<String>();
+		ChecksumArray = new ArrayList<Integer>();
+		JsonArray = new CommitArray();
+		
+		try {
+			commitListOpen();
+		} catch (IOException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

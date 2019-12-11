@@ -65,11 +65,12 @@ public class ExecutionCommit {
 		cm.BranchArray.remove(cm.BranchArray.size()-1);
 		cm.AuthorNameArray.remove(cm.AuthorNameArray.size()-1);
 		cm.AuthorAddressArray.remove(cm.AuthorAddressArray.size()-1);
+		cm.ChecksumArray.remove(cm.AuthorAddressArray.size()-1);
 		CommitArray ca = new CommitArray();
 		ca.init();
 		//다시 저장하고, 현재 커밋을 CommitGraphPane에 최신화한다.
 		for(int i=0;i<cm.CMArray.size();i++)
-			ca.commit(cm.CMArray.get(i), cm.BranchArray.get(i), cm.AuthorNameArray.get(i), cm.AuthorAddressArray.get(i));
+			ca.commit(cm.CMArray.get(i), cm.BranchArray.get(i), cm.AuthorNameArray.get(i), cm.AuthorAddressArray.get(i),cm.ChecksumArray.get(i));
 		cm.commitListSave(CurrentLocation.workspace.getPath()+File.separator+ ".git" +File.separator+"CommitList.ini");
 		
 		int checki=0;
@@ -101,7 +102,7 @@ public class ExecutionCommit {
 				e.printStackTrace();
 			}
 			//입력받은 커밋 내용을 현재 정보와 조합하여 커밋에 저장한다.
-			commit.commitAdd(inputContent,CurrentLocation.getBranch(),CurrentLocation.AuthorName,CurrentLocation.AuthorAddress);
+			commit.commitAdd(inputContent,CurrentLocation.getBranch(),CurrentLocation.AuthorName,CurrentLocation.AuthorAddress,commit.CMArray.size());
 			commit.workspaceCopy(new File(CurrentLocation.workspace.getPath()+File.separator+".git"+File.separator+"add"),new File(CurrentLocation.workspace.getPath()+File.separator+CurrentLocation.getBranch()+File.separator+"commit"));
 
 			List<String> branchList = commit.BranchArray;

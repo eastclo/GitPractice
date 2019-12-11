@@ -39,12 +39,13 @@ public class CommitArray {
 	public String branchKey = "branch"; 
 
 	//commit을 추가하는 메소드이다. 들어가는 인자로는 커밋내용(content),브랜치,저자이름,저자주소 가 있다.
-	public void commit(String content,String branch,String AuthorName,String AuthorAddress) {
+	public void commit(String content,String branch,String AuthorName,String AuthorAddress,int checksum) {
 		JSONObject jsonOb=new JSONObject();
 		jsonOb.put("content", content);
 		jsonOb.put("branch",branch);
 		jsonOb.put("AuthorName", AuthorName);
 		jsonOb.put("AuthorAddress", AuthorAddress);
+		jsonOb.put("checksum", Integer.toString(checksum));
 		commitArray.add(jsonOb);
 		contentC.add(content);
 		branchC.add(branch);
