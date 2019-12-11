@@ -7,5 +7,3 @@
              해결됩니다.) 이는 fetch와의 가장 큰 차이점입니다. 아무 인자 없이 git pull
              명령어를 사용할 경우 git pull origin master 명령어와 같으며
              이는 origin remote의 변경사항을 로컬 레포지토리에 업데이트 하는 것입니다.
-
-⑶구현:
